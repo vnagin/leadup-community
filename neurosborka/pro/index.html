@@ -27,12 +27,8 @@
   <script defer src="../../assets/js/analytics.js"></script>
   <script defer src="../../assets/js/pro-checkout.js"></script>
 </head>
-<body data-pending-founder-pass="true">
+<body>
   <a href="#main" class="skip-link">К основному содержимому</a>
-
-  <div class="notice-bar" role="note">
-    Pre-launch: финальный pass по голосу основателя — до 06.05. Цены и оплата — в проде.
-  </div>
 
   <header class="site-header">
     <div class="container site-header__inner">
@@ -44,6 +40,16 @@
         <a href="#faq">FAQ</a>
         <a class="btn btn-primary btn-checkout" data-tribute-checkout data-region="eu" data-plan="monthly" data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly" href="#price">Оформить подписку</a>
       </nav>
+      <details class="nav-drawer">
+        <summary aria-label="Меню навигации"></summary>
+        <div class="nav-drawer__panel">
+          <a href="#compare">Free vs PRO</a>
+          <a href="#benefits">Что входит</a>
+          <a href="#price">Цена</a>
+          <a href="#faq">FAQ</a>
+          <a class="btn btn-primary btn-checkout" data-tribute-checkout data-region="eu" data-plan="monthly" data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly" href="#price">Оформить подписку</a>
+        </div>
+      </details>
     </div>
   </header>
 
@@ -52,7 +58,7 @@
     <!-- B.1 Hero -->
     <section class="hero">
       <div class="container hero__inner">
-        <p class="eyebrow-accent hero__eyebrow">PRO · Закрытый клуб · 50 €/мес или 5 000 ₽/мес</p>
+        <p class="eyebrow-accent hero__eyebrow">PRO · Закрытый клуб · 50&nbsp;€/мес</p>
         <h1>Нейросборка <span class="text-teal-grad">PRO</span> — закрытый клуб для тех, кто строит на AI</h1>
         <p class="hero__lead">
           9 ивентов в месяц с командой LeadUp AI и приглашёнными экспертами:
@@ -78,7 +84,7 @@
     <!-- B.2 Free vs PRO -->
     <section class="section" id="compare">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.2 · Что меняется на PRO</p>
+        <p class="eyebrow section__eyebrow">Что меняется на PRO</p>
         <h2>Free vs PRO — что в каждом</h2>
         <p class="section__lead">Free — это база, чат и открытые мини-эфиры. PRO добавляет регулярные синхронные форматы, библиотеку шаблонов и ранний доступ к материалам Нейромастерской 2.0.</p>
 
@@ -120,7 +126,7 @@
     <!-- B.3 Что ты будешь делать в PRO -->
     <section class="section" id="benefits">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.3 · Что ты будешь делать в PRO</p>
+        <p class="eyebrow section__eyebrow">Что ты будешь делать в PRO</p>
         <h2>8 регулярных форматов, чтобы ты двигался по своим проектам</h2>
 
         <div class="benefits">
@@ -206,7 +212,7 @@
     <!-- B.4 Календарь -->
     <section class="section" id="cadence">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.4 · Что в неделю и в месяц</p>
+        <p class="eyebrow section__eyebrow">Что в неделю и в месяц</p>
         <h2>Календарь PRO</h2>
         <p class="section__lead">~9 синхронных событий в месяц + self-paced библиотека и материалы Нейромастерской 2.0. Итого ≈9 часов в месяц синхрона.</p>
 
@@ -225,7 +231,7 @@
     <!-- B.5 Кому подойдёт PRO -->
     <section class="section section-tight" id="audience">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.5 · Кому подойдёт</p>
+        <p class="eyebrow section__eyebrow">Кому подойдёт</p>
         <h2>Для кого собрали PRO</h2>
 
         <div class="audience-grid">
@@ -242,7 +248,7 @@
     <!-- B.6 30 дней -->
     <section class="section" id="program">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.6 · 30 дней в PRO</p>
+        <p class="eyebrow section__eyebrow">30 дней в PRO</p>
         <h2>Что сделаешь за первые 30 дней</h2>
 
         <div class="program">
@@ -297,7 +303,7 @@
     <!-- B.7 Голос Владимира -->
     <section class="section" id="founder">
       <div class="container">
-        <p class="eyebrow section__eyebrow" style="text-align: center;">B.7 · От основателя</p>
+        <p class="eyebrow section__eyebrow" style="text-align: center;">От основателя</p>
 
         <!-- Welcome-видео slot — заполняем mp4 от Артёма (LEA-739).
              До поставки видео слот скрыт через `hidden`; fallback — текстовое обращение ниже. -->
@@ -326,7 +332,7 @@
     <!-- B.8 Кейсы -->
     <section class="section" id="cases">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.8 · Примеры результатов</p>
+        <p class="eyebrow section__eyebrow">Примеры результатов</p>
         <h2>Какие результаты повторяются у участников</h2>
         <p class="section__lead">Это не testimonials с прямой цитатой — для них нужно письменное согласие участника. Это типы результатов, которые повторяются у участников, прошедших через активные форматы.</p>
 
@@ -360,7 +366,7 @@
     <!-- B.9 Цена -->
     <section class="section" id="price">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.9 · Сколько стоит</p>
+        <p class="eyebrow section__eyebrow">Сколько стоит</p>
         <h2>Один тариф, без уровней</h2>
         <p class="section__lead">Оплата картой или криптой. Отписаться — в один клик в личном кабинете.</p>
 
@@ -414,7 +420,7 @@
     <!-- B.10 FAQ -->
     <section class="section" id="faq">
       <div class="container">
-        <p class="eyebrow section__eyebrow">B.10 · FAQ</p>
+        <p class="eyebrow section__eyebrow">FAQ</p>
         <h2>Частые вопросы</h2>
 
         <div class="faq" style="margin-top: 32px;">
@@ -469,7 +475,7 @@
     <!-- B.11 Финальный CTA -->
     <section class="final-cta" id="join">
       <div class="container">
-        <p class="eyebrow-accent">B.11 · Готов попробовать PRO?</p>
+        <p class="eyebrow-accent">Готов попробовать PRO?</p>
         <h2>50 € или 5 000 ₽ в месяц</h2>
         <p>Отписаться можно в любой момент, никаких обязательств.</p>
         <div class="hero__ctas" style="justify-content: center;">
@@ -491,7 +497,7 @@
     <section class="section section-tight" id="refund">
       <div class="container">
         <div class="refund">
-          <p class="eyebrow">B.12 · Гарантия</p>
+          <p class="eyebrow">Гарантия</p>
           <h3>Если не зашло — вернём деньги</h3>
           <p>Первые 7 дней работают как полный возврат. Пишешь в чат, мы отменяем подписку и возвращаем оплату. Без звонков и анкет «почему вы уходите».</p>
         </div>
