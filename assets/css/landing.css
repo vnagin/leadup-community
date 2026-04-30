@@ -3,6 +3,8 @@
    Depends on tokens.css (brand v3, D2 Cold Technical · TS1 Geist)
    ============================================================ */
 
+html { scroll-padding-top: 72px; }
+
 /* ---------- Skip link & focus ---------- */
 .skip-link {
   position: absolute;
@@ -53,6 +55,70 @@
   font-weight: var(--fw-medium);
 }
 .site-header__nav a:hover { color: var(--fg-1); }
+
+/* ---------- Mobile drawer (≤720px) ---------- */
+.nav-drawer { display: none; }
+.nav-drawer > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  color: var(--fg-1);
+}
+.nav-drawer > summary::-webkit-details-marker { display: none; }
+.nav-drawer > summary::before {
+  content: "";
+  width: 18px;
+  height: 12px;
+  background-image: linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor);
+  background-size: 100% 1.5px;
+  background-position: 0 0, 0 50%, 0 100%;
+  background-repeat: no-repeat;
+}
+.nav-drawer[open] > summary::before {
+  background-image: linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor);
+  background-size: 100% 1.5px;
+  background-position: 0 50%, 0 50%;
+  transform: rotate(45deg);
+  filter: none;
+}
+.nav-drawer__panel {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 13, 0.96);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--border-1);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.nav-drawer__panel a {
+  color: var(--fg-1);
+  font-size: var(--text-md);
+  font-weight: var(--fw-medium);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border-1);
+}
+.nav-drawer__panel a:last-child { border-bottom: 0; }
+.nav-drawer__panel .btn { margin-top: var(--sp-3); }
+
+@media (max-width: 720px) {
+  .site-header__nav { display: none; }
+  .nav-drawer { display: inline-block; }
+}
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -221,8 +287,14 @@
 /* ---------- Audience grid (A.4 / B.5) ---------- */
 .audience-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--grid-gap);
+}
+@media (max-width: 980px) {
+  .audience-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .audience-grid { grid-template-columns: 1fr; }
 }
 .audience-card {
   padding: var(--sp-5) var(--sp-6);
@@ -263,7 +335,9 @@
 }
 
 /* ---------- Stub-wall (A.5) ---------- */
-.stub-wall {
+/* Hidden до получения ассетов от Кати ([LEA-674]). Снимаем display:none — раскомментируем grid. */
+.stub-wall { display: none; }
+.stub-wall--enabled {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: var(--sp-3);
@@ -286,7 +360,7 @@
   margin-bottom: var(--sp-3);
 }
 @media (max-width: 720px) {
-  .stub-wall { grid-template-columns: repeat(3, 1fr); }
+  .stub-wall--enabled { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- Upsell card (A.6) ---------- */
