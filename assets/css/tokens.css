@@ -1,0 +1,501 @@
+/* ============================================================
+   LeadUp AI — Design Tokens (v3)
+   Direction: D2 Cold Technical · Color: C3 Electric Teal · Type: TS1 Geist
+   Reference DNA: Linear + Vercel + Raycast
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  color-scheme: dark light;
+
+  /* ---------- COLORS: Signature ---------- */
+  --teal:            #00E5C7;   /* Electric Teal — CTA, accent, links */
+  --teal-hover:      #14F5D7;
+  --teal-pressed:    #00CBB0;
+  --teal-tint:       rgba(0, 229, 199, 0.12);
+  --teal-tint-2:     rgba(0, 229, 199, 0.20);
+  --teal-glow:       0 0 24px rgba(0, 229, 199, 0.45);
+
+  /* ---------- COLORS: Surfaces (dark-first) ---------- */
+  --bg-0:            #050807;   /* deepest — outside body */
+  --bg-1:            #0A0F0D;   /* default page */
+  --bg-2:            #0F1512;   /* elevated section */
+  --bg-3:            #141B18;   /* card surface */
+  --bg-4:            #1B2420;   /* raised card, input */
+  --bg-5:            #253029;   /* hover, divider-fill */
+
+  /* ---------- COLORS: Light surfaces ---------- */
+  --bg-light-1:      #FAFBFA;
+  --bg-light-2:      #F2F4F3;
+  --bg-light-3:      #E6EAE8;
+
+  /* ---------- COLORS: Foreground (on dark) ---------- */
+  --fg-1:            #EDEFEE;   /* primary text */
+  --fg-2:            rgba(237, 239, 238, 0.72);  /* body */
+  --fg-3:            rgba(237, 239, 238, 0.52);  /* muted */
+  --fg-4:            rgba(237, 239, 238, 0.36);  /* captions, disabled */
+
+  /* ---------- COLORS: Foreground (on light) ---------- */
+  --fg-light-1:      #0A0F0D;
+  --fg-light-2:      #3A4440;
+  --fg-light-3:      #6A7570;
+  --fg-light-4:      #9BA3A0;
+
+  /* ---------- COLORS: Borders ---------- */
+  --border-1:        rgba(255, 255, 255, 0.06);   /* subtle */
+  --border-2:        rgba(255, 255, 255, 0.10);   /* default */
+  --border-3:        rgba(255, 255, 255, 0.18);   /* hover, focus-ring */
+  --border-light-1:  rgba(10, 15, 13, 0.08);
+  --border-light-2:  rgba(10, 15, 13, 0.14);
+  --border-light-3:  rgba(10, 15, 13, 0.22);
+
+  /* ---------- COLORS: Light semantic ---------- */
+  --teal-on-light:       #009E8A;   /* darker teal for AA on white */
+  --teal-on-light-hover: #00B89E;
+  --teal-tint-light:     rgba(0, 158, 138, 0.10);
+  --success-on-light:    #15803D;
+  --success-tint-light:  rgba(21, 128, 61, 0.10);
+  --warning-on-light:    #A16207;
+  --warning-tint-light:  rgba(161, 98, 7, 0.10);
+  --danger-on-light:     #DC2626;
+  --danger-tint-light:   rgba(220, 38, 38, 0.10);
+  --info-on-light:       #2563EB;
+  --info-tint-light:     rgba(37, 99, 235, 0.10);
+
+  /* ---------- COLORS: Light shadows ---------- */
+  --shadow-light-1:  0 1px 2px rgba(10, 15, 13, 0.06);
+  --shadow-light-2:  0 2px 8px rgba(10, 15, 13, 0.08), 0 0 0 1px rgba(10, 15, 13, 0.04);
+  --shadow-light-3:  0 8px 24px rgba(10, 15, 13, 0.10), 0 0 0 1px rgba(10, 15, 13, 0.06);
+  --shadow-light-4:  0 20px 48px rgba(10, 15, 13, 0.14), 0 0 0 1px rgba(10, 15, 13, 0.06);
+  --shadow-light-teal: 0 0 0 1px var(--teal-on-light), 0 4px 16px rgba(0, 158, 138, 0.18);
+  --ring-focus-light: 0 0 0 2px #fff, 0 0 0 4px var(--teal-on-light);
+
+  /* ---------- COLORS: Semantic ---------- */
+  --success:         #3EE089;
+  --success-tint:    rgba(62, 224, 137, 0.14);
+  --warning:         #F5B544;
+  --warning-tint:    rgba(245, 181, 68, 0.14);
+  --danger:          #FF5D5D;
+  --danger-tint:     rgba(255, 93, 93, 0.14);
+  --info:            #6EB8FF;
+  --info-tint:       rgba(110, 184, 255, 0.14);
+
+  /* ---------- COLORS: Gradients (used sparingly) ---------- */
+  --grad-glow:       radial-gradient(60% 80% at 50% 0%, rgba(0, 229, 199, 0.18) 0%, transparent 60%);
+  --grad-mesh:       radial-gradient(at 18% 24%, rgba(0, 229, 199, 0.10) 0, transparent 45%),
+                     radial-gradient(at 82% 80%, rgba(0, 229, 199, 0.06) 0, transparent 50%);
+  --grad-teal-line:  linear-gradient(90deg, transparent, rgba(0, 229, 199, 0.4), transparent);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-sans:       'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  --font-mono:       'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  --text-xs:         11px;    /* eyebrow, kbd, mono tags */
+  --text-sm:         13px;    /* small body, meta */
+  --text-base:       15px;    /* body */
+  --text-md:         17px;    /* lead paragraph */
+  --text-lg:         20px;    /* small subhead */
+  --text-xl:         24px;    /* H4 */
+  --text-2xl:        32px;    /* H3 */
+  --text-3xl:        44px;    /* H2 */
+  --text-4xl:        60px;    /* H1 */
+  --text-5xl:        84px;    /* display */
+  --text-6xl:        120px;   /* mega display */
+
+  --fw-regular:      400;
+  --fw-medium:       500;
+  --fw-semibold:     600;
+  --fw-bold:         700;
+  --fw-extrabold:    800;
+  --fw-black:        900;
+
+  --lh-display:      0.98;
+  --lh-tight:        1.04;
+  --lh-snug:         1.2;
+  --lh-normal:       1.5;
+  --lh-relaxed:      1.6;
+
+  --tracking-mega:   -0.045em;   /* 84px+ display */
+  --tracking-tight:  -0.035em;   /* H1, H2 */
+  --tracking-snug:   -0.02em;    /* H3, H4 */
+  --tracking-normal: -0.01em;    /* lead */
+  --tracking-wide:   0.08em;     /* eyebrow uppercase */
+  --tracking-mono:   0.02em;     /* mono */
+
+  /* ---------- SPACING (4px base) ---------- */
+  --sp-1:            4px;
+  --sp-2:            8px;
+  --sp-3:            12px;
+  --sp-4:            16px;
+  --sp-5:            20px;
+  --sp-6:            24px;
+  --sp-8:            32px;
+  --sp-10:           40px;
+  --sp-12:           48px;
+  --sp-16:           64px;
+  --sp-20:           80px;
+  --sp-24:           96px;
+  --sp-32:           128px;
+  --sp-40:           160px;
+
+  /* ---------- RADII (tight, Linear-esque) ---------- */
+  --r-sm:            4px;    /* kbd, inline */
+  --r-md:            6px;    /* small buttons, badges */
+  --r-lg:            8px;    /* buttons, inputs — DEFAULT */
+  --r-xl:            10px;   /* cards */
+  --r-2xl:           14px;   /* large cards, hero blocks */
+  --r-3xl:           20px;   /* feature panels */
+  --r-full:          9999px;
+
+  /* ---------- SHADOWS (subtle, mostly rings) ---------- */
+  --shadow-1:        0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2:        0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-3:        0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-4:        0 24px 64px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-teal:     0 0 0 1px var(--teal), 0 8px 24px rgba(0, 229, 199, 0.28);
+  --ring-focus:      0 0 0 2px var(--bg-1), 0 0 0 4px var(--teal);
+
+  /* ---------- MOTION (Linear-like, fast + crisp) ---------- */
+  --ease:            cubic-bezier(0.2, 0, 0, 1);
+  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1:           120ms;   /* hover, micro */
+  --dur-2:           200ms;   /* default */
+  --dur-3:           320ms;   /* reveal */
+  --dur-4:           500ms;   /* complex */
+
+  /* ---------- GRID / LAYOUT ---------- */
+  --container:       1240px;
+  --container-narrow: 980px;
+  --grid-gap:        24px;
+
+  /* ---------- BACKGROUND GRID (signature pattern) ---------- */
+  --grid-line:       rgba(255, 255, 255, 0.035);
+  --grid-size:       48px;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html {
+  background: var(--bg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'cv11';  /* Geist stylistic sets */
+}
+
+body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  min-height: 100vh;
+}
+
+/* ---------- Typography elements ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--fg-1);
+  margin: 0;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+h2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+}
+h4 {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+}
+h5 {
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-snug);
+}
+h6 {
+  font-size: var(--text-md);
+  font-weight: var(--fw-semibold);
+  line-height: 1.35;
+  letter-spacing: var(--tracking-normal);
+}
+
+.display-1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-mega);
+}
+.display-2 {
+  font-size: var(--text-6xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-mega);
+}
+
+p {
+  margin: 0;
+  color: var(--fg-2);
+  line-height: var(--lh-normal);
+}
+
+.lead {
+  font-size: var(--text-md);
+  color: var(--fg-2);
+  line-height: 1.55;
+  letter-spacing: var(--tracking-normal);
+}
+
+code, pre, kbd, samp, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  letter-spacing: var(--tracking-mono);
+}
+
+code {
+  padding: 1px 6px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-sm);
+  color: var(--teal);
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+  color: var(--fg-1);
+}
+
+a {
+  color: var(--teal);
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease);
+}
+a:hover { color: var(--teal-hover); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.eyebrow-accent {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.caption {
+  font-size: var(--text-xs);
+  color: var(--fg-3);
+  line-height: var(--lh-snug);
+}
+
+/* Selection */
+::selection { background: var(--teal-tint-2); color: var(--fg-1); }
+
+/* Focus */
+:where(button, a, input, textarea, select, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: inherit;
+}
+
+/* Scrollbar (dark) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 10px; border: 2px solid var(--bg-1); }
+::-webkit-scrollbar-thumb:hover { background: var(--bg-5); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   UTILITY PRIMITIVES
+   ============================================================ */
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--sp-6); }
+.container-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 var(--sp-6); }
+
+/* Signature background grid */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+.bg-glow-top {
+  background: var(--grad-glow), var(--bg-1);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-1);
+  border: 0;
+}
+
+.divider-teal {
+  height: 1px;
+  background: var(--grad-teal-line);
+  border: 0;
+}
+
+/* Gradient text — SPARINGLY, max 1 per screen */
+.text-teal-grad {
+  background: linear-gradient(90deg, #14F5D7 0%, #00E5C7 50%, #00CBB0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================================
+   LIGHT THEME — apply via [data-theme="light"] or .theme-light
+   ============================================================ */
+
+[data-theme="light"],
+.theme-light {
+  --bg-0:        #F0F2F1;
+  --bg-1:        #FAFBFA;
+  --bg-2:        #F2F4F3;
+  --bg-3:        #E6EAE8;
+  --bg-4:        #DCE0DE;
+  --bg-5:        #CFD4D2;
+
+  --fg-1:        #0A0F0D;
+  --fg-2:        #3A4440;
+  --fg-3:        #6A7570;
+  --fg-4:        #9BA3A0;
+
+  --border-1:    rgba(10, 15, 13, 0.06);
+  --border-2:    rgba(10, 15, 13, 0.12);
+  --border-3:    rgba(10, 15, 13, 0.22);
+
+  --teal:        #009E8A;
+  --teal-hover:  #00B89E;
+  --teal-pressed:#008575;
+  --teal-tint:   rgba(0, 158, 138, 0.10);
+  --teal-tint-2: rgba(0, 158, 138, 0.18);
+  --teal-glow:   0 4px 16px rgba(0, 158, 138, 0.22);
+
+  --success:     #15803D;
+  --success-tint:rgba(21, 128, 61, 0.10);
+  --warning:     #A16207;
+  --warning-tint:rgba(161, 98, 7, 0.10);
+  --danger:      #DC2626;
+  --danger-tint: rgba(220, 38, 38, 0.10);
+  --info:        #2563EB;
+  --info-tint:   rgba(37, 99, 235, 0.10);
+
+  --shadow-1:    0 1px 2px rgba(10, 15, 13, 0.06);
+  --shadow-2:    0 2px 8px rgba(10, 15, 13, 0.08), 0 0 0 1px rgba(10, 15, 13, 0.04);
+  --shadow-3:    0 8px 24px rgba(10, 15, 13, 0.10), 0 0 0 1px rgba(10, 15, 13, 0.06);
+  --shadow-4:    0 20px 48px rgba(10, 15, 13, 0.14), 0 0 0 1px rgba(10, 15, 13, 0.06);
+  --shadow-teal: 0 0 0 1px var(--teal), 0 4px 16px rgba(0, 158, 138, 0.18);
+  --ring-focus:  0 0 0 2px #fff, 0 0 0 4px var(--teal);
+
+  --grid-line:   rgba(10, 15, 13, 0.04);
+
+  --grad-glow:   radial-gradient(60% 80% at 50% 0%, rgba(0, 158, 138, 0.10) 0%, transparent 60%);
+  --grad-teal-line: linear-gradient(90deg, transparent, rgba(0, 158, 138, 0.25), transparent);
+
+  color-scheme: light;
+}
+
+[data-theme="light"] body,
+.theme-light body,
+[data-theme="light"],
+.theme-light {
+  background: var(--bg-1);
+  color: var(--fg-1);
+}
+
+/* Auto light via OS preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-0:        #F0F2F1;
+    --bg-1:        #FAFBFA;
+    --bg-2:        #F2F4F3;
+    --bg-3:        #E6EAE8;
+    --bg-4:        #DCE0DE;
+    --bg-5:        #CFD4D2;
+    --fg-1:        #0A0F0D;
+    --fg-2:        #3A4440;
+    --fg-3:        #6A7570;
+    --fg-4:        #9BA3A0;
+    --border-1:    rgba(10, 15, 13, 0.06);
+    --border-2:    rgba(10, 15, 13, 0.12);
+    --border-3:    rgba(10, 15, 13, 0.22);
+    --teal:        #009E8A;
+    --teal-hover:  #00B89E;
+    --teal-pressed:#008575;
+    --teal-tint:   rgba(0, 158, 138, 0.10);
+    --teal-tint-2: rgba(0, 158, 138, 0.18);
+    --teal-glow:   0 4px 16px rgba(0, 158, 138, 0.22);
+    --success:     #15803D;
+    --success-tint:rgba(21, 128, 61, 0.10);
+    --warning:     #A16207;
+    --warning-tint:rgba(161, 98, 7, 0.10);
+    --danger:      #DC2626;
+    --danger-tint: rgba(220, 38, 38, 0.10);
+    --info:        #2563EB;
+    --info-tint:   rgba(37, 99, 235, 0.10);
+    --shadow-1:    0 1px 2px rgba(10, 15, 13, 0.06);
+    --shadow-2:    0 2px 8px rgba(10, 15, 13, 0.08), 0 0 0 1px rgba(10, 15, 13, 0.04);
+    --shadow-3:    0 8px 24px rgba(10, 15, 13, 0.10), 0 0 0 1px rgba(10, 15, 13, 0.06);
+    --shadow-4:    0 20px 48px rgba(10, 15, 13, 0.14), 0 0 0 1px rgba(10, 15, 13, 0.06);
+    --shadow-teal: 0 0 0 1px var(--teal), 0 4px 16px rgba(0, 158, 138, 0.18);
+    --ring-focus:  0 0 0 2px #fff, 0 0 0 4px var(--teal);
+    --grid-line:   rgba(10, 15, 13, 0.04);
+    --grad-glow:   radial-gradient(60% 80% at 50% 0%, rgba(0, 158, 138, 0.10) 0%, transparent 60%);
+    --grad-teal-line: linear-gradient(90deg, transparent, rgba(0, 158, 138, 0.25), transparent);
+    color-scheme: light;
+  }
+}

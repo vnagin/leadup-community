@@ -1,47 +1,53 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LeadUp Community — Нейросборка</title>
-  <meta name="description" content="Сообщества и ивенты LeadUp AI: Нейросборка (free), Нейросборка PRO, мастермайнды и события." />
-  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>LeadUp · Community — хаб community-продуктов LeadUp AI</title>
+  <meta name="description" content="Сообщества LeadUp AI: бесплатная Нейросборка, закрытый клуб PRO, мастермайнды и ивенты для практиков AI-автоматизации." />
+  <meta name="theme-color" content="#0A0F0D" />
   <link rel="canonical" href="https://community.leadup.guru/" />
-  <style>
-    :root { color-scheme: light; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #0B0F14; color: #E8EDF2; line-height: 1.5; }
-    main { max-width: 720px; margin: 0 auto; padding: 64px 24px; }
-    h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; }
-    p.lead { font-size: 18px; opacity: 0.78; margin: 0 0 40px; }
-    nav.routes { display: grid; gap: 12px; }
-    a.route { display: block; padding: 20px 22px; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 0.18s ease, background 0.18s ease; }
-    a.route:hover { border-color: #00E5C7; background: rgba(0,229,199,0.05); }
-    a.route strong { font-size: 17px; display: block; margin-bottom: 4px; }
-    a.route span { font-size: 14px; opacity: 0.7; }
-    footer { margin-top: 48px; opacity: 0.55; font-size: 13px; }
-    footer a { color: inherit; }
-  </style>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LeadUp · Community" />
+  <meta property="og:description" content="Хаб community-продуктов LeadUp AI: Нейросборка (free), PRO-клуб, мастермайнды." />
+  <meta property="og:url" content="https://community.leadup.guru/" />
+  <meta property="og:locale" content="ru_RU" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/landing.css" />
+
+  <script defer src="assets/js/analytics.js"></script>
 </head>
 <body>
-  <main>
-    <h1>LeadUp Community</h1>
-    <p class="lead">Сообщества и ивенты для практиков AI-автоматизации. Этот хаб скоро наполнится.</p>
+  <main class="hub">
+    <div class="hub__inner">
+      <p class="eyebrow-accent" style="margin-bottom: 16px;">LeadUp · Community</p>
+      <h1>Сообщества LeadUp AI — для тех, кто строит на&nbsp;<span class="text-teal-grad">AI</span></h1>
+      <p class="hub__lead">
+        Бесплатный чат, закрытый PRO-клуб и будущие ивенты — в одной экосистеме.
+        Выбери, что тебе ближе: разовое погружение или регулярные мастермайнды.
+      </p>
 
-    <nav class="routes">
-      <a class="route" href="/neurosborka/">
-        <strong>Нейросборка</strong>
-        <span>Бесплатное Telegram-сообщество практиков AI-автоматизации.</span>
-      </a>
-      <a class="route" href="/neurosborka/pro/">
-        <strong>Нейросборка PRO</strong>
-        <span>Платная подписка: mastermind, воркшопы, библиотека шаблонов. 50 €/5 000 ₽ в месяц.</span>
-      </a>
-    </nav>
+      <div class="hub__cards">
+        <a class="hub__card" href="neurosborka/" data-event="hub_card_click" data-event-page="hub" data-event-plan="free">
+          <p class="hub__card-eyebrow">Бесплатно · Telegram</p>
+          <h3>Нейросборка</h3>
+          <p>Дайджест индустрии раз в неделю, разборы кейсов участников 2–3 раза в неделю, открытые мини-эфиры. ~2&nbsp;500 практиков AI-автоматизации.</p>
+          <span class="hub__card-cta">Посмотреть → /neurosborka/</span>
+        </a>
 
-    <footer>
-      <p>community.leadup.guru — placeholder. Финальный хаб запускаем после v1 лендингов 2026-05-06.</p>
-      <p><a href="https://leadup.guru">leadup.guru</a></p>
-    </footer>
+        <a class="hub__card" href="neurosborka/pro/" data-event="hub_card_click" data-event-page="hub" data-event-plan="pro">
+          <p class="hub__card-eyebrow">50 €/мес · 5 000 ₽/мес</p>
+          <h3>Нейросборка PRO</h3>
+          <p>9 ивентов в месяц с командой LeadUp AI: мастермайнды, воркшопы по n8n, разборы кейсов, Q&A. Библиотека шаблонов и ранний доступ к Нейромастерской 2.0.</p>
+          <span class="hub__card-cta">Что входит → /neurosborka/pro/</span>
+        </a>
+      </div>
+    </div>
   </main>
 </body>
 </html>
