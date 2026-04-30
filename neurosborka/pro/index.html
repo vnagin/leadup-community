@@ -1,50 +1,538 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Нейросборка PRO — закрытый клуб для тех, кто строит на AI</title>
-  <meta name="description" content="Закрытый клуб с еженедельным mastermind, воркшопами по n8n, библиотекой шаблонов и Q&A с экспертами LeadUp AI. 50 €/5 000 ₽ в месяц." />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="9 ивентов в месяц с командой LeadUp AI: мастермайнды, воркшопы по n8n, разборы кейсов, Q&A. Библиотека шаблонов и ранний доступ к Нейромастерской 2.0. 50 €/мес или 5 000 ₽/мес." />
+  <meta name="theme-color" content="#0A0F0D" />
   <link rel="canonical" href="https://community.leadup.guru/neurosborka/pro/" />
+
+  <meta property="og:type" content="product" />
   <meta property="og:title" content="Нейросборка PRO — закрытый клуб для тех, кто строит на AI" />
-  <meta property="og:description" content="Mastermind, воркшопы, библиотека n8n-шаблонов, Q&A с экспертами LeadUp AI. 50 €/5 000 ₽ в месяц." />
+  <meta property="og:description" content="Мастермайнды, воркшопы по n8n, библиотека шаблонов. 50 €/мес или 5 000 ₽/мес. Один тариф." />
   <meta property="og:url" content="https://community.leadup.guru/neurosborka/pro/" />
-  <meta property="og:type" content="website" />
-  <style>
-    :root { color-scheme: light; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #FAFBFC; color: #0B0F14; line-height: 1.55; }
-    main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
-    h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; }
-    p.lead { font-size: 18px; color: #41525E; margin: 0 0 24px; }
-    .price { display: inline-flex; align-items: baseline; gap: 8px; padding: 10px 14px; background: rgba(0,229,199,0.12); border-radius: 8px; margin-bottom: 32px; font-weight: 600; }
-    .price small { color: #41525E; font-weight: 400; font-size: 13px; }
-    .cta { display: inline-block; background: #00E5C7; color: #0B0F14; padding: 14px 24px; border-radius: 10px; text-decoration: none; font-weight: 700; }
-    .cta:hover { background: #00C9AE; }
-    section.skeleton { margin: 48px 0; padding: 24px; border: 1px dashed rgba(0,0,0,0.18); border-radius: 12px; color: #5A6975; font-size: 14px; }
-    footer { margin-top: 48px; color: #8B98A4; font-size: 13px; }
-    footer a { color: inherit; }
-  </style>
+  <meta property="og:image" content="https://community.leadup.guru/assets/img/og-neurosborka-pro.png" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="product:price:amount" content="50" />
+  <meta property="product:price:currency" content="EUR" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="../../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../../assets/css/landing.css" />
+
+  <script defer src="../../assets/js/analytics.js"></script>
+  <script defer src="../../assets/js/pro-checkout.js"></script>
 </head>
-<body>
-  <main>
-    <h1>Нейросборка PRO — закрытый клуб для тех, кто строит на AI</h1>
-    <p class="lead">Каждую неделю — mastermind с разбором кейсов, два воркшопа в месяц, библиотека готовых n8n-сценариев, Q&A с экспертами LeadUp AI и закрытый чат с теми, кто реально внедряет.</p>
+<body data-pending-founder-pass="true">
+  <a href="#main" class="skip-link">К основному содержимому</a>
 
-    <div class="price"><strong>50 €</strong><small>/мес или 5 000 ₽/мес · оплата через Tribute</small></div>
+  <div class="notice-bar" role="note">
+    Pre-launch: финальный pass по голосу основателя — до 06.05. Цены и оплата — в проде.
+  </div>
 
-    <p>
-      <a class="cta" href="#" data-tribute-checkout rel="noopener">Оформить подписку</a>
-    </p>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="../../" class="brand" aria-label="Community LeadUp">leadup<span class="brand__dot">·</span>community</a>
+      <nav class="site-header__nav" aria-label="Основная навигация">
+        <a href="#compare">Free vs PRO</a>
+        <a href="#benefits">Что входит</a>
+        <a href="#price">Цена</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary btn-checkout" data-tribute-checkout data-region="eu" data-plan="monthly" data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly" href="#price">Оформить подписку</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="skeleton">
-      <strong>Скелет лендинга</strong> — production-копия (Марина, copy-v2 §B) подключается версткой 2026-05-06. CTA-ссылка на Tribute checkout — берёт Дима в LEA-675. Структура: Hero → Free vs PRO → Что входит (6 бенефитов) → Календарь событий → Что вы сделаете за 30 дней → Голос основателя → Отзывы → Цена → FAQ → Финальный CTA.
+  <main id="main">
+
+    <!-- B.1 Hero -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="eyebrow-accent hero__eyebrow">PRO · Закрытый клуб · 50 €/мес или 5 000 ₽/мес</p>
+        <h1>Нейросборка <span class="text-teal-grad">PRO</span> — закрытый клуб для тех, кто строит на AI</h1>
+        <p class="hero__lead">
+          9 ивентов в месяц с командой LeadUp AI и приглашёнными экспертами:
+          мастермайнды, воркшопы по n8n, разборы кейсов и Q&A.
+          Плюс библиотека готовых шаблонов и ранний доступ к материалам Нейромастерской 2.0.
+          Один тариф — 50&nbsp;€/мес или 5&nbsp;000&nbsp;₽/мес.
+        </p>
+        <div class="hero__ctas">
+          <button type="button" class="btn btn-primary btn-lg btn-checkout" data-tribute-checkout
+                  data-region="eu" data-plan="monthly"
+                  data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly">
+            Оформить за 50&nbsp;€/мес
+          </button>
+          <button type="button" class="btn btn-ghost btn-lg btn-checkout" data-tribute-checkout
+                  data-region="ru" data-plan="monthly"
+                  data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_ru_monthly">
+            Оплата картой ₽ — 5&nbsp;000&nbsp;₽/мес
+          </button>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>community.leadup.guru/neurosborka/pro — placeholder, v1 на стейдже 2026-05-06.</p>
-      <p>Не готов платить? <a href="/neurosborka/">Бесплатное сообщество</a></p>
-    </footer>
+    <!-- B.2 Free vs PRO -->
+    <section class="section" id="compare">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.2 · Что меняется на PRO</p>
+        <h2>Free vs PRO — что в каждом</h2>
+        <p class="section__lead">Free — это база, чат и открытые мини-эфиры. PRO добавляет регулярные синхронные форматы, библиотеку шаблонов и ранний доступ к материалам Нейромастерской 2.0.</p>
+
+        <div class="compare-wrap">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Free</th>
+                <th>PRO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Telegram-чат сообщества</td><td class="cell-yes">✓</td><td class="cell-yes">✓</td></tr>
+              <tr><td>Еженедельный дайджест индустрии</td><td class="cell-yes">✓</td><td class="cell-yes">✓</td></tr>
+              <tr><td>Открытые мини-эфиры</td><td class="cell-yes">✓</td><td class="cell-yes">✓</td></tr>
+              <tr><td>Кейсы участников (текст)</td><td class="cell-yes">✓</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Еженедельный мастермайнд 75 мин (Zoom)</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Воркшопы по n8n и AI-агентам, 90 мин</strong></td><td class="cell-no">—</td><td class="cell-yes">✓ (2/мес)</td></tr>
+              <tr><td><strong>Разбор твоего кейса в «горячем кресле», 45 мин</strong></td><td class="cell-no">—</td><td class="cell-yes">✓ (1/мес)</td></tr>
+              <tr><td><strong>Q&A с экспертами LeadUp AI, 60 мин</strong></td><td class="cell-no">—</td><td class="cell-yes">✓ (1/мес)</td></tr>
+              <tr><td><strong>Челлендж месяца: собери X за 7 дней</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Daily AI-дайджест в чате, 5 мин чтения</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Библиотека n8n-шаблонов и промптов</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Ранний доступ к материалам Нейромастерской 2.0</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td><strong>Закрытый чат PRO + ранний доступ к продуктам</strong></td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr><td>Welcome-видео от Владимира Нагина при подключении</td><td class="cell-no">—</td><td class="cell-yes">✓</td></tr>
+              <tr>
+                <td><strong>Цена</strong></td>
+                <td>0</td>
+                <td><strong style="color: var(--teal);">50 €/мес или 5 000 ₽/мес</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- B.3 Что ты будешь делать в PRO -->
+    <section class="section" id="benefits">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.3 · Что ты будешь делать в PRO</p>
+        <h2>8 регулярных форматов, чтобы ты двигался по своим проектам</h2>
+
+        <div class="benefits">
+          <article class="benefit">
+            <span class="benefit__num">01</span>
+            <div>
+              <h3>Разбираешь чужой кейс каждую неделю — и применяешь к своему процессу</h3>
+              <p class="benefit__meta">Еженедельный мастермайнд в Zoom · 75 мин · четверг 19:00 МСК</p>
+              <p class="benefit__body">60 минут разбираем кейсы участников, 15 минут открытый Q&A. Кто-то приносит свою воронку, n8n-схему или AI-агента, остальные дают конкретные правки. Без записей — чтобы говорили честно.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">02</span>
+            <div>
+              <h3>Собираешь рабочий workflow в проде за 90 минут эфира — не теоретически, а руками</h3>
+              <p class="benefit__meta">Воркшоп по n8n / AI-агентам · 90 мин · 1-я и 3-я среда месяца</p>
+              <p class="benefit__body">15 минут теории, 60 минут hands-on, 15 минут разбор. Открываешь n8n параллельно с эфиром, повторяешь шаги, к концу — рабочая автоматизация. Ведёт Дима (AutomationEngineer), приглашённые практики — по ротации.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">03</span>
+            <div>
+              <h3>Дорабатываешь свой проект по фидбэку Алекса и комьюнити за один эфир</h3>
+              <p class="benefit__meta">«Горячее кресло» — открытый разбор твоего кейса · 45 мин · 2-й вторник месяца</p>
+              <p class="benefit__body">Один участник — один проект — 45 минут конкретных правок от Алекса и комьюнити. Заявку подаёшь в чате, очередь прозрачная. Артефакт «до → после» = твоё измеримое движение по проекту.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">04</span>
+            <div>
+              <h3>Решаешь свой стопор за 60 минут с экспертом, а не неделю на форумах</h3>
+              <p class="benefit__meta">Q&A с экспертом LeadUp AI · 60 мин · последний вторник месяца</p>
+              <p class="benefit__body">Алекс (стратегия AI в бизнесе), Дима (n8n / автоматизация), Ирина (методология), приглашённые эксперты — по ротации. Темы голосуем заранее.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">05</span>
+            <div>
+              <h3>Делаешь законченный артефакт под жёсткий дедлайн — пока он у тебя ещё в фокусе</h3>
+              <p class="benefit__meta">Челлендж месяца «собери X за 7 дней» · 30-мин брифинг + 7 дней работы · 1-й понедельник месяца</p>
+              <p class="benefit__body">Темы практические: AI-ресёрчер на n8n, автоматизация обработки лидов, промпт-сборщик коммерческих предложений. Опционально, без штрафов — кто хочет, тот участвует.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">06</span>
+            <div>
+              <h3>Запускаешь готовый AI-сценарий за &lt;30 минут — вместо того, чтобы строить с нуля</h3>
+              <p class="benefit__meta">Библиотека n8n-шаблонов, промптов и скриптов · self-paced</p>
+              <p class="benefit__body">Стартуем с 10 workflows, проверенных в проде: лидогенерация, ресёрч, контент-конвейер, поддержка клиентов. +5–10 единиц в месяц, Дима курирует.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">07</span>
+            <div>
+              <h3>Осваиваешь модули Нейромастерской 2.0 раньше публики — и влияешь на финальный продукт</h3>
+              <p class="benefit__meta">Ранний доступ к материалам корпоративной 3-месячной программы · self-paced</p>
+              <p class="benefit__body">Beta-релизы ключевых модулей — открываются по мере готовности. Ты получаешь раньше, мы получаем твою обратную связь до запуска новой когорты.</p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__num">08</span>
+            <div>
+              <h3>Внедряешь 1 свежий AI-инструмент в неделю по daily-дайджесту, а не догоняешь индустрию раз в квартал</h3>
+              <p class="benefit__meta">Закрытый чат PRO + daily AI-дайджест · 5 мин чтения каждый рабочий день · 10:00 МСК</p>
+              <p class="benefit__body">Прямой канал к команде LeadUp AI, дайджест от Кати: что нового и что с этим делать на этой неделе. Beta-доступ ко всему, что мы запускаем. Сетевой эффект — партнёры по проекту находятся в одном чате.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="benefit__bonus">
+          <strong>Бонус при подключении:</strong> welcome-видео от Владимира Нагина с навигацией по программе и pre-assessment «где ты сейчас». В конце 30 дней — post-assessment и skill-gain score, чтобы рост был измерим.
+        </div>
+      </div>
+    </section>
+
+    <!-- B.4 Календарь -->
+    <section class="section" id="cadence">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.4 · Что в неделю и в месяц</p>
+        <h2>Календарь PRO</h2>
+        <p class="section__lead">~9 синхронных событий в месяц + self-paced библиотека и материалы Нейромастерской 2.0. Итого ≈9 часов в месяц синхрона.</p>
+
+        <ul class="cadence-list" role="list">
+          <li><span class="when">каждый рабочий день · 10:00 МСК</span><span class="what">Daily AI-дайджест в чате — 5 минут чтения (PRO).</span></li>
+          <li><span class="when">каждый чт · 19:00 МСК</span><span class="what">Мастермайнд 75 мин — разбор кейсов участников + Q&A (PRO).</span></li>
+          <li><span class="when">1-я и 3-я ср месяца</span><span class="what">Воркшоп по n8n или AI-агентам — 90 мин hands-on.</span></li>
+          <li><span class="when">2-й вт месяца</span><span class="what">«Горячее кресло» — разбор кейса участника, 45 мин.</span></li>
+          <li><span class="when">последний вт месяца</span><span class="what">Q&A с экспертом LeadUp AI — 60 мин, темы голосуем.</span></li>
+          <li><span class="when">1-й пн месяца</span><span class="what">Челлендж-брифинг «собери X за 7 дней» — 30 мин + 7 дней работы.</span></li>
+          <li><span class="when">1 раз в месяц</span><span class="what">Открытый мини-эфир для всех (общий с free) — 30 мин.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- B.5 Кому подойдёт PRO -->
+    <section class="section section-tight" id="audience">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.5 · Кому подойдёт</p>
+        <h2>Для кого собрали PRO</h2>
+
+        <div class="audience-grid">
+          <div class="audience-card"><strong>Маркетологам в агентстве</strong>которые продают AI-внедрения клиентам и хотят чужие кейсы и шаблоны, а не разрабатывать всё с нуля.</div>
+          <div class="audience-card"><strong>Фаундерам SMB</strong>у которых команда из 5–50 человек и есть бюджет на автоматизацию, но нет внутреннего AI-эксперта.</div>
+          <div class="audience-card"><strong>RevOps и SalesOps</strong>которые автоматизируют воронки и хотят ускориться через готовые n8n-связки.</div>
+          <div class="audience-card"><strong>HR / TalentOps</strong>которые внедряют AI-сотрудников в процессы найма и онбординга.</div>
+          <div class="audience-card"><strong>AI-практикам</strong>ищущим single source of truth по русскоязычной AI-автоматизации, а не разрозненные посты в X и LinkedIn.</div>
+          <div class="audience-card"><strong>Руководителям, которые думают про Нейромастерскую 2.0</strong>PRO даёт ранний доступ к её материалам и понимание, подходит ли формат команде.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- B.6 30 дней -->
+    <section class="section" id="program">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.6 · 30 дней в PRO</p>
+        <h2>Что сделаешь за первые 30 дней</h2>
+
+        <div class="program">
+          <div class="program__step">
+            <div class="program__when">День 1</div>
+            <div class="program__what">
+              <h4>Welcome-видео от Владимира Нагина</h4>
+              <p>Pre-assessment «где ты сейчас» — за 20 минут получаешь ориентир и план на месяц.</p>
+            </div>
+          </div>
+          <div class="program__step">
+            <div class="program__when">Неделя 1</div>
+            <div class="program__what">
+              <h4>Первый запуск</h4>
+              <p>Выбираешь шаблон из библиотеки под свою задачу, разворачиваешь в своём n8n, делишься результатом в чат.</p>
+              <span class="program__artifact">артефакт · работающий AI-сценарий + пост в чате</span>
+            </div>
+          </div>
+          <div class="program__step">
+            <div class="program__when">Неделя 2</div>
+            <div class="program__what">
+              <h4>Свой workflow</h4>
+              <p>Идёшь на воркшоп по n8n или AI-агентам, к концу эфира у тебя в проде — вторая автоматизация, уже собранная под твой бизнес-кейс, не копия шаблона.</p>
+              <span class="program__artifact">артефакт · свой workflow с описанием задачи</span>
+            </div>
+          </div>
+          <div class="program__step">
+            <div class="program__when">Неделя 3</div>
+            <div class="program__what">
+              <h4>Мастермайнд и фидбэк</h4>
+              <p>Подаёшь заявку на «горячее кресло» (или работаешь с чужим разбором) и идёшь на еженедельный мастермайнд. Получаешь правки от Алекса и комьюнити.</p>
+              <span class="program__artifact">артефакт · документ «3 инсайта + что меняю в своём workflow»</span>
+            </div>
+          </div>
+          <div class="program__step">
+            <div class="program__when">Неделя 4</div>
+            <div class="program__what">
+              <h4>План на следующий месяц</h4>
+              <p>Q&A с экспертом по теме, которую сам и проголосовал, post-assessment и skill-gain score, AI-Roadmap на следующие 30–60 дней.</p>
+              <span class="program__artifact">артефакт · roadmap из 3–5 сценариев + измеренный рост навыка</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program__summary">
+          <strong>К концу месяца у тебя в портфолио:</strong> работающий шаблон, свой workflow, документ инсайтов и roadmap.
+          Плюс библиотека шаблонов под рукой и комьюнити, к которому можно вернуться с любым вопросом.
+        </div>
+      </div>
+    </section>
+
+    <!-- B.7 Голос Владимира -->
+    <section class="section" id="founder">
+      <div class="container">
+        <p class="eyebrow section__eyebrow" style="text-align: center;">B.7 · От основателя</p>
+
+        <!-- Welcome-видео slot — заполняем mp4 от Артёма (LEA-739).
+             До поставки видео слот скрыт через `hidden`; fallback — текстовое обращение ниже. -->
+        <div class="founder-video" data-welcome-video hidden>
+          <video controls preload="metadata"
+                 poster="../../assets/img/founder-poster.jpg"
+                 data-event="founder_video_play" data-event-page="pro" data-event-plan="pro">
+            <source src="../../assets/video/welcome-vladimir.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает воспроизведение видео.
+          </video>
+        </div>
+
+        <div class="founder">
+          <p>Привет. Я Владимир Нагин, основатель LeadUp AI.</p>
+          <p>Я собираю Нейросборку PRO так, как сам бы хотел в неё попасть, когда начинал с AI: меньше восторгов, больше готовых решений и людей, которые уже наступили на грабли.</p>
+          <p><strong>Что AI делает хорошо:</strong> забирает рутину — отчёты, ресёрч, первые черновики, базовую обработку лидов. На этом почти у всех получается отбить подписку и кратно больше за первый же месяц.</p>
+          <p><strong>Где AI пока не работает:</strong> финальные решения, отношения с клиентами, нюансы стратегии. Там, где нужно понимать контекст, который не записан нигде, кроме головы человека.</p>
+          <p><strong>И где он добавляет работы:</strong> чтобы AI делал нормально, кто-то должен собрать промпт, проверить результат и встроить это в процессы. Это не «волшебная кнопка», это новая инженерная дисциплина.</p>
+          <p>PRO — про то, чтобы пройти этот путь быстрее. С готовыми шаблонами, чужими ошибками и людьми, которые уже работают на той же территории.</p>
+          <p>Если резонирует — приходи. Если нет — оставайся в free, мы там же.</p>
+          <p class="founder__sig">— Владимир</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- B.8 Кейсы -->
+    <section class="section" id="cases">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.8 · Примеры результатов</p>
+        <h2>Какие результаты повторяются у участников</h2>
+        <p class="section__lead">Это не testimonials с прямой цитатой — для них нужно письменное согласие участника. Это типы результатов, которые повторяются у участников, прошедших через активные форматы.</p>
+
+        <div class="cases">
+          <article class="case">
+            <p class="case__role">Маркетинговое агентство</p>
+            <p class="case__metric">4&nbsp;ч&nbsp;→&nbsp;~2&nbsp;мин</p>
+            <p class="case__body">Автоматизация сбора и первичной квалификации лидов через n8n + LLM. Время на обработку одного лида сократилось с 4 часов до ~2 минут.</p>
+          </article>
+          <article class="case">
+            <p class="case__role">Head of Operations · SMB</p>
+            <p class="case__metric">−30%</p>
+            <p class="case__body">AI-ассистент по внутренней документации компании. Снижение нагрузки на техподдержку на ~30% за первый месяц после внедрения.</p>
+          </article>
+          <article class="case">
+            <p class="case__role">Фрилансер-автоматизатор</p>
+            <p class="case__metric">×2 клиентов</p>
+            <p class="case__body">Конвейер генерации контента для клиентов на AI-агентах. Вдвое больше клиентов без роста рабочих часов.</p>
+          </article>
+          <article class="case">
+            <p class="case__role">Маркетолог · e-commerce</p>
+            <p class="case__metric">+12% CR</p>
+            <p class="case__body">Поведенческая персонализация email-рассылок на AI. +12% конверсии в покупку за счёт релевантности.</p>
+          </article>
+        </div>
+
+        <p class="cases__note">Кейсы — типичные результаты участников последних активностей Нейросборки. Прямые testimonials с именами и должностями появятся, когда у нас будут письменные согласия конкретных участников.</p>
+      </div>
+    </section>
+
+    <!-- B.9 Цена -->
+    <section class="section" id="price">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.9 · Сколько стоит</p>
+        <h2>Один тариф, без уровней</h2>
+        <p class="section__lead">Оплата картой или криптой. Отписаться — в один клик в личном кабинете.</p>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <p class="price-card__region">Мир · EUR + крипта</p>
+            <div class="price-card__amount">50&nbsp;€<span class="price-card__per">/ мес</span></div>
+            <p class="price-card__annual">Год: <strong>510&nbsp;€</strong> (~42.50 €/мес, −15%)</p>
+            <div class="price-card__cta">
+              <button type="button" class="btn btn-primary btn-block btn-checkout" data-tribute-checkout
+                      data-region="eu" data-plan="monthly"
+                      data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly">
+                Оформить за 50&nbsp;€
+              </button>
+              <button type="button" class="btn btn-ghost btn-block btn-checkout" data-tribute-checkout
+                      data-region="eu" data-plan="annual"
+                      data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_annual"
+                      style="margin-top: 8px;">
+                Год за 510&nbsp;€ (−15%)
+              </button>
+            </div>
+          </article>
+
+          <article class="price-card">
+            <p class="price-card__region">RU + BY · ₽</p>
+            <div class="price-card__amount">5&nbsp;000&nbsp;₽<span class="price-card__per">/ мес</span></div>
+            <p class="price-card__annual">Год: <strong>51&nbsp;000&nbsp;₽</strong> (~4 250 ₽/мес, −15%)</p>
+            <div class="price-card__cta">
+              <button type="button" class="btn btn-primary btn-block btn-checkout" data-tribute-checkout
+                      data-region="ru" data-plan="monthly"
+                      data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_ru_monthly">
+                Оформить за 5&nbsp;000&nbsp;₽
+              </button>
+              <button type="button" class="btn btn-ghost btn-block btn-checkout" data-tribute-checkout
+                      data-region="ru" data-plan="annual"
+                      data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_ru_annual"
+                      style="margin-top: 8px;">
+                Год за 51&nbsp;000&nbsp;₽ (−15%)
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <p class="pricing__note">
+          После успешной оплаты ты автоматически попадаешь в закрытый Telegram-чат PRO.
+          Подписка возобновляется автоматически — отписка в один клик в личном кабинете.
+        </p>
+      </div>
+    </section>
+
+    <!-- B.10 FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">B.10 · FAQ</p>
+        <h2>Частые вопросы</h2>
+
+        <div class="faq" style="margin-top: 32px;">
+          <details>
+            <summary>Чем PRO отличается от Нейромастерской 2.0?</summary>
+            <div class="faq__answer">
+              <p>Нейромастерская 2.0 — 3-месячная корпоративная программа AI-трансформации команды, под ключ, с куратором.</p>
+              <p>PRO — это сообщество и регулярные мастермайнды для индивидуальных практиков, без жёсткого расписания и без сертификата. PRO даёт ранний доступ к части материалов Нейромастерской.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Нужен ли опыт работы с n8n или AI?</summary>
+            <div class="faq__answer">
+              <p>Нет. На воркшопах разбираем с нуля. Если ты работал с Zapier / Make.com / любой no-code-логикой — освоишься быстрее, но не критично.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Как часто проходят мастермайнды?</summary>
+            <div class="faq__answer">
+              <p>Каждый четверг 19:00 МСК, 75 минут — 60 минут разбора кейсов и 15 минут открытый Q&A. Zoom, запись не ведётся — поэтому говорим честнее.</p>
+              <p>Если пропустил — приноси свой проект на следующий или подавай заявку на «горячее кресло» во второй вторник месяца.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Как оплатить из России?</summary>
+            <div class="faq__answer">
+              <p>Картой ₽ через российский эквайринг — 5 000 ₽/мес. Из других регионов — карта € или крипта, 50 €/мес.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Можно ли вернуть деньги?</summary>
+            <div class="faq__answer">
+              <p>Да, в первые 7 дней — без вопросов. Дальше — отмена работает с конца оплаченного месяца.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Есть ли скидка на годовую подписку?</summary>
+            <div class="faq__answer">
+              <p>Да, годовая на 15% дешевле помесячной — оплачиваешь сразу за год, экономишь ≈1.8 месяца. Если хочешь сначала попробовать — стартуй с месячной, в личном кабинете перейдёшь на годовую в любой момент.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Можно ли перейти из PRO обратно в free?</summary>
+            <div class="faq__answer">
+              <p>Можно. Отменяешь подписку, остаёшься в бесплатном Telegram-чате сообщества как до PRO. Ничего не теряешь.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- B.11 Финальный CTA -->
+    <section class="final-cta" id="join">
+      <div class="container">
+        <p class="eyebrow-accent">B.11 · Готов попробовать PRO?</p>
+        <h2>50 € или 5 000 ₽ в месяц</h2>
+        <p>Отписаться можно в любой момент, никаких обязательств.</p>
+        <div class="hero__ctas" style="justify-content: center;">
+          <button type="button" class="btn btn-primary btn-lg btn-checkout" data-tribute-checkout
+                  data-region="eu" data-plan="monthly"
+                  data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_eu_monthly">
+            Оформить за 50&nbsp;€/мес
+          </button>
+          <button type="button" class="btn btn-ghost btn-lg btn-checkout" data-tribute-checkout
+                  data-region="ru" data-plan="monthly"
+                  data-event="pro_checkout_click" data-event-page="pro" data-event-plan="pro_ru_monthly">
+            Картой ₽ — 5&nbsp;000&nbsp;₽/мес
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- B.12 Гарантия -->
+    <section class="section section-tight" id="refund">
+      <div class="container">
+        <div class="refund">
+          <p class="eyebrow">B.12 · Гарантия</p>
+          <h3>Если не зашло — вернём деньги</h3>
+          <p>Первые 7 дней работают как полный возврат. Пишешь в чат, мы отменяем подписку и возвращаем оплату. Без звонков и анкет «почему вы уходите».</p>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div>
+          <p class="brand">leadup<span class="brand__dot">·</span>community</p>
+          <p style="color: var(--fg-3); font-size: var(--text-sm); margin-top: 8px; max-width: 360px; line-height: 1.5;">
+            Нейросборка PRO — закрытый клуб LeadUp AI: мастермайнды, воркшопы, библиотека шаблонов. Один тариф, без уровней.
+          </p>
+        </div>
+        <div>
+          <h4>PRO</h4>
+          <ul>
+            <li><a href="#compare">Free vs PRO</a></li>
+            <li><a href="#benefits">Что входит</a></li>
+            <li><a href="#program">30 дней в PRO</a></li>
+            <li><a href="#price">Цена</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>LeadUp AI</h4>
+          <ul>
+            <li><a href="../">Free Нейросборка</a></li>
+            <li><a href="https://leadup.guru" rel="noopener">leadup.guru</a></li>
+            <li><a href="https://leadup.guru/community/ai-automation" rel="noopener">Нейромастерская 2.0</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__meta">
+        <span>© 2026 LeadUp AI · Все права защищены</span>
+        <span>community.leadup.guru/neurosborka/pro/</span>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

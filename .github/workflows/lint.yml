@@ -1,0 +1,61 @@
+name: lint
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  html-css-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install linters
+        run: |
+          npm i -g htmlhint stylelint stylelint-config-standard linkinator@6
+
+      - name: HTMLHint
+        run: |
+          cat > .htmlhintrc <<'JSON'
+          {
+            "tagname-lowercase": true,
+            "attr-lowercase": true,
+            "attr-value-double-quotes": true,
+            "doctype-first": true,
+            "tag-pair": true,
+            "id-unique": true,
+            "src-not-empty": true,
+            "title-require": true,
+            "alt-require": false,
+            "attr-no-duplication": true
+          }
+          JSON
+          htmlhint "**/*.html" --ignore "node_modules/**"
+
+      - name: Stylelint
+        run: |
+          cat > .stylelintrc.json <<'JSON'
+          {
+            "extends": ["stylelint-config-standard"],
+            "rules": {
+              "no-descending-specificity": null,
+              "selector-class-pattern": null,
+              "custom-property-pattern": null,
+              "color-function-notation": null,
+              "alpha-value-notation": null
+            }
+          }
+          JSON
+          stylelint "assets/css/*.css"
+
+      - name: Broken-links
+        run: |
+          npx --yes linkinator . --recurse --silent --skip "^https?://(t\\.me|tribute\\.tg|leadup\\.guru|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|widget\\.cloudpayments\\.ru|plausible\\.io)" --markdown false || true

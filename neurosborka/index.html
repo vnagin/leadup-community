@@ -1,43 +1,295 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Нейросборка — сообщество практиков AI-автоматизации</title>
-  <meta name="description" content="Telegram-канал и сообщество практиков AI-автоматизации: дайджест, разборы кейсов, открытые мини-эфиры. Бесплатно, без флуда." />
-  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Нейросборка — место, где разбирают AI-автоматизацию на чужих кейсах</title>
+  <meta name="description" content="Telegram-чат и сообщество практиков AI-автоматизации: дайджест индустрии, разборы реальных воронок участников, открытые мини-эфиры. Бесплатно, без флуда и без курса в конце." />
+  <meta name="theme-color" content="#0A0F0D" />
   <link rel="canonical" href="https://community.leadup.guru/neurosborka/" />
-  <meta property="og:title" content="Нейросборка — сообщество практиков AI-автоматизации" />
-  <meta property="og:description" content="Дайджест индустрии раз в неделю, разборы реальных воронок участников, открытые мини-эфиры. Бесплатно." />
-  <meta property="og:url" content="https://community.leadup.guru/neurosborka/" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <style>
-    :root { color-scheme: light; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #FAFBFC; color: #0B0F14; line-height: 1.55; }
-    main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
-    h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; }
-    p.lead { font-size: 18px; color: #41525E; margin: 0 0 32px; }
-    .cta { display: inline-block; background: #0B0F14; color: #fff; padding: 14px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; }
-    .cta:hover { background: #1A2330; }
-    section.skeleton { margin: 48px 0; padding: 24px; border: 1px dashed rgba(0,0,0,0.18); border-radius: 12px; color: #5A6975; font-size: 14px; }
-    footer { margin-top: 48px; color: #8B98A4; font-size: 13px; }
-  </style>
+  <meta property="og:title" content="Нейросборка — место, где разбирают AI-автоматизацию на чужих кейсах" />
+  <meta property="og:description" content="Дайджест индустрии раз в неделю, разборы реальных воронок участников, открытые мини-эфиры. Бесплатно, без флуда." />
+  <meta property="og:url" content="https://community.leadup.guru/neurosborka/" />
+  <meta property="og:image" content="https://community.leadup.guru/assets/img/og-neurosborka.png" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/landing.css" />
+
+  <script defer src="../assets/js/analytics.js"></script>
 </head>
 <body>
-  <main>
-    <h1>Нейросборка — сообщество практиков AI-автоматизации</h1>
-    <p class="lead">Telegram-канал и сообщество: дайджест индустрии раз в неделю, разборы реальных воронок участников, открытые мини-эфиры. Бесплатно, без флуда и без курса в конце.</p>
+  <a href="#main" class="skip-link">К основному содержимому</a>
 
-    <a class="cta" href="https://t.me/+a4YGH9rdoJRjMTE1" rel="noopener">Вступить в Telegram</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="../" class="brand" aria-label="Community LeadUp">leadup<span class="brand__dot">·</span>community</a>
+      <nav class="site-header__nav" aria-label="Основная навигация">
+        <a href="#cadence">Что внутри</a>
+        <a href="#audience">Кому</a>
+        <a href="#pro">PRO</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary" href="https://t.me/+a4YGH9rdoJRjMTE1" data-event="free_join_click" data-event-page="free" data-event-plan="free" rel="noopener">Вступить в чат</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="skeleton">
-      <strong>Скелет лендинга</strong> — production-копия (Марина, copy-v2 §A) подключается версткой 2026-05-06. Структура: Hero → Что внутри → Форматы → Кому подойдёт → Социальное доказательство → Апсейл в PRO → CTA → FAQ.
+  <main id="main">
+
+    <!-- A.1 Hero -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="eyebrow-accent hero__eyebrow">Сообщество · 2 500 участников · Бесплатно</p>
+        <h1>Нейросборка — место, где разбирают AI-автоматизацию на чужих кейсах</h1>
+        <p class="hero__lead">
+          Telegram-чат и сообщество практиков: дайджест индустрии раз в неделю,
+          разборы реальных воронок участников, открытые мини-эфиры.
+          Бесплатно, без флуда и без курса в конце.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn-primary btn-lg" href="https://t.me/+a4YGH9rdoJRjMTE1" data-event="free_join_click" data-event-page="free" data-event-plan="free" rel="noopener">
+            Вступить в Telegram-чат
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#cadence">Что внутри</a>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>community.leadup.guru/neurosborka — placeholder, v1 на стейдже 2026-05-06.</p>
-      <p>Хочешь больше? <a href="/neurosborka/pro/">Нейросборка PRO</a></p>
-    </footer>
+    <!-- A.2 Что внутри Нейросборки -->
+    <section class="section" id="inside">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">A.2 · Что внутри</p>
+        <h2>Три вещи, ради которых читают чат</h2>
+        <p class="section__lead">Без курсов, инфоповодов и пересказов твитов. Только то, что можно применить на следующей неделе.</p>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-card__num">01</span>
+            <h3 class="feature-card__title">Дайджест AI-автоматизации, раз в неделю</h3>
+            <p class="feature-card__body">
+              Самые громкие апдейты по n8n, OpenAI, YandexGPT, GigaChat — но коротко:
+              что изменилось и что с этим делать на следующей неделе.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__num">02</span>
+            <h3 class="feature-card__title">Кейсы участников, 2–3 раза в неделю</h3>
+            <p class="feature-card__body">
+              Один человек — одна воронка, один промпт, одна автоматизация.
+              Без вылизанных success-stories: где сэкономило часы, где не зашло, что бы сделал иначе.
+              По нашим метрикам — самый читаемый формат в канале.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__num">03</span>
+            <h3 class="feature-card__title">Открытый мини-эфир, раз в месяц</h3>
+            <p class="feature-card__body">
+              30 минут, Q&A, без записи. Темы голосуем в чате — обычно про связки n8n + LLM,
+              агентов и про то, как продавать AI-проекты заказчикам.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- A.3 Что регулярно происходит -->
+    <section class="section section-tight" id="cadence">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">A.3 · Регулярность</p>
+        <h2>Что происходит в чате каждую неделю</h2>
+
+        <ul class="cadence-list" role="list">
+          <li><span class="when">раз в неделю</span><span class="what">Дайджест индустрии: что произошло за 7 дней и что с этим делать на следующей.</span></li>
+          <li><span class="when">2–3 раза в неделю</span><span class="what">AI-кейс участника: один человек, одна воронка / промпт / автоматизация. Без вылизанных success-stories.</span></li>
+          <li><span class="when">раз в месяц</span><span class="what">Открытый мини-эфир или вебинар, темы голосуем в чате.</span></li>
+          <li><span class="when">раз в квартал</span><span class="what">Общий челлендж: 7 дней работы, артефакт в чат.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- A.4 Кому зайдёт -->
+    <section class="section" id="audience">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">A.4 · Кому зайдёт</p>
+        <h2>Для кого собирали</h2>
+
+        <div class="audience-grid">
+          <div class="audience-card">
+            <strong>Маркетологам и агентствам</strong>
+            которые внедряют AI-инструменты для клиентов и хотят видеть, что работает у других, прежде чем продавать.
+          </div>
+          <div class="audience-card">
+            <strong>Фаундерам SMB</strong>
+            которые думают, как масштабировать команду через автоматизации, а не через найм.
+          </div>
+          <div class="audience-card">
+            <strong>AI-практикам</strong>
+            которым надоели каналы с переводами твитов из англоязычного X — нужны кейсы на русском с цифрами.
+          </div>
+          <div class="audience-card">
+            <strong>Продактам и операционщикам</strong>
+            которые ищут, что отдать AI, а что оставить людям.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A.5 Кто уже внутри -->
+    <section class="section section-tight" id="proof">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">A.5 · Соц.доказательство</p>
+        <h2>Кто уже в Нейросборке</h2>
+
+        <p class="stub-wall__label">Сообщество маркетологов, фаундеров и продуктовых команд</p>
+        <div class="stub-wall" aria-hidden="true">
+          <div class="stub-wall__plate"></div>
+          <div class="stub-wall__plate"></div>
+          <div class="stub-wall__plate"></div>
+          <div class="stub-wall__plate"></div>
+          <div class="stub-wall__plate"></div>
+          <div class="stub-wall__plate"></div>
+        </div>
+
+        <div class="stats" role="group" aria-label="Метрики Нейросборки">
+          <div>
+            <div class="stat__num">~2&nbsp;500</div>
+            <div class="stat__label">участников в Нейросборке</div>
+          </div>
+          <div>
+            <div class="stat__num">20–24%</div>
+            <div class="stat__label">активны каждую неделю — читают, реагируют, обсуждают кейсы</div>
+          </div>
+          <div>
+            <div class="stat__num">+3–5%</div>
+            <div class="stat__label">прирост в неделю — растём органически, без рекламы</div>
+          </div>
+          <p class="stats__note">Оценка на 30.04.2026 по ручному сбору. Автоматический счёт через Telegram channel API подключим позже, к Q3 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A.6 Хочешь больше — есть PRO -->
+    <section class="section" id="pro">
+      <div class="container">
+        <div class="upsell">
+          <div>
+            <p class="eyebrow-accent">A.6 · Закрытый клуб</p>
+            <h3>Хочешь больше — есть PRO</h3>
+            <p class="upsell__body">
+              Нейросборка PRO — закрытый клуб для тех, кто строит на AI:
+              еженедельные мастермайнды по разбору проектов участников,
+              библиотека готовых n8n-шаблонов и промптов,
+              ранний доступ к материалам Нейромастерской 2.0.
+            </p>
+            <p class="upsell__body">
+              Никаких уровней — один тариф, всё включено.
+            </p>
+          </div>
+          <div class="upsell__side">
+            <div class="upsell__price">50&nbsp;€<span class="upsell__per" style="font-size: 18px; color: var(--fg-3); font-weight: 400;"> / мес</span></div>
+            <p class="upsell__price-meta">или 5&nbsp;000 ₽/мес — для RU+BY</p>
+            <a class="btn btn-primary btn-lg" href="pro/" data-event="pro_upsell_click" data-event-page="free" data-event-plan="pro">
+              Посмотреть, что входит в PRO
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A.7 Готов? Зайди в чат -->
+    <section class="final-cta" id="join">
+      <div class="container">
+        <p class="eyebrow-accent">A.7 · Готов?</p>
+        <h2>Без формы. Без регистрации.</h2>
+        <p>Открыл Telegram, нажал «Вступить» — ты внутри. Одно касание — и видишь сегодняшний дайджест, разборы кейсов и обсуждение последних апдейтов n8n.</p>
+        <a class="btn btn-primary btn-lg" href="https://t.me/+a4YGH9rdoJRjMTE1" data-event="free_join_click" data-event-page="free" data-event-plan="free" rel="noopener">
+          Вступить в Telegram-чат
+        </a>
+      </div>
+    </section>
+
+    <!-- A.8 FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <p class="eyebrow section__eyebrow">A.8 · FAQ</p>
+        <h2>Частые вопросы</h2>
+
+        <div class="faq" style="margin-top: 32px;">
+          <details>
+            <summary>Это правда бесплатно?</summary>
+            <div class="faq__answer">
+              <p>Да. Чат и открытые эфиры — без оплаты и без формы. Платная подписка PRO — отдельный продукт, не обязательный для участия в free.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Что вы продаёте внутри?</summary>
+            <div class="faq__answer">
+              <p>На free-канале — ничего. Раз в 1–2 недели можем упомянуть продукты LeadUp AI (Нейромастерская 2.0, PRO-клуб), но без рекламных залпов. Если так не считаешь — отписывайся, мы не обидимся.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Есть ли модерация?</summary>
+            <div class="faq__answer">
+              <p>Да. Спам, реклама без согласования, обсуждения вне темы — удаляем. Кейсы и вопросы — приветствуем, даже если кажется, что «слишком базовый».</p>
+            </div>
+          </details>
+          <details>
+            <summary>Я не маркетолог и не разработчик. Зайдёт?</summary>
+            <div class="faq__answer">
+              <p>Если ты руководитель, продукт-менеджер, операционщик или фаундер — да. Большинство кейсов в чате не про код, а про связки готовых инструментов.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Можно ли потом перейти в PRO?</summary>
+            <div class="faq__answer">
+              <p>Можно в любой момент. Подписка помесячная, без обязательств — отменишь в один клик.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div>
+          <p class="brand">leadup<span class="brand__dot">·</span>community</p>
+          <p style="color: var(--fg-3); font-size: var(--text-sm); margin-top: 8px; max-width: 360px; line-height: 1.5;">
+            Сообщество практиков AI-автоматизации от LeadUp AI.
+            Бесплатный Telegram-чат и закрытый клуб PRO.
+          </p>
+        </div>
+        <div>
+          <h4>Сообщество</h4>
+          <ul>
+            <li><a href="https://t.me/+a4YGH9rdoJRjMTE1" rel="noopener">Telegram-чат</a></li>
+            <li><a href="pro/">Нейросборка PRO</a></li>
+            <li><a href="../">Хаб community</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>LeadUp AI</h4>
+          <ul>
+            <li><a href="https://leadup.guru" rel="noopener">leadup.guru</a></li>
+            <li><a href="https://leadup.guru/community/ai-automation" rel="noopener">Нейромастерская 2.0</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__meta">
+        <span>© 2026 LeadUp AI · Все права защищены</span>
+        <span>community.leadup.guru/neurosborka/</span>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
