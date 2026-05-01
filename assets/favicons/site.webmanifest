@@ -1,0 +1,24 @@
+{
+  "name": "LeadUp Community",
+  "short_name": "LeadUp",
+  "icons": [
+    {
+      "src": "/assets/favicons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicons/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0A0F0D",
+  "background_color": "#0A0F0D",
+  "display": "standalone"
+}
