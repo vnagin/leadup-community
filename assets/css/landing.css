@@ -144,12 +144,12 @@ html { scroll-padding-top: 72px; }
 }
 .btn-primary {
   background: var(--teal);
-  color: #061210;
+  color: #000;
   box-shadow: var(--teal-glow);
 }
 .btn-primary:hover {
   background: var(--teal-hover);
-  color: #061210;
+  color: #000;
   transform: translateY(-1px);
 }
 .btn-primary:active { background: var(--teal-pressed); transform: translateY(0); }
