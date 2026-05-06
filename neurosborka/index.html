@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="../assets/css/landing.css" />
 
   <script defer src="../assets/js/analytics.js"></script>
+  <script defer src="../assets/js/optin.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">К основному содержимому</a>
@@ -188,6 +189,51 @@
             <div class="stat__label">прирост в неделю — растём органически, без рекламы</div>
           </div>
           <p class="stats__note">Оценка на 30.04.2026 по ручному сбору. Автоматический счёт через Telegram channel API подключим позже, к Q3 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A.5b Email-дайджест (LeadUp AI Daily) -->
+    <section class="optin" id="newsletter">
+      <div class="container">
+        <div class="optin__inner">
+          <p class="eyebrow-accent">LeadUp AI Daily</p>
+          <h2>Дайджест AI-индустрии — на почту, каждое утро в 10:00 МСК</h2>
+          <p class="optin__lead">
+            Топ-5 апдейтов в AI-автоматизации за сутки: что произошло, что с этим делать.
+            Параллель к Telegram-каналу — для тех, кому удобнее на почте. Без воды и без рекламы.
+          </p>
+
+          <form class="optin-wrap" data-optin data-source="neurosborka-free" novalidate>
+            <div class="optin-form">
+              <label for="optin-email-free" style="position:absolute;left:-9999px;">Email</label>
+              <input id="optin-email-free" class="optin-input" type="email" name="email"
+                     placeholder="ты@почта.рф" autocomplete="email" required inputmode="email" />
+
+              <label for="optin-name-free" style="position:absolute;left:-9999px;">Имя</label>
+              <input id="optin-name-free" class="optin-input" type="text" name="first_name"
+                     placeholder="Имя (опционально)" autocomplete="given-name" maxlength="80" />
+
+              <button class="btn btn-primary" type="submit"
+                      data-event="optin_submit_click" data-event-page="free" data-event-plan="free">
+                Подписаться
+              </button>
+
+              <input type="text" name="honeypot" class="optin-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            </div>
+
+            <label class="optin-consent">
+              <input type="checkbox" name="consent_152fz" />
+              <span>
+                Согласен на обработку персональных данных и получение писем по 152-ФЗ.
+                Подробнее — <a href="/legal/privacy">политика конфиденциальности</a>. Отписаться можно в один клик из любого письма.
+              </span>
+            </label>
+
+            <p class="optin-meta">Двойное подтверждение по email · TTL 48 часов · GDPR-friendly · Resend EU</p>
+
+            <div class="optin-status" data-optin-status role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
