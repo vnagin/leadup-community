@@ -32,7 +32,7 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   const ip = clientIp(request);
-  const rl = checkRateLimit(ip);
+  const rl = checkRateLimit(ip, "confirm");
   if (!rl.allowed) {
     return jsonResponse(
       429,
@@ -64,6 +64,7 @@ export default async function handler(request: Request): Promise<Response> {
     process.env.LE_OPTIN_CONFIRM_WEBHOOK_URL,
     process.env.LE_OPTIN_WEBHOOK_SECRET,
     { email, ts, token, submitted_at: new Date().toISOString() },
+    "confirm",
   );
 
   if (!upstream.ok) {

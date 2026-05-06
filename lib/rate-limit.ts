@@ -5,14 +5,17 @@
 // Vercel's edge regions tend to pin a client IP to the same POP for short
 // windows, so this is a sane MVP without external KV. If bot-traffic spikes
 // past comfort, swap for Upstash Redis (separate child issue).
+//
+// Each endpoint passes a `scope` ("subscribe", "confirm") so confirm-page
+// "retry" clicks don't burn through the subscribe budget — and vice versa.
 
 type Bucket = { minute: number[]; hour: number[] };
 
-const STORE_KEY = "__leadup_rl_v1";
+const STORE_KEY = "__leadup_rl_v2";
 
 declare global {
   // eslint-disable-next-line no-var
-  var __leadup_rl_v1: Map<string, Bucket> | undefined;
+  var __leadup_rl_v2: Map<string, Bucket> | undefined;
 }
 
 function getStore(): Map<string, Bucket> {
@@ -34,37 +37,38 @@ export type RateLimitDecision =
   | { allowed: true }
   | { allowed: false; retryAfterSec: number };
 
-export function checkRateLimit(ip: string): RateLimitDecision {
+export function checkRateLimit(ip: string, scope: string): RateLimitDecision {
   if (!ip) return { allowed: true };
   const store = getStore();
   const now = Date.now();
+  const key = `${scope}:${ip}`;
 
-  const bucket = store.get(ip) ?? { minute: [], hour: [] };
+  const bucket = store.get(key) ?? { minute: [], hour: [] };
   bucket.minute = bucket.minute.filter((t) => now - t < MIN_WINDOW_MS);
   bucket.hour = bucket.hour.filter((t) => now - t < HOUR_WINDOW_MS);
 
   if (bucket.minute.length >= PER_MIN_LIMIT) {
     const oldest = bucket.minute[0] ?? now;
     const retryAfterSec = Math.max(1, Math.ceil((MIN_WINDOW_MS - (now - oldest)) / 1000));
-    store.set(ip, bucket);
+    store.set(key, bucket);
     return { allowed: false, retryAfterSec };
   }
   if (bucket.hour.length >= PER_HOUR_LIMIT) {
     const oldest = bucket.hour[0] ?? now;
     const retryAfterSec = Math.max(60, Math.ceil((HOUR_WINDOW_MS - (now - oldest)) / 1000));
-    store.set(ip, bucket);
+    store.set(key, bucket);
     return { allowed: false, retryAfterSec };
   }
 
   bucket.minute.push(now);
   bucket.hour.push(now);
-  store.set(ip, bucket);
+  store.set(key, bucket);
 
   // Lightweight LRU pruning to bound memory in long-lived edge instances.
   if (store.size > 5000) {
     const cutoff = now - HOUR_WINDOW_MS;
-    for (const [key, b] of store) {
-      if ((b.hour[b.hour.length - 1] ?? 0) < cutoff) store.delete(key);
+    for (const [k, b] of store) {
+      if ((b.hour[b.hour.length - 1] ?? 0) < cutoff) store.delete(k);
     }
   }
 
@@ -72,6 +76,11 @@ export function checkRateLimit(ip: string): RateLimitDecision {
 }
 
 export function clientIp(req: Request): string {
+  // Vercel-specific header is authoritative when present — `x-forwarded-for`
+  // can be spoofed by the client when the request is proxied cross-origin
+  // (e.g. lendings on other domains hitting our Edge function).
+  const vercel = req.headers.get("x-vercel-forwarded-for");
+  if (vercel) return vercel.split(",")[0]!.trim();
   const fwd = req.headers.get("x-forwarded-for");
   if (fwd) return fwd.split(",")[0]!.trim();
   const real = req.headers.get("x-real-ip");

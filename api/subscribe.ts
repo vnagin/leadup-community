@@ -36,7 +36,7 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   const ip = clientIp(request);
-  const rl = checkRateLimit(ip);
+  const rl = checkRateLimit(ip, "subscribe");
   if (!rl.allowed) {
     return jsonResponse(
       429,
@@ -97,6 +97,7 @@ export default async function handler(request: Request): Promise<Response> {
     process.env.LE_OPTIN_WEBHOOK_URL,
     process.env.LE_OPTIN_WEBHOOK_SECRET,
     forwardPayload,
+    "subscribe",
   );
 
   if (!upstream.ok) {
