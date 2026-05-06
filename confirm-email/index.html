@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Подтверждение подписки — LeadUp AI Daily</title>
+  <meta name="description" content="Подтверждение email-подписки на ежедневный AI-дайджест от LeadUp AI." />
+  <meta name="theme-color" content="#0A0F0D" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://community.leadup.guru/confirm-email" />
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/landing.css" />
+
+  <script defer src="/assets/js/analytics.js"></script>
+  <script defer src="/assets/js/confirm-email.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">К основному содержимому</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="/" class="brand" aria-label="Community LeadUp">leadup<span class="brand__dot">·</span>community</a>
+      <nav class="site-header__nav" aria-label="Основная навигация">
+        <a href="/neurosborka/">Нейросборка</a>
+        <a href="/neurosborka/pro/">PRO</a>
+        <a class="btn btn-primary" href="https://t.me/+a4YGH9rdoJRjMTE1" rel="noopener">Telegram-чат</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="confirm">
+    <div class="container">
+      <article class="confirm__card" aria-live="polite">
+
+        <!-- Loading (initial) -->
+        <div class="confirm__state" data-state="loading" data-active="true">
+          <div class="confirm__icon" data-tone="loading" aria-hidden="true"></div>
+          <h1>Подтверждаем подписку…</h1>
+          <p class="confirm__body">Проверяем ссылку. Это занимает пару секунд.</p>
+        </div>
+
+        <!-- Success -->
+        <div class="confirm__state" data-state="success">
+          <div class="confirm__icon" aria-hidden="true">✓</div>
+          <h1>Подписка активна</h1>
+          <p class="confirm__body">
+            Готово, <code data-confirm-email>ты@почта</code> — теперь в списке.
+            Первый дайджест придёт завтра в 10:00 МСК. Топ-5 апдейтов AI-индустрии за сутки, без воды.
+          </p>
+          <div class="confirm__ctas">
+            <a class="btn btn-primary btn-lg" href="https://t.me/+a4YGH9rdoJRjMTE1"
+               data-event="confirm_tg_click" data-event-page="confirm-email" rel="noopener">
+              Заглянуть в Telegram-чат
+            </a>
+            <a class="btn btn-ghost btn-lg" href="/neurosborka/">Вернуться на лендинг</a>
+          </div>
+        </div>
+
+        <!-- Already confirmed -->
+        <div class="confirm__state" data-state="already_confirmed">
+          <div class="confirm__icon" aria-hidden="true">✓</div>
+          <h1>Ты уже подписан</h1>
+          <p class="confirm__body">
+            Подписка на <code data-confirm-email>ты@почта</code> активна с прошлого подтверждения. Дайджест приходит каждое утро в 10:00 МСК.
+          </p>
+          <div class="confirm__ctas">
+            <a class="btn btn-primary btn-lg" href="https://t.me/+a4YGH9rdoJRjMTE1"
+               data-event="confirm_tg_click" data-event-page="confirm-email" rel="noopener">
+              Заглянуть в Telegram-чат
+            </a>
+            <a class="btn btn-ghost btn-lg" href="/neurosborka/">Вернуться на лендинг</a>
+          </div>
+        </div>
+
+        <!-- Expired -->
+        <div class="confirm__state" data-state="expired">
+          <div class="confirm__icon" data-tone="warning" aria-hidden="true">!</div>
+          <h1>Ссылка устарела</h1>
+          <p class="confirm__body">
+            Ссылки подтверждения живут 48 часов — твоя истекла.
+            Это мера 152-ФЗ, чтобы согласие было свежим. Подпишись заново, и мы пришлём новое письмо.
+          </p>
+          <div class="confirm__ctas">
+            <a class="btn btn-primary btn-lg" href="/neurosborka/#newsletter">Подписаться заново</a>
+            <a class="btn btn-ghost btn-lg" href="/neurosborka/">К лендингу</a>
+          </div>
+        </div>
+
+        <!-- Invalid token / mangled URL -->
+        <div class="confirm__state" data-state="invalid">
+          <div class="confirm__icon" data-tone="error" aria-hidden="true">×</div>
+          <h1>Ссылка невалидна</h1>
+          <p class="confirm__body">
+            Мы не смогли проверить эту ссылку. Возможно, её скопировали не полностью, или письмо обработал email-сканер.
+            Подпишись заново — пришлём новую.
+          </p>
+          <div class="confirm__ctas">
+            <a class="btn btn-primary btn-lg" href="/neurosborka/#newsletter">Подписаться заново</a>
+            <a class="btn btn-ghost btn-lg" href="/neurosborka/">К лендингу</a>
+          </div>
+        </div>
+
+        <!-- Network / 5xx fallback -->
+        <div class="confirm__state" data-state="error">
+          <div class="confirm__icon" data-tone="error" aria-hidden="true">×</div>
+          <h1>Что-то пошло не так</h1>
+          <p class="confirm__body">
+            На нашей стороне сбой. Попробуй обновить страницу через минуту — или подпишись заново, если не получится.
+          </p>
+          <div class="confirm__ctas">
+            <button type="button" class="btn btn-primary btn-lg" data-confirm-retry>Попробовать снова</button>
+            <a class="btn btn-ghost btn-lg" href="/neurosborka/#newsletter">Подписаться заново</a>
+          </div>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__meta">
+        <span>© 2026 LeadUp AI · Все права защищены</span>
+        <span><a href="/legal/privacy">Политика конфиденциальности</a></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

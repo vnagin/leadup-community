@@ -1,0 +1,14 @@
+{
+  "name": "leadup-community",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Static landings + Vercel Edge API for community.leadup.guru",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.0.0",
+    "typescript": "^5.6.3"
+  }
+}
