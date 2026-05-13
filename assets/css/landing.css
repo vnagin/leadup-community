@@ -582,6 +582,14 @@ html { scroll-padding-top: 72px; }
   margin: 0 auto var(--sp-8);
   display: block;
 }
+.founder-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--r-3xl);
+  border: 1px solid var(--border-2);
+  background: var(--bg-2);
+}
 .founder-video--placeholder {
   background: linear-gradient(140deg, rgba(0, 229, 199, 0.10) 0%, rgba(0, 229, 199, 0.02) 60%, transparent 100%), var(--bg-2);
   border: 1px solid var(--border-2);

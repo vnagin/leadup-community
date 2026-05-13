@@ -312,21 +312,14 @@
       <div class="container">
         <p class="eyebrow section__eyebrow" style="text-align: center;">От основателя</p>
 
-        <!-- Welcome-видео placeholder. mp4 заедет в LEA-739; до этого — статичная карточка
-             в design-v3 без 404-ассетов. Когда видео придёт, swap-in делается одним PR. -->
-        <figure class="founder-video founder-video--placeholder" aria-label="Видео-обращение основателя — скоро">
-          <div class="founder-video__frame" aria-hidden="true">
-            <span class="founder-video__play">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
-              </svg>
-            </span>
-          </div>
-          <figcaption class="founder-video__caption">
-            <span class="founder-video__eyebrow">Видео скоро</span>
-            <span class="founder-video__title">Обращение основателя — Владимир Нагин</span>
-          </figcaption>
-        </figure>
+        <div class="founder-video">
+          <video controls preload="metadata"
+                 poster="../../assets/img/from-founder-vladimir-2026-05-thumb.webp"
+                 data-event="founder_video_play" data-event-page="pro" data-event-plan="pro">
+            <source src="../../assets/video/from-founder-vladimir-2026-05.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает воспроизведение видео.
+          </video>
+        </div>
 
         <div class="founder">
           <p>Привет. Я Владимир Нагин, основатель LeadUp AI.</p>
