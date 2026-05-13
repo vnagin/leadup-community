@@ -463,18 +463,73 @@ html { scroll-padding-top: 72px; }
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-normal);
   text-transform: none;
-  position: sticky;
-  top: 56px;
-  z-index: 10;
+}
+@media (min-width: 641px) {
+  .compare thead th { position: sticky; top: 56px; z-index: 10; }
 }
 .compare tbody td:first-child { color: var(--fg-1); font-weight: var(--fw-medium); }
 .compare td.cell-yes { color: var(--teal); font-weight: var(--fw-semibold); }
 .compare td.cell-no { color: var(--fg-4); }
 .compare tr:last-child td { border-bottom: 0; }
+/* PRO column highlight (desktop) */
+.compare thead th:last-child {
+  background: var(--teal-tint);
+  color: var(--teal);
+}
+.compare tbody td:last-child {
+  background: rgba(0, 229, 199, 0.03);
+}
+/* Price row accent */
+.compare tbody tr:last-child td {
+  border-top: 1px solid var(--border-2);
+  background: var(--bg-3);
+  font-weight: var(--fw-semibold);
+}
+.cell-price-pro { color: var(--teal); }
 .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 calc(-1 * var(--sp-3)); padding: 0 var(--sp-3); }
-@media (max-width: 720px) {
-  .compare { font-size: var(--text-xs); }
-  .compare th, .compare td { padding: 10px 12px; }
+@media (max-width: 640px) {
+  .compare-wrap { overflow-x: unset; margin: 0; padding: 0; }
+  .compare { display: block; background: transparent; border: none; border-radius: 0; }
+  .compare thead { display: none; }
+  .compare tbody { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .compare tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 52px 52px;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--bg-2);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-xl);
+  }
+  .compare tbody tr:last-child { background: var(--bg-3); border-color: var(--border-2); }
+  .compare tbody td { padding: 0; border: none; font-size: var(--text-sm); line-height: 1.4; }
+  .compare tbody td:first-child { color: var(--fg-1); font-weight: var(--fw-medium); }
+  .compare tbody td:nth-child(2),
+  .compare tbody td:nth-child(3) {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: transparent;
+  }
+  .compare tbody td:nth-child(2)::before {
+    content: "Free";
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-4);
+  }
+  .compare tbody td:nth-child(3)::before {
+    content: "PRO";
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+  }
 }
 
 /* ---------- B.3 numbered benefits ---------- */
@@ -743,6 +798,7 @@ html { scroll-padding-top: 72px; }
 .price-card__per { color: var(--fg-3); font-size: var(--text-md); margin-left: 6px; font-weight: var(--fw-regular); }
 .price-card__annual { color: var(--fg-2); font-size: var(--text-sm); margin-top: var(--sp-2); }
 .price-card__cta { margin-top: var(--sp-6); }
+.price-card__cta .btn + .btn { margin-top: var(--sp-2); }
 .pricing__note { max-width: 880px; margin: var(--sp-6) auto 0; color: var(--fg-3); font-size: var(--text-sm); }
 
 /* ---------- Refund (B.12) ---------- */
