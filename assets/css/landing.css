@@ -485,7 +485,14 @@ html { scroll-padding-top: 72px; }
   background: var(--bg-3);
   font-weight: var(--fw-semibold);
 }
+/* Restore PRO highlight on price cell (override tr:last-child td) */
+.compare tbody tr:last-child td:last-child {
+  background:
+    linear-gradient(rgba(0, 229, 199, 0.10), rgba(0, 229, 199, 0.10)),
+    var(--bg-3);
+}
 .cell-price-pro { color: var(--teal); }
+.cell-price-free { color: var(--fg-3); }
 .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 calc(-1 * var(--sp-3)); padding: 0 var(--sp-3); }
 @media (max-width: 640px) {
   .compare-wrap { overflow-x: unset; margin: 0; padding: 0; }
@@ -514,7 +521,12 @@ html { scroll-padding-top: 72px; }
     gap: 2px;
     background: transparent;
   }
-  .compare tbody td:nth-child(2)::before {
+  /* FREE/PRO labels: show only on the first feature row (acts as sticky-like header) */
+  .compare tbody td:nth-child(2)::before,
+  .compare tbody td:nth-child(3)::before {
+    content: none;
+  }
+  .compare tbody tr:first-child td:nth-child(2)::before {
     content: "Free";
     font-family: var(--font-mono);
     font-size: 9px;
@@ -522,13 +534,38 @@ html { scroll-padding-top: 72px; }
     letter-spacing: 0.06em;
     color: var(--fg-4);
   }
-  .compare tbody td:nth-child(3)::before {
+  .compare tbody tr:first-child td:nth-child(3)::before {
     content: "PRO";
     font-family: var(--font-mono);
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--teal);
+  }
+  /* PRO-only feature rows: teal border-left for visual hierarchy of "what I get on PRO" */
+  .compare tbody tr:has(td.cell-no + td.cell-yes) {
+    border-left: 2px solid var(--teal);
+  }
+  /* Price row: full-width layout — long text doesn't fit the 52px columns */
+  .compare tbody tr:last-child {
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+  }
+  .compare tbody tr:last-child td:first-child {
+    font-size: var(--text-base);
+    margin-bottom: var(--sp-1);
+  }
+  .compare tbody tr:last-child td:nth-child(2) {
+    display: none;
+  }
+  .compare tbody tr:last-child td:nth-child(3) {
+    text-align: left;
+    align-items: flex-start;
+    font-size: var(--text-md);
+    font-weight: var(--fw-semibold);
+  }
+  .compare tbody tr:last-child td:nth-child(3)::before {
+    content: none;
   }
 }
 
