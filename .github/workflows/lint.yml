@@ -42,18 +42,6 @@ jobs:
 
       - name: Stylelint
         run: |
-          cat > .stylelintrc.json <<'JSON'
-          {
-            "extends": ["stylelint-config-standard"],
-            "rules": {
-              "no-descending-specificity": null,
-              "selector-class-pattern": null,
-              "custom-property-pattern": null,
-              "color-function-notation": null,
-              "alpha-value-notation": null
-            }
-          }
-          JSON
           stylelint "assets/css/*.css"
 
       - name: Broken-links
