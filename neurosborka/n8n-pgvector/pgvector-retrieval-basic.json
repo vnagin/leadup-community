@@ -1,0 +1,108 @@
+{
+  "name": "PGVector · Retrieval (basic)",
+  "nodes": [
+    {
+      "id": "b29dbb51-9d03-4ee8-b3ac-71cc5fb08f60",
+      "name": "Sticky Note ce49a0ca",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [400, 384],
+      "parameters": {
+        "content": "## PGVector · Retrieval (basic)\n\nПринимает POST-запрос с вопросом, ищет релевантные фрагменты в PGVector и возвращает топ-N в JSON.\n\n**Запрос:**\n```\nPOST /webhook/pgvector-search\n{ \"query\": \"ваш вопрос\", \"topK\": 4 }\n```\n\n**Ответ:**\n```\n{ \"query\": \"...\", \"count\": 4, \"matches\": [ { \"text\": \"...\", \"score\": 0.87, \"metadata\": { ... } } ] }\n```\n\n**Перед запуском:**\n1. Подключите те же credentials, что в ingest-workflow.\n2. В узле «Поиск в PGVector» укажите ту же таблицу.\n3. Эмбеддинги ДОЛЖНЫ совпадать с теми, что использовались при ingest.",
+        "color": 4,
+        "width": 880,
+        "height": 240
+      }
+    },
+    {
+      "id": "e11ea419-137d-49eb-979f-cff3cf6df9ce",
+      "name": "Webhook для запроса",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 112],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pgvector-search",
+        "responseMode": "responseNode"
+      },
+      "webhookId": "a91aa639-026d-4f35-80c6-a4770b1ff908"
+    },
+    {
+      "id": "f6e2dd3e-8772-4666-93da-a7ebc41e82b8",
+      "name": "Поиск в PGVector",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [224, 112],
+      "parameters": {
+        "mode": "load",
+        "tableName": "n8n_vectors",
+        "prompt": "={{ $json.body.query }}",
+        "topK": "={{ $json.body.topK || 4 }}",
+        "includeDocumentMetadata": true
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "id": "92431bf2-3d13-4ba1-a5d5-29ff6c38198b",
+      "name": "Эмбеддинги OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [304, 336],
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": { "dimensions": 1536 }
+      }
+    },
+    {
+      "id": "911ad3b3-541e-4229-b3a4-fd072f59a013",
+      "name": "Сформировать ответ",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [576, 112],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            { "id": "a1", "name": "query", "value": "={{ $('Webhook для запроса').item.json.body.query }}", "type": "string" },
+            { "id": "a2", "name": "matches", "value": "={{ $input.all().map(i => ({ text: i.json.document.pageContent, score: i.json.score, metadata: i.json.document.metadata })) }}", "type": "array" },
+            { "id": "a3", "name": "count", "value": "={{ $input.all().length }}", "type": "number" }
+          ]
+        },
+        "includeOtherFields": false
+      },
+      "executeOnce": true
+    },
+    {
+      "id": "6e844de2-0b09-4fca-a082-8094211abbe0",
+      "name": "Ответ клиенту",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [800, 112],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}"
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook для запроса": {
+      "main": [[{ "node": "Поиск в PGVector", "type": "main", "index": 0 }]]
+    },
+    "Поиск в PGVector": {
+      "main": [[{ "node": "Сформировать ответ", "type": "main", "index": 0 }]]
+    },
+    "Эмбеддинги OpenAI": {
+      "ai_embedding": [[{ "node": "Поиск в PGVector", "type": "ai_embedding", "index": 0 }]]
+    },
+    "Сформировать ответ": {
+      "main": [[{ "node": "Ответ клиенту", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "19a48887-f677-4907-ba3b-ad4d7104d6e3",
+  "meta": { "templateCredsSetupCompleted": false },
+  "id": "pgvector-retrieval-basic",
+  "tags": []
+}

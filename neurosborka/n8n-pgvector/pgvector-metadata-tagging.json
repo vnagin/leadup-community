@@ -1,0 +1,200 @@
+{
+  "name": "PGVector · Metadata tagging",
+  "nodes": [
+    {
+      "id": "acdbab04-75eb-435e-9200-28362b2896da",
+      "name": "Sticky Note 3f42a8a7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [688, 688],
+      "parameters": {
+        "content": "## PGVector · Metadata tagging\n\nЧитает документ → достаёт текст → LLM-классификатор присваивает теги, категорию, язык и однострочное summary → весь набор пишется в metadata вместе с чанками в PGVector.\n\n**Зачем нужны metadata в RAG:**\n- При поиске можно фильтровать по `metadata.category = \"договор\"` или `metadata.tags ILIKE '%налоги%'`.\n- LLM в ответе видит источник + теги — даёт более точные ссылки.\n- Можно делать аналитику: сколько в базе документов каждой категории.\n\n**Перед запуском:**\n1. Подключите credentials OpenAI и Postgres (те же, что в ingest).\n2. Узел «Прочитать файлы» — путь и маска.\n3. Если документы НЕ текстовые — замените «Извлечь текст» на тот же узел в режиме `pdf`.\n\n**Подстроить под себя:**\n- В «Сгенерировать теги» отредактируйте промпт под вашу таксономию.\n- В «Схема тегов» поменяйте jsonSchemaExample — это становится JSON-схемой, которой LLM обязан соблюдать.\n- В «Собрать документ + теги» добавьте свои поля (например, `client_id`, `project_code`), их же добавьте в metadataValues узла «Загрузить с метаданными».",
+        "color": 4,
+        "width": 1460,
+        "height": 580
+      }
+    },
+    {
+      "id": "c63e009a-aa9b-4a95-b169-9e1bf945e990",
+      "name": "Запустить вручную",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 208],
+      "parameters": {}
+    },
+    {
+      "id": "78883d5f-190d-454d-a6be-87ea1f78931c",
+      "name": "Прочитать файлы",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [224, 208],
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "/data/docs/**/*.{txt,md}"
+      }
+    },
+    {
+      "id": "6fa07590-12aa-4e18-a63c-f5cc1395ee3a",
+      "name": "Извлечь текст",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [448, 208],
+      "parameters": {
+        "operation": "text",
+        "destinationKey": "text",
+        "options": { "keepSource": "both" }
+      }
+    },
+    {
+      "id": "f8c2bea2-3a01-421f-a02c-c57cdd7260e3",
+      "name": "Сгенерировать теги",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [672, 208],
+      "parameters": {
+        "promptType": "define",
+        "text": "=Проанализируй документ и верни структурированные теги.\n\nДокумент:\n\"\"\"\n{{ $json.text.slice(0, 4000) }}\n\"\"\"\n\nВерни JSON по схеме: tags (3–7 ключевых слов на русском), category (одна из: отчёт, инструкция, договор, переписка, статья, прочее), language (ru/en/mixed), summary (1 предложение).",
+        "hasOutputParser": true
+      }
+    },
+    {
+      "id": "d62bd138-338c-4abf-bc1d-0cb04ec7f68a",
+      "name": "GPT-классификатор",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [688, 432],
+      "parameters": {
+        "model": { "__rl": true, "mode": "list", "value": "gpt-5-mini" },
+        "options": { "temperature": 0 }
+      }
+    },
+    {
+      "id": "168504f0-8999-4f9b-b993-f3baed2b571a",
+      "name": "Схема тегов",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [816, 432],
+      "parameters": {
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\"tags\":[\"финансы\",\"отчёт\",\"q1-2026\"],\"category\":\"отчётность\",\"language\":\"ru\",\"summary\":\"Краткая аннотация документа в одно предложение.\"}"
+      }
+    },
+    {
+      "id": "57c2e7b6-4b19-4f3d-9f2d-409d978d3426",
+      "name": "Собрать документ + теги",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1024, 208],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            { "id": "m1", "name": "text", "value": "={{ $('Извлечь текст').item.json.text }}", "type": "string" },
+            { "id": "m2", "name": "source", "value": "={{ $('Прочитать файлы').item.binary.data.fileName }}", "type": "string" },
+            { "id": "m3", "name": "tags", "value": "={{ $json.output.tags.join(', ') }}", "type": "string" },
+            { "id": "m4", "name": "category", "value": "={{ $json.output.category }}", "type": "string" },
+            { "id": "m5", "name": "language", "value": "={{ $json.output.language }}", "type": "string" },
+            { "id": "m6", "name": "summary", "value": "={{ $json.output.summary }}", "type": "string" },
+            { "id": "m7", "name": "tagged_at", "value": "={{ $now.toISO() }}", "type": "string" }
+          ]
+        },
+        "includeOtherFields": false
+      }
+    },
+    {
+      "id": "74784905-fff4-42ef-a7c4-53266e3fdf99",
+      "name": "Записать в PGVector",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [1248, 208],
+      "parameters": {
+        "mode": "insert",
+        "tableName": "n8n_vectors",
+        "embeddingBatchSize": 200
+      }
+    },
+    {
+      "id": "a70b783a-5dbe-4d28-bdc9-4eacc5c3553b",
+      "name": "Эмбеддинги OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [1264, 432],
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": { "dimensions": 1536 }
+      }
+    },
+    {
+      "id": "de7da59b-2d23-45bc-8039-b8670c165fac",
+      "name": "Загрузить с метаданными",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [1392, 432],
+      "parameters": {
+        "dataType": "json",
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.text }}",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              { "name": "source", "value": "={{ $json.source }}" },
+              { "name": "tags", "value": "={{ $json.tags }}" },
+              { "name": "category", "value": "={{ $json.category }}" },
+              { "name": "language", "value": "={{ $json.language }}" },
+              { "name": "summary", "value": "={{ $json.summary }}" },
+              { "name": "tagged_at", "value": "={{ $json.tagged_at }}" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "2d68b852-9255-402f-8629-d4c2855865f4",
+      "name": "Разбить на чанки",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [1392, 640],
+      "parameters": { "chunkSize": 1000, "chunkOverlap": 150 }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Запустить вручную": {
+      "main": [[{ "node": "Прочитать файлы", "type": "main", "index": 0 }]]
+    },
+    "Прочитать файлы": {
+      "main": [[{ "node": "Извлечь текст", "type": "main", "index": 0 }]]
+    },
+    "Извлечь текст": {
+      "main": [[{ "node": "Сгенерировать теги", "type": "main", "index": 0 }]]
+    },
+    "Сгенерировать теги": {
+      "main": [[{ "node": "Собрать документ + теги", "type": "main", "index": 0 }]]
+    },
+    "GPT-классификатор": {
+      "ai_languageModel": [[{ "node": "Сгенерировать теги", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Схема тегов": {
+      "ai_outputParser": [[{ "node": "Сгенерировать теги", "type": "ai_outputParser", "index": 0 }]]
+    },
+    "Собрать документ + теги": {
+      "main": [[{ "node": "Записать в PGVector", "type": "main", "index": 0 }]]
+    },
+    "Эмбеддинги OpenAI": {
+      "ai_embedding": [[{ "node": "Записать в PGVector", "type": "ai_embedding", "index": 0 }]]
+    },
+    "Загрузить с метаданными": {
+      "ai_document": [[{ "node": "Записать в PGVector", "type": "ai_document", "index": 0 }]]
+    },
+    "Разбить на чанки": {
+      "ai_textSplitter": [[{ "node": "Загрузить с метаданными", "type": "ai_textSplitter", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "b90c1847-cb05-4d52-a8b6-7c362107a489",
+  "meta": { "templateCredsSetupCompleted": false },
+  "id": "pgvector-metadata-tagging",
+  "tags": []
+}

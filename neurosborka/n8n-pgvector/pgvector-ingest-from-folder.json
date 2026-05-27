@@ -1,0 +1,113 @@
+{
+  "name": "PGVector · Ingest from folder",
+  "nodes": [
+    {
+      "id": "506a6d65-8c2a-478e-94f4-139a142ab66c",
+      "name": "Sticky Note 906f31aa",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [288, 688],
+      "parameters": {
+        "content": "## PGVector · Ingest from folder\n\nЧитает файлы (PDF / TXT / MD / DOCX) из локальной папки → режет на чанки 1000 символов с перекрытием 150 → считает эмбеддинги через OpenAI → записывает в PostgreSQL с расширением pgvector.\n\n**Перед запуском:**\n1. Подключите credentials «OpenAI» и «Postgres (PGVector)» (правый верхний угол узла).\n2. В узле «Прочитать файлы из папки» укажите путь и маску.\n3. В узле «Записать в PGVector» при желании поменяйте имя таблицы. Если её нет — n8n создаст автоматически.\n\n**Подсказка по subnode-узлам (линии вниз от «Записать в PGVector»):**\n- *Эмбеддинги OpenAI* — превращает текст в векторы. Можно заменить на Ollama / локальные эмбеддинги.\n- *Загрузить документы* — берёт бинарные файлы и нарезает.\n- *Разбить на чанки* — рекурсивный сплиттер, лучший дефолт для русскоязычных текстов.",
+        "color": 4,
+        "width": 880,
+        "height": 580
+      }
+    },
+    {
+      "id": "d4daca42-4e7d-4656-be52-062a8c6a1197",
+      "name": "Запустить вручную",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 208],
+      "parameters": {}
+    },
+    {
+      "id": "6ff3e7f5-f481-48a6-b2f3-de215a6ccd0a",
+      "name": "Прочитать файлы из папки",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [224, 208],
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "/data/docs/**/*.{pdf,txt,md}"
+      }
+    },
+    {
+      "id": "f6ef41ae-0674-45b9-847b-bd90bc14d407",
+      "name": "Записать в PGVector",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [448, 208],
+      "parameters": {
+        "mode": "insert",
+        "tableName": "n8n_vectors",
+        "embeddingBatchSize": 200
+      }
+    },
+    {
+      "id": "2919354a-4499-478f-ad37-f9a4f5739680",
+      "name": "Эмбеддинги OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [464, 432],
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": { "dimensions": 1536 }
+      }
+    },
+    {
+      "id": "84d241f5-944e-4f74-a0f2-c8339fd78fd4",
+      "name": "Загрузить документы",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [592, 432],
+      "parameters": {
+        "dataType": "binary",
+        "binaryMode": "allInputData",
+        "loader": "auto",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              { "name": "source", "value": "={{ $binary.data.fileName }}" },
+              { "name": "ingested_at", "value": "={{ $now.toISO() }}" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "e1b69f42-7cca-4e2e-b806-f1a742021979",
+      "name": "Разбить на чанки",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [592, 640],
+      "parameters": { "chunkSize": 1000, "chunkOverlap": 150 }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Запустить вручную": {
+      "main": [[{ "node": "Прочитать файлы из папки", "type": "main", "index": 0 }]]
+    },
+    "Прочитать файлы из папки": {
+      "main": [[{ "node": "Записать в PGVector", "type": "main", "index": 0 }]]
+    },
+    "Эмбеддинги OpenAI": {
+      "ai_embedding": [[{ "node": "Записать в PGVector", "type": "ai_embedding", "index": 0 }]]
+    },
+    "Загрузить документы": {
+      "ai_document": [[{ "node": "Записать в PGVector", "type": "ai_document", "index": 0 }]]
+    },
+    "Разбить на чанки": {
+      "ai_textSplitter": [[{ "node": "Загрузить документы", "type": "ai_textSplitter", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "673409ce-8b62-418c-9627-760063fb8841",
+  "meta": { "templateCredsSetupCompleted": false },
+  "id": "pgvector-ingest-from-folder",
+  "tags": []
+}
