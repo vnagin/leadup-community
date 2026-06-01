@@ -892,7 +892,7 @@
     var errBox = document.getElementById('mmError');
     var btn = document.getElementById('mmSubmit');
     var ENDPOINT = 'https://n8n.flowstudio.cloud/webhook/mastermind-application';
-    var SECRET = '__MM_INTAKE_SECRET__'; // подставляется при деплое через secret-channel
+    var SECRET = 'd4a600ef9992791f9fe750558cb9e966e63dbf27cbafc69ff68e6939d0f61711'; // публичный анти-спам токен (литерал в Auth-ноде n8n; см. spec §3, LEA-2482)
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
