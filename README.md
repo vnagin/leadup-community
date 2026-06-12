@@ -1,34 +1,55 @@
-# leadup-community — лендинги Нейросборка (v1)
+# leadup-community — лендинги Нейросборка + LeadUp AI Daily (v2)
 
-Static-сайт для `community.leadup.guru` на GitHub Pages. Brand v3 (D2 Cold Technical · Geist · Electric Teal `#00E5C7`).
+Лендинги и opt-in воронка для `community.leadup.guru`. Brand v3 (D2 Cold Technical · Geist · Electric Teal `#00E5C7`).
+
+> **v2 (2026-05-06):** добавлены Vercel Edge функции `/api/subscribe` + `/api/subscribe/confirm` для community-newsletter (LEA-1174 / parent LEA-1164). Деплой переходит с GitHub Pages на Vercel, чтобы Edge-функции жили same-origin с лендингами.
 
 ## Структура
 
 ```
 .
-├── index.html                 # community.leadup.guru/  (хаб)
+├── index.html                       # community.leadup.guru/ (хаб)
 ├── neurosborka/
-│   ├── index.html             # /neurosborka/  (free лендинг)
+│   ├── index.html                   # /neurosborka/ (free лендинг + opt-in форма)
 │   └── pro/
-│       └── index.html         # /neurosborka/pro/  (PRO лендинг)
+│       └── index.html               # /neurosborka/pro/ (PRO лендинг + opt-in форма)
+├── confirm-email/
+│   └── index.html                   # /confirm-email — 4 state'а подтверждения подписки
+├── legal/
+│   └── privacy/
+│       └── index.html               # /legal/privacy — политика 152-ФЗ (placeholder, swap по LEA-1170)
+├── api/                             # Vercel Edge runtime
+│   ├── subscribe.ts                 # POST /api/subscribe — proxy → n8n с HMAC, rate-limit, honeypot
+│   └── subscribe/
+│       └── confirm.ts               # POST /api/subscribe/confirm — proxy → n8n
+├── lib/
+│   ├── rate-limit.ts                # 5/min + 30/hour per-IP, in-memory edge bucket
+│   ├── validation.ts                # email regex, source allowlist, masked-email
+│   └── forward.ts                   # n8n webhook helper (HMAC header)
 ├── assets/
-│   ├── css/
-│   │   ├── tokens.css         # brand v3 — копия vault/company/brand/colors_and_type.css
-│   │   └── landing.css        # секции и компоненты лендингов
-│   ├── js/
-│   │   ├── analytics.js       # Plausible (один домен community.leadup.guru, custom events)
-│   │   └── pro-checkout.js    # Tribute (EUR + crypto) + CloudPayments (RUB recurring)
-│   └── img/                   # OG-картинки + ассеты
-├── CNAME                      # community.leadup.guru
-├── .nojekyll                  # отключает Jekyll (важно для папок с подчёркиваниями)
-└── .github/workflows/lint.yml # HTML/CSS lint + broken-links на push в main
+│   ├── css/{tokens.css,landing.css}
+│   └── js/{analytics.js,pro-checkout.js,optin.js,confirm-email.js}
+├── package.json + tsconfig.json + vercel.json
+├── CNAME                            # community.leadup.guru
+└── .github/workflows/lint.yml       # HTML/CSS lint + broken-links
 ```
 
-## Деплой (для CEO/Дима)
+## Деплой через Vercel (CEO)
 
-1. Скопировать содержимое этой папки в корень репо `vnagin/leadup-community` (replace existing skeleton).
-2. Push в `main` → GitHub Pages автоматически выкатит на `community.leadup.guru` (CNAME уже задан).
-3. Через 1–24 часа после CNAME проверить SSL и включить «Enforce HTTPS» в Settings → Pages.
+> Миграция с GitHub Pages на Vercel требуется, потому что `/api/*` — это Edge functions, а GH Pages — пуристически статика.
+
+1. **Создать Vercel-проект** `community-leadup-guru` в команде `vnagins-projects`. Framework — `Other` (детектится по `vercel.json`). Root — корень репо.
+2. **Привязать домен** `community.leadup.guru` (DNS уже на Cloudflare, поменять CNAME на `cname.vercel-dns.com` или `A @ 76.76.21.21`). SSL — авто.
+3. **GitHub App.** Поставить https://github.com/apps/vercel на `vnagin/leadup-community`. После этого пуш в `main` → авто-деплой prod.
+4. **Env vars (production):**
+   - `LE_OPTIN_WEBHOOK_URL` = `https://n8n.leadup.guru/webhook/community-opt-in-request` (даёт Дима)
+   - `LE_OPTIN_CONFIRM_WEBHOOK_URL` = `https://n8n.leadup.guru/webhook/community-opt-in-confirm` (даёт Дима)
+   - `LE_OPTIN_WEBHOOK_SECRET` = 32+ байт случайных (общий с Димой, сверяет в первой Code-node)
+5. Если env-vars пустые — `/api/subscribe` уходит в **mock-mode** (логирует payload + возвращает 202). Удобно для preview-деплоев до того, как n8n поднялся.
+
+### Старый GH Pages деплой
+
+Можно оставить как fallback (CNAME в этом репо живой), но `/api/*` там не работает — форма получит 404. Решение CEO — мигрируем на Vercel целиком.
 
 ## Прод-чек-лист (что заполнить перед запуском)
 
@@ -42,6 +63,9 @@ Static-сайт для `community.leadup.guru` на GitHub Pages. Brand v3 (D2 C
 | Free CTA url `https://t.me/+a4YGH9rdoJRjMTE1` | Подтвердить актуальность invite-link с Катей | Катя |
 | PRO success redirect `https://t.me/+4muWaxiEim8yNDU1` (в `pro-checkout.js`) | Подтвердить с Катей, что invite автоматически сработает после оплаты | Катя / Дима |
 | `pro/index.html` body atribute `data-pending-founder-pass="true"` | После финального pass-а Владимира удалить (или оставить `false`) | Дима |
+| Vercel env: `LE_OPTIN_WEBHOOK_URL`, `LE_OPTIN_CONFIRM_WEBHOOK_URL`, `LE_OPTIN_WEBHOOK_SECRET` | Прод-секреты для n8n proxy (LEA-1174) | Дима |
+| `legal/privacy/index.html` | Финальный текст политики 152-ФЗ | Катя (LEA-1170) |
+| `neurosborka/{,pro/}index.html` секция `#newsletter` (h2 / lead / labels / consent text) | Финальная копия opt-in формы | Катя (LEA-1170) |
 
 ## Аналитика и retargeting
 
@@ -86,13 +110,41 @@ Tribute checkout — внешняя ссылка, открывается в но
 
 ## Локальный preview
 
+**Static-only (без API):**
+
 ```bash
-cd /path/to/leadup-community
 python3 -m http.server 4000
-# открыть http://localhost:4000/
-# открыть http://localhost:4000/neurosborka/
-# открыть http://localhost:4000/neurosborka/pro/
+# http://localhost:4000/neurosborka/  — форма получит 404 при submit, но рендер ОК
 ```
+
+**С Edge функциями (`vercel dev`):**
+
+```bash
+npm install
+npx vercel dev    # http://localhost:3000
+# /api/subscribe работает в mock-mode без env vars — payload логируется, 202 возвращается
+```
+
+## Newsletter opt-in поток (LEA-1174)
+
+```
+[/neurosborka/  или  /neurosborka/pro/]
+   form data-optin → POST /api/subscribe (Vercel Edge)
+       ├─ rate-limit (5/min, 30/hour per IP)        → 429
+       ├─ honeypot != "" → silent 202 (drop)
+       ├─ email regex + consent_152fz + source allowlist
+       └─ forward + HMAC X-Webhook-Secret → n8n
+              ↓
+       [n8n WF-5a] HMAC-token + Resend confirm-email
+              ↓
+       email-link → /confirm-email?email=&ts=&token=
+              ↓
+       confirm-email.js → POST /api/subscribe/confirm → n8n WF-5b → Resend audience
+              ↓
+       UI рендерит один из 4 state'ов: success | already_confirmed | expired | invalid
+```
+
+Контракты — `vault/projects/n8n-automations/deliverables/workflow-specs/inbound-2026/05-daily-digest-broadcast.spec.md` §2 + LEA-1174 issue body.
 
 ## Lint (опц.)
 
