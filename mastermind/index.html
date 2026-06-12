@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap"/>
+<link rel="stylesheet" href="/assets/css/lg-shell.css"/>
 
 <!-- Schema.org: Course + Event (плейсхолдер-значения из кита) -->
 <script type="application/ld+json">
@@ -146,6 +147,14 @@
 
     /* layout */
     --container: 1240px;
+
+    /* lg-shell deps (LEA-3015): spacing, text, fw, dur, tracking */
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+    --text-xs: 11px; --text-sm: 13px; --text-base: 15px; --text-md: 17px;
+    --fw-medium: 500; --fw-semibold: 600;
+    --dur-1: 120ms;
+    --tracking-normal: -0.01em;
   }
 
   /* base */
@@ -434,19 +443,39 @@
 
 <a href="#main" class="skip-link">К основному содержимому</a>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="container nav-inner">
-    <div class="nav-left">
-      <a href="https://community.leadup.guru/" class="brand" aria-label="LeadUp AI · community"><img src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="594" height="168"/></a>
-      <span class="nav-pill">AI Мастермайнд</span>
-    </div>
-    <div class="nav-right">
-      <span class="nav-seats">Первый поток · <strong>6–8 мест</strong></span>
-      <a href="#apply-form" class="btn-primary" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="nav">Подать заявку →</a>
+<!-- LG-SHELL HEADER (LEA-3015) -->
+<header class="lg-header">
+  <div class="lg-header__inner">
+    <a class="lg-brand" href="/" aria-label="LeadUp AI">
+      <img class="lg-brand__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24"/>
+    </a>
+    <nav class="lg-nav" aria-label="Основная навигация">
+      <a href="https://cms.leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a>
+      <a href="/">Сообщество</a>
+      <a href="/mastermind/">Мастермайнд</a>
+      <a href="https://blog.leadup.guru" rel="noopener">Блог</a>
+      <a href="https://cms.leadup.guru/ru/about" rel="noopener">О нас</a>
+      <a href="https://cms.leadup.guru/ru/contact" rel="noopener">Контакты</a>
+    </nav>
+    <div class="lg-header__actions">
+      <a class="btn-p" href="#apply-form" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="nav">Подать заявку</a>
+      <details class="lg-mobile">
+        <summary aria-label="Меню"></summary>
+        <div class="lg-drawer">
+          <nav class="lg-drawer__nav" aria-label="Мобильная навигация">
+            <a href="https://cms.leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a>
+            <a href="/">Сообщество</a>
+            <a href="/mastermind/">Мастермайнд</a>
+            <a href="https://blog.leadup.guru" rel="noopener">Блог</a>
+            <a href="https://cms.leadup.guru/ru/about" rel="noopener">О нас</a>
+            <a href="https://cms.leadup.guru/ru/contact" rel="noopener">Контакты</a>
+          </nav>
+          <a class="btn-p" href="#apply-form" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="nav">Подать заявку</a>
+        </div>
+      </details>
     </div>
   </div>
-</nav>
+</header>
 
 <main id="main">
 
@@ -815,11 +844,59 @@
 
 </main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container footer-inner">
-    <span>© 2026 LeadUp AI · community.leadup.guru/mastermind</span>
-    <div style="display:flex; gap:18px;"><a href="mailto:hello@leadup.guru">hello@leadup.guru</a><a href="https://t.me/neurosborka" rel="noopener">@neurosborka</a></div>
+<!-- LG-SHELL FOOTER (LEA-3015) -->
+<footer class="lg-footer" aria-label="Подвал сайта">
+  <div class="lg-footer__inner">
+    <div class="lg-footer__cols">
+      <section class="lg-footer__col lg-footer__col--brand">
+        <a class="lg-footer__brand" href="/" aria-label="LeadUp AI">
+          <img class="lg-footer__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24"/>
+        </a>
+        <p class="lg-footer__tagline">Экосистема AI-трансформации бизнеса. Внедряем, а не продаём курсы.</p>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Продукты</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://cms.leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a></li>
+          <li><a href="/mastermind/">Мастермайнд</a></li>
+          <li><a href="/neurosborka/">Нейросборка (сообщество)</a></li>
+          <li><a href="https://ads.leadup.guru/mini-course/" rel="noopener">Мини-курс</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Учиться</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://blog.leadup.guru" rel="noopener">Блог</a></li>
+          <li><a href="https://portfolio.leadup.guru" rel="noopener">Портфолио</a></li>
+          <li><a href="https://ads.leadup.guru/tripwire/prompt-library-ceo/" rel="noopener">42 промпта</a></li>
+          <li><a href="https://cms.leadup.guru/ru/resources/ai-library" rel="noopener">Библиотека ресурсов</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Подписаться</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://t.me/aibusinesshub" rel="noopener">Telegram-канал · @aibusinesshub</a></li>
+          <li><a href="https://www.youtube.com/@businessaihub" rel="noopener">YouTube · @businessaihub</a></li>
+          <li><a href="https://www.tiktok.com/@businessaihub" rel="noopener">TikTok · @businessaihub</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Компания</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://cms.leadup.guru/ru/contact" rel="noopener">Связаться</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="lg-footer__legal">
+      <div class="lg-footer__legal-row">
+        <p class="lg-footer__rights">© 2026 LeadUp AI. Все права защищены.</p>
+        <ul class="lg-footer__legal-links" aria-label="Легал">
+          <li><a href="https://cms.leadup.guru/ru/privacy" rel="noopener">Политика данных</a></li>
+          <li><a href="https://cms.leadup.guru/ru/terms" rel="noopener">Договор-оферта</a></li>
+          <li><a href="https://cms.leadup.guru/ru/security" rel="noopener">Security</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>
 
