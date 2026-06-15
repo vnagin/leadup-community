@@ -28,6 +28,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var form = document.getElementById('t0-form');
     if (!form) return;
+    var nameEl = document.getElementById('t0-name');
     var emailEl = document.getElementById('t0-email');
     var consentEl = document.getElementById('t0-consent');
     var submitEl = document.getElementById('t0-submit');
@@ -41,9 +42,17 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      var name = (nameEl.value || '').trim();
       var email = (emailEl.value || '').trim().toLowerCase();
+      nameEl.setAttribute('aria-invalid', 'false');
       emailEl.setAttribute('aria-invalid', 'false');
 
+      if (!name) {
+        nameEl.setAttribute('aria-invalid', 'true');
+        nameEl.focus();
+        setStatus('error', 'Подскажите, как к вам обращаться.');
+        return;
+      }
       if (!EMAIL_RE.test(email)) {
         emailEl.setAttribute('aria-invalid', 'true');
         emailEl.focus();
@@ -57,6 +66,7 @@
 
       // UTM + источник из analytics.js (window.NS_UTM)
       var payload = {
+        name: name,
         email: email,
         consent: true,
         tag: 't0-pgvector-2026-06',
