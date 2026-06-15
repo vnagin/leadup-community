@@ -1,0 +1,145 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap');
+* { box-sizing: border-box; }
+text { font-feature-settings: 'ss01', 'cv11'; -webkit-font-smoothing: antialiased; }
+</style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1122" width="794" height="1122">
+<defs>
+  <pattern id="cgrid" width="48" height="48" patternUnits="userSpaceOnUse">
+    <line x1="48" y1="0" x2="0" y2="0" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="48" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+  </pattern>
+  <radialGradient id="ctopglow" cx="50%" cy="0%" r="90%" gradientUnits="objectBoundingBox">
+    <stop offset="0%" stop-color="#00E5C7" stop-opacity="0.16"/>
+    <stop offset="60%" stop-color="#00E5C7" stop-opacity="0.03"/>
+    <stop offset="100%" stop-color="#0A0F0D" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="ctealline" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00E5C7" stop-opacity="0"/>
+    <stop offset="20%" stop-color="#00E5C7" stop-opacity="0.8"/>
+    <stop offset="80%" stop-color="#00E5C7" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#00E5C7" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="cbottomfade" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#0A0F0D" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#141B18" stop-opacity="0.6"/>
+  </linearGradient>
+</defs>
+
+<!-- Base background -->
+<rect width="794" height="1122" fill="#0A0F0D"/>
+<!-- Grid -->
+<rect width="794" height="1122" fill="url(#cgrid)"/>
+<!-- Top glow -->
+<rect width="794" height="700" fill="url(#ctopglow)"/>
+
+<!-- ── HEADER ── -->
+<image href="data:image/png;base64,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" x="40" y="38" width="120" height="34" preserveAspectRatio="xMinYMid meet"/>
+<text x="754" y="58"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="10" font-weight="500"
+  fill="rgba(237,239,238,0.40)" letter-spacing="0.08em" text-anchor="end">НЕЙРОСБОРКА · ПРАКТИКА</text>
+
+<!-- Header line -->
+<line x1="40" y1="90" x2="754" y2="90" stroke="url(#ctealline)" stroke-width="1"/>
+
+<!-- ── EYEBROW ── -->
+<text x="40" y="164"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="11" font-weight="500"
+  fill="#00E5C7" letter-spacing="0.10em">ПРАКТИЧЕСКИЙ ГАЙД</text>
+
+<!-- ── MAIN TITLE ── -->
+<text x="40" y="270"
+  font-family="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="80" font-weight="800"
+  fill="#EDEFEE" letter-spacing="-0.04em">PostgreSQL</text>
+<text x="40" y="366"
+  font-family="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="80" font-weight="800"
+  fill="#00E5C7" letter-spacing="-0.04em">→ PGVector</text>
+
+<!-- Subtitle -->
+<text x="40" y="422"
+  font-family="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="34" font-weight="600"
+  fill="rgba(237,239,238,0.70)" letter-spacing="-0.02em">Базовый RAG для n8n</text>
+
+<!-- Short teal rule -->
+<rect x="40" y="454" width="80" height="2" rx="1" fill="#00E5C7"/>
+
+<!-- Author block -->
+<text x="40" y="496"
+  font-family="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="16" font-weight="400"
+  fill="rgba(237,239,238,0.70)" letter-spacing="-0.01em">Практический гайд от Алекса Нагина (LeadUp AI)</text>
+<text x="40" y="520"
+  font-family="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="14" font-weight="400"
+  fill="rgba(237,239,238,0.45)" letter-spacing="-0.01em">для участников сообщества Нейросборка</text>
+
+<!-- ── TECH FLOW DIAGRAM ── -->
+<!-- box 1: PostgreSQL -->
+<rect x="40" y="606" width="196" height="78" rx="10" fill="#141B18" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+<text x="138" y="632" text-anchor="middle"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="10" font-weight="500"
+  fill="rgba(237,239,238,0.40)" letter-spacing="0.08em">DATABASE</text>
+<text x="138" y="660" text-anchor="middle"
+  font-family="'Geist', -apple-system, sans-serif" font-size="18" font-weight="700"
+  fill="#EDEFEE" letter-spacing="-0.02em">PostgreSQL</text>
+
+<!-- arrow 1 -->
+<line x1="240" y1="645" x2="295" y2="645" stroke="#00E5C7" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="293,640 303,645 293,650" fill="#00E5C7"/>
+
+<!-- box 2: PGVector -->
+<rect x="307" y="606" width="170" height="78" rx="10" fill="#141B18" stroke="#00E5C7" stroke-width="1" stroke-opacity="0.7"/>
+<text x="392" y="632" text-anchor="middle"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="10" font-weight="500"
+  fill="#00E5C7" letter-spacing="0.08em">EXTENSION</text>
+<text x="392" y="660" text-anchor="middle"
+  font-family="'Geist', -apple-system, sans-serif" font-size="18" font-weight="700"
+  fill="#EDEFEE" letter-spacing="-0.02em">PGVector</text>
+
+<!-- arrow 2 -->
+<line x1="481" y1="645" x2="534" y2="645" stroke="#00E5C7" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="532,640 542,645 532,650" fill="#00E5C7"/>
+
+<!-- box 3: n8n -->
+<rect x="546" y="606" width="196" height="78" rx="10" fill="#141B18" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+<text x="644" y="632" text-anchor="middle"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="10" font-weight="500"
+  fill="rgba(237,239,238,0.40)" letter-spacing="0.08em">AUTOMATION</text>
+<text x="644" y="660" text-anchor="middle"
+  font-family="'Geist', -apple-system, sans-serif" font-size="18" font-weight="700"
+  fill="#EDEFEE" letter-spacing="-0.02em">n8n RAG</text>
+
+<!-- ── WHAT'S INSIDE ── -->
+<text x="40" y="752"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="10" font-weight="500"
+  fill="rgba(237,239,238,0.35)" letter-spacing="0.10em">ЧТО ВНУТРИ</text>
+
+<rect x="40" y="766" width="714" height="1" fill="rgba(255,255,255,0.06)"/>
+
+<!-- list items -->
+<text x="40" y="800" font-family="'Geist', -apple-system, sans-serif" font-size="14" fill="rgba(237,239,238,0.65)">
+  <tspan x="40">Установка PGVector расширения в PostgreSQL</tspan>
+</text>
+<text x="40" y="828" font-family="'Geist', -apple-system, sans-serif" font-size="14" fill="rgba(237,239,238,0.65)">Создание таблицы с векторными полями и индексами</text>
+<text x="40" y="856" font-family="'Geist', -apple-system, sans-serif" font-size="14" fill="rgba(237,239,238,0.65)">Подключение к n8n через HTTP Request и credentials</text>
+<text x="40" y="884" font-family="'Geist', -apple-system, sans-serif" font-size="14" fill="rgba(237,239,238,0.65)">Базовый RAG-флоу: embeddings → сохранение → поиск</text>
+<text x="40" y="912" font-family="'Geist', -apple-system, sans-serif" font-size="14" fill="rgba(237,239,238,0.65)">Готовые SQL-сниппеты и примеры n8n-нод</text>
+
+<!-- Teal tag: free -->
+<rect x="40" y="940" width="112" height="28" rx="6" fill="rgba(0,229,199,0.10)" stroke="#00E5C7" stroke-width="1" stroke-opacity="0.5"/>
+<text x="96" y="958" text-anchor="middle"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="11" font-weight="600"
+  fill="#00E5C7" letter-spacing="0.06em">БЕСПЛАТНО</text>
+
+<!-- ── FOOTER ── -->
+<rect x="40" y="1060" width="714" height="1" fill="rgba(255,255,255,0.06)"/>
+<text x="40" y="1094"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="11" font-weight="400"
+  fill="rgba(237,239,238,0.28)" letter-spacing="0.04em">v1.0 · май 2026</text>
+<text x="754" y="1094" text-anchor="end"
+  font-family="'Geist Mono', ui-monospace, monospace" font-size="11" font-weight="400"
+  fill="rgba(237,239,238,0.28)" letter-spacing="0.04em">leadup.ai</text>
+</svg>
