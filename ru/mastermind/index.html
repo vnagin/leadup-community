@@ -1,0 +1,1100 @@
+<!doctype html>
+<!-- ============================================================
+     AI Мастермайнд Нейросборки — community.leadup.guru/mastermind/
+     Скелет лендинга (LEA-2463). Портирован из UI-Kit:
+       vault/company/brand/ui_kits/mastermind/index.html
+     Дизайн-система: brand v3 (D2 Cold Technical · C3 Teal · TS1 Geist).
+     Токены v3 — инлайн. data-theme="dark". OG + Schema.org Course/Event.
+     КОПИ: финал-v3 из copy-final-v3.md (LEA-2474), применена под канон ADR-002
+     (LEA-2476): 6–8 мест, 200 000 ₽, ПЕРВЫЙ поток, старт 23.06.2026, без фейк-отзывов.
+     Форма заявки (#mmForm) — боевая (LEA-2477): поля/ключи из спеки §2,
+     сабмит POST'ом в n8n. Cutover (секрет, env, активация) — за Димой (LEA-2464).
+     ============================================================ -->
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>AI Мастермайнд Нейросборки — камерный поток для внедрения AI · LeadUp AI</title>
+<meta name="description" content="Камерный AI-мастермайнд: 6–8 практиков за 8 недель под фасилитацией Владимира Нагина внедряют один AI-кейс в свой бизнес и выходят с цифрами до/после. Старт 23 июня 2026, открытый набор по заявке."/>
+<meta name="theme-color" content="#0A0F0D"/>
+<link rel="canonical" href="https://community.leadup.guru/ru/mastermind/"/>
+
+<!-- Open Graph (соц-карточка og-mastermind.png 1200×630 — координация с Леной) -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="AI Мастермайнд Нейросборки — внедряете AI, а не изучаете"/>
+<meta property="og:description" content="Камерная группа 6–8 практиков. 8 недель: hot-seat-разборы, 1:1 с Владимиром Нагиным, ваш кейс с цифрами до/после. Старт 23 июня 2026. Премиум, отбор по заявке."/>
+<meta property="og:url" content="https://community.leadup.guru/ru/mastermind/"/>
+<meta property="og:image" content="https://community.leadup.guru/ru/assets/img/og-mastermind.png"/>
+<meta property="og:locale" content="ru_RU"/>
+<meta property="og:site_name" content="LeadUp · Community"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap"/>
+<link rel="stylesheet" href="/assets/css/lg-shell.css"/>
+
+<!-- Schema.org: Course + Event (плейсхолдер-значения из кита) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Course",
+      "name": "AI Мастермайнд Нейросборки",
+      "description": "Камерная группа 6–8 практиков внедряют один AI-кейс в свой бизнес за 8 недель под фасилитацией Владимира Нагина: hot-seat-разборы, персональный 1:1, результат в цифрах до/после.",
+      "url": "https://community.leadup.guru/ru/mastermind/",
+      "inLanguage": "ru",
+      "provider": {
+        "@type": "Organization",
+        "name": "LeadUp AI",
+        "url": "https://leadup.guru/"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "name": "Первый поток",
+        "startDate": "2026-06-23",
+        "endDate": "2026-08-18",
+        "courseWorkload": "P8W",
+        "offers": {
+          "@type": "Offer",
+          "price": "200000",
+          "priceCurrency": "RUB",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://community.leadup.guru/ru/mastermind/#apply-form"
+        }
+      }
+    },
+    {
+      "@type": "Event",
+      "name": "AI Мастермайнд Нейросборки — Первый поток",
+      "description": "8 недель камерного мастермайнда для практиков AI-внедрения. Еженедельные онлайн-созвоны ~90 минут, hot-seat-разборы, персональный 1:1 с Владимиром Нагиным.",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "startDate": "2026-06-23",
+      "endDate": "2026-08-18",
+      "inLanguage": "ru",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://community.leadup.guru/ru/mastermind/"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "LeadUp AI",
+        "url": "https://leadup.guru/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "200000",
+        "priceCurrency": "RUB",
+        "availability": "https://schema.org/LimitedAvailability",
+        "url": "https://community.leadup.guru/ru/mastermind/#apply-form",
+        "validFrom": "2026-06-01"
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  /* ============================================================
+     TOKENS v3 (инлайн) — dark, из vault/company/brand/colors_and_type.css
+     ============================================================ */
+  :root {
+    color-scheme: dark;
+
+    --teal:            #00E5C7;
+    --teal-hover:      #14F5D7;
+    --teal-pressed:    #00CBB0;
+    --teal-tint:       rgba(0, 229, 199, 0.12);
+    --teal-tint-2:     rgba(0, 229, 199, 0.20);
+    --teal-glow:       0 0 24px rgba(0, 229, 199, 0.45);
+
+    --bg-0:  #050807;
+    --bg-1:  #0A0F0D;
+    --bg-2:  #0F1512;
+    --bg-3:  #141B18;
+    --bg-4:  #1B2420;
+    --bg-5:  #253029;
+
+    --fg-1:  #EDEFEE;
+    --fg-2:  rgba(237, 239, 238, 0.72);
+    --fg-3:  rgba(237, 239, 238, 0.52);
+    --fg-4:  rgba(237, 239, 238, 0.36);
+
+    --border-1: rgba(255, 255, 255, 0.06);
+    --border-2: rgba(255, 255, 255, 0.10);
+    --border-3: rgba(255, 255, 255, 0.18);
+
+    --success: #3EE089;
+    --warning: #F5B544;
+    --danger:  #FF5D5D;
+    --info:    #6EB8FF;
+
+    --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+    --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 10px;
+    --r-2xl: 14px; --r-3xl: 20px; --r-full: 9999px;
+
+    --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --z-header: 200;
+
+    --grid-line: rgba(255, 255, 255, 0.035);
+
+    /* layout */
+    --container: 1240px;
+
+    /* lg-shell deps (LEA-3015): spacing, text, fw, dur, tracking */
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+    --text-xs: 11px; --text-sm: 13px; --text-base: 15px; --text-md: 17px;
+    --fw-medium: 500; --fw-semibold: 600;
+    --dur-1: 120ms;
+    --tracking-normal: -0.01em;
+  }
+
+  /* base */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html {
+    background: var(--bg-1);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg-1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01', 'cv11';
+    scroll-behavior: smooth;
+  }
+  body { background: var(--bg-1); color: var(--fg-1); min-height: 100vh; }
+  h1, h2, h3, h4 { margin: 0; }
+  a { color: var(--teal); text-decoration: none; transition: color 120ms var(--ease); }
+  a:hover { color: var(--teal-hover); }
+  ::selection { background: var(--teal-tint-2); color: var(--fg-1); }
+  :where(button, a, input, textarea, select, [tabindex]):focus-visible {
+    outline: none; box-shadow: 0 0 0 2px var(--bg-1), 0 0 0 4px var(--teal); border-radius: inherit;
+  }
+  .skip-link { position: absolute; left: -999px; top: 0; background: var(--teal); color: #061210; padding: 10px 16px; border-radius: var(--r-lg); z-index: 999; }
+  .skip-link:focus { left: 16px; top: 16px; }
+
+  /* ---------- layout primitives ---------- */
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 84px 0; position: relative; }
+
+  /* NAV */
+  .nav { position: sticky; top: 0; z-index: var(--z-header); background: rgba(10,15,13,0.72); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--border-1); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .nav-left { display: flex; align-items: center; gap: 24px; }
+  .brand { display: inline-flex; align-items: center; line-height: 0; }
+  .brand img { height: 22px; width: auto; display: block; }
+  .nav-pill { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); padding: 5px 12px; border: 1px solid var(--border-2); border-radius: 100px; letter-spacing: 0.04em; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-seats { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .nav-seats strong { color: var(--teal); font-weight: 600; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: #061210; font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: var(--r-lg); border: 0; cursor: pointer; transition: all 120ms var(--ease); text-decoration: none; }
+  .btn-primary:hover { background: var(--teal-hover); box-shadow: var(--teal-glow); transform: translateY(-1px); }
+  .btn-primary.lg { padding: 14px 28px; font-size: 15px; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--fg-1); border: 1px solid var(--border-3); font-weight: 500; font-size: 14px; padding: 13px 24px; border-radius: var(--r-lg); cursor: pointer; text-decoration: none; transition: all 120ms var(--ease); }
+  .btn-ghost:hover { background: var(--bg-3); border-color: var(--teal); }
+
+  /* HERO */
+  .hero { position: relative; padding: 72px 0 72px; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+  .hero-bg::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 30% 35%, black 25%, transparent 68%); }
+  .hero-bg::after { content: ''; position: absolute; left: 10%; top: -220px; width: 760px; height: 760px; background: radial-gradient(circle, rgba(0,229,199,0.12) 0%, transparent 50%); }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); padding: 6px 14px; border: 1px solid rgba(0,229,199,0.3); border-radius: 100px; background: var(--teal-tint); margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(40px, 5.2vw, 62px); font-weight: 700; line-height: 1.0; letter-spacing: -0.04em; margin: 0 0 20px; }
+  .hero h1 .accent { color: var(--teal); }
+  .hero .lead { font-size: 18px; line-height: 1.6; color: var(--fg-2); max-width: 520px; margin: 0 0 28px; }
+  .hero-facts { display: flex; flex-direction: column; gap: 14px; }
+  .hero-fact { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--fg-2); }
+  .hero-fact .ico { width: 28px; height: 28px; border-radius: var(--r-md); background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.2); color: var(--teal); display: grid; place-items: center; flex-shrink: 0; }
+  .hero-fact strong { color: var(--fg-1); font-weight: 600; }
+
+  /* APPLY CARD */
+  .apply-card { background: var(--bg-2); border: 1px solid var(--border-2); border-radius: var(--r-3xl); padding: 32px; position: relative; overflow: hidden; box-shadow: var(--shadow-3); }
+  .apply-card::before { content: ''; position: absolute; top: -1px; left: 16%; right: 16%; height: 2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); box-shadow: 0 0 18px var(--teal); }
+  .apply-glow { position: absolute; bottom: -60px; left: -40px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(0,229,199,0.16), transparent 60%); filter: blur(22px); pointer-events: none; }
+  .apply-card .eyebrow { position: relative; font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .apply-card h3 { position: relative; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .apply-card .sub { position: relative; font-size: 14px; color: var(--fg-3); margin: 0 0 24px; line-height: 1.5; }
+  .apply-rows { position: relative; display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .apply-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border-1); }
+  .apply-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .apply-row .k { color: var(--fg-3); }
+  .apply-row .v { color: var(--fg-1); font-weight: 600; font-family: var(--font-mono); font-size: 13px; }
+  .apply-row .v.teal { color: var(--teal); }
+  .apply-card .btn-primary { position: relative; width: 100%; justify-content: center; padding: 14px; font-size: 15px; }
+  .apply-seats { position: relative; display: flex; align-items: center; gap: 10px; margin-top: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .apply-seats .dots { display: flex; gap: 4px; }
+  .apply-seats .dots i { width: 12px; height: 12px; border-radius: 3px; background: var(--bg-5); }
+  .apply-seats .dots i.taken { background: var(--teal); }
+  .apply-note { position: relative; font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); text-align: center; margin-top: 14px; letter-spacing: 0.04em; }
+
+  /* SECTION HEAD */
+  .section-h { margin-bottom: 44px; max-width: 680px; }
+  .section-h.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-h .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .section-h h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.06; letter-spacing: -0.035em; margin: 0 0 14px; }
+  .section-h p { font-size: 16px; color: var(--fg-3); line-height: 1.55; margin: 0; }
+
+  /* HOW IT WORKS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pillar { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 30px; transition: all 200ms var(--ease); }
+  .pillar:hover { border-color: var(--border-3); background: var(--bg-3); }
+  .pillar .ico { width: 44px; height: 44px; border-radius: var(--r-lg); background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.2); color: var(--teal); display: grid; place-items: center; margin-bottom: 18px; }
+  .pillar h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; }
+  .pillar p { font-size: 14px; line-height: 1.6; color: var(--fg-3); margin: 0; }
+
+  /* FORMAT STRIP */
+  .format { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-1); border-radius: var(--r-2xl); overflow: hidden; background: var(--bg-2); }
+  .format-cell { padding: 28px 24px; border-right: 1px solid var(--border-1); }
+  .format-cell:last-child { border-right: 0; }
+  .format-cell .v { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--teal); }
+  .format-cell .l { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; margin-top: 12px; line-height: 1.4; }
+
+  /* WHO FOR */
+  .whofor { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .whofor-card { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 32px; }
+  .whofor-card.yes { border-color: rgba(0,229,199,0.2); }
+  .whofor-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 18px; display: flex; align-items: center; gap: 10px; }
+  .whofor-card h3 .tag { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .whofor-card.yes h3 .tag { background: var(--teal-tint); color: var(--teal); border: 1px solid rgba(0,229,199,0.25); }
+  .whofor-card.no h3 .tag { background: var(--bg-4); color: var(--fg-4); border: 1px solid var(--border-1); }
+  .whofor-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .whofor-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--fg-2); line-height: 1.5; }
+  .whofor-list li .mk { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; position: relative; margin-top: 1px; }
+  .whofor-card.yes .mk { background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.3); }
+  .whofor-card.yes .mk::after { content: ''; position: absolute; top: 6px; left: 5px; width: 7px; height: 4px; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
+  .whofor-card.no .mk { background: var(--bg-4); border: 1px solid var(--border-2); }
+  .whofor-card.no .mk::before, .whofor-card.no .mk::after { content: ''; position: absolute; top: 50%; left: 50%; width: 9px; height: 1.5px; background: var(--fg-4); transform: translate(-50%,-50%) rotate(45deg); }
+  .whofor-card.no .mk::after { transform: translate(-50%,-50%) rotate(-45deg); }
+
+  /* FACILITATORS */
+  .facils { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .facil { display: flex; gap: 20px; background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 28px; }
+  .facil .av { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #061210; font-weight: 700; font-size: 24px; flex-shrink: 0; }
+  .facil h4 { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 4px; }
+  .facil .role { font-family: var(--font-mono); font-size: 12px; color: var(--teal); letter-spacing: 0.02em; margin-bottom: 12px; }
+  .facil p { font-size: 14px; color: var(--fg-3); line-height: 1.55; margin: 0; }
+
+  /* SESSION RHYTHM (timeline) */
+  .rhythm { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-3xl); padding: 12px; }
+  .rhythm-row { display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: baseline; padding: 22px 28px; border-radius: var(--r-2xl); }
+  .rhythm-row + .rhythm-row { border-top: 1px solid var(--border-1); }
+  .rhythm-row:hover { background: var(--bg-3); }
+  .rhythm-row .wk { font-family: var(--font-mono); font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 0.02em; }
+  .rhythm-row h4 { font-size: 17px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .rhythm-row p { font-size: 14px; color: var(--fg-3); margin: 0; line-height: 1.5; }
+
+  /* TESTIMONIALS */
+  .quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .quote { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 30px; }
+  .quote blockquote { font-size: 17px; font-weight: 500; line-height: 1.5; letter-spacing: -0.01em; color: var(--fg-1); margin: 0 0 20px; }
+  .quote blockquote .acc { color: var(--teal); }
+  .quote .by { display: flex; align-items: center; gap: 12px; }
+  .quote .by .av { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #061210; font-weight: 700; font-size: 14px; }
+  .quote .by .nm { font-size: 14px; font-weight: 600; color: var(--fg-1); }
+  .quote .by .rl { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); }
+
+  /* PRICING */
+  .pricing { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 820px; margin: 0 auto; }
+  .plan { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-3xl); padding: 36px; position: relative; overflow: hidden; }
+  .plan.featured { border-color: rgba(0,229,199,0.3); }
+  .plan.featured::before { content: ''; position: absolute; top: -50px; right: -30px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(0,229,199,0.12), transparent 60%); pointer-events: none; }
+  .plan .ribbon { position: absolute; top: 20px; right: 20px; font-family: var(--font-mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: var(--teal); color: #061210; font-weight: 600; letter-spacing: 0.06em; }
+  .plan .pname { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+  .plan .price { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .plan .price span { font-size: 15px; font-weight: 500; color: var(--fg-3); letter-spacing: 0; }
+  .plan .pdesc { font-size: 14px; color: var(--fg-3); margin: 14px 0 22px; line-height: 1.5; }
+  .plan-feats { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 11px; }
+  .plan-feats li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--fg-2); line-height: 1.45; }
+  .plan-feats li .ck { width: 18px; height: 18px; border-radius: 50%; background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.3); flex-shrink: 0; position: relative; margin-top: 1px; }
+  .plan-feats li .ck::after { content: ''; position: absolute; top: 5px; left: 4px; width: 7px; height: 4px; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
+  .plan .btn-primary, .plan .btn-ghost { width: 100%; justify-content: center; box-sizing: border-box; }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border-1); }
+  .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 4px; cursor: pointer; font-size: 17px; font-weight: 500; color: var(--fg-1); letter-spacing: -0.01em; list-style: none; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q .plus { width: 24px; height: 24px; flex-shrink: 0; position: relative; }
+  .faq-q .plus::before, .faq-q .plus::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--fg-3); }
+  .faq-q .plus::before { width: 12px; height: 2px; }
+  .faq-q .plus::after { width: 2px; height: 12px; transition: opacity 200ms var(--ease); }
+  details[open] .faq-q .plus::after { opacity: 0; }
+  details[open] .faq-q { color: var(--teal); }
+  .faq-a { padding: 0 4px 24px; font-size: 15px; color: var(--fg-3); line-height: 1.6; max-width: 640px; }
+
+  /* FINAL CTA */
+  .final-cta { text-align: center; position: relative; overflow: hidden; background: linear-gradient(160deg, var(--bg-2), var(--bg-3)); border: 1px solid rgba(0,229,199,0.18); border-radius: var(--r-3xl); padding: 64px 40px; }
+  .final-cta::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 500px; background: radial-gradient(circle, rgba(0,229,199,0.15), transparent 55%); pointer-events: none; }
+  .final-cta .badge { position: relative; display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); padding: 6px 13px; border: 1px solid rgba(0,229,199,0.3); border-radius: 100px; background: var(--teal-tint); margin-bottom: 22px; }
+  .final-cta h2 { position: relative; font-size: clamp(32px, 4.5vw, 50px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.04; margin: 0 auto 16px; max-width: 620px; }
+  .final-cta h2 .accent { color: var(--teal); }
+  .final-cta p { position: relative; font-size: 17px; color: var(--fg-2); margin: 0 auto 32px; max-width: 480px; line-height: 1.55; }
+  .final-cta .actions { position: relative; display: inline-flex; gap: 12px; align-items: center; }
+  .final-cta .micro { position: relative; margin-top: 22px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.04em; }
+
+  /* APPLICATION FORM */
+  .applyf { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: start; background: var(--bg-2); border: 1px solid var(--border-2); border-radius: var(--r-3xl); padding: 48px; position: relative; overflow: hidden; }
+  .applyf::before { content: ''; position: absolute; top: -120px; right: -80px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(0,229,199,0.12), transparent 60%); pointer-events: none; }
+  .applyf-left { position: relative; }
+  .applyf-left .eyebrow { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .applyf-left h2 { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.06; margin: 0 0 14px; }
+  .applyf-left p { font-size: 15px; color: var(--fg-3); line-height: 1.6; margin: 0 0 28px; }
+  .applyf-steps { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 16px; }
+  .applyf-steps li { display: flex; gap: 14px; align-items: flex-start; }
+  .applyf-steps .n { width: 26px; height: 26px; border-radius: 50%; background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.3); color: var(--teal); font-family: var(--font-mono); font-size: 12px; font-weight: 600; display: grid; place-items: center; flex-shrink: 0; }
+  .applyf-steps .tx { font-size: 14px; color: var(--fg-2); line-height: 1.45; }
+  .applyf-steps .tx b { color: var(--fg-1); font-weight: 600; }
+  .applyf-seats { display: flex; align-items: center; gap: 10px; padding-top: 22px; border-top: 1px solid var(--border-1); font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .applyf-seats .dots { display: flex; gap: 4px; }
+  .applyf-seats .dots i { width: 12px; height: 12px; border-radius: 3px; background: var(--bg-5); }
+  .applyf-seats .dots i.taken { background: var(--teal); }
+
+  .applyf-form { position: relative; display: flex; flex-direction: column; gap: 16px; }
+  .ff { display: flex; flex-direction: column; gap: 7px; }
+  .ff label { font-size: 13px; font-weight: 500; color: var(--fg-2); }
+  .ff label .opt { color: var(--fg-4); font-weight: 400; }
+  .ff-input, .ff-select, .ff-textarea { width: 100%; box-sizing: border-box; background: var(--bg-3); border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 12px 14px; color: var(--fg-1); font-size: 14px; font-family: inherit; outline: none; transition: all 120ms var(--ease); }
+  .ff-input::placeholder, .ff-textarea::placeholder { color: var(--fg-4); }
+  .ff-input:focus, .ff-select:focus, .ff-textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,229,199,0.12); }
+  .ff-textarea { resize: vertical; min-height: 84px; line-height: 1.5; }
+  .ff-select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236A7570' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer; }
+  .ff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ff-tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ff-tier { position: relative; cursor: pointer; }
+  .ff-tier input { position: absolute; opacity: 0; pointer-events: none; }
+  .ff-tier .box { border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 14px 16px; transition: all 120ms var(--ease); height: 100%; box-sizing: border-box; }
+  .ff-tier .box .nm { font-size: 14px; font-weight: 600; color: var(--fg-1); margin-bottom: 3px; }
+  .ff-tier .box .pr { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); }
+  .ff-tier input:checked + .box { border-color: var(--teal); background: var(--teal-tint); box-shadow: 0 0 0 1px var(--teal); }
+  .ff-tier input:checked + .box .pr { color: var(--teal); }
+  .applyf-form .btn-primary { justify-content: center; padding: 15px; font-size: 15px; margin-top: 4px; width: 100%; box-sizing: border-box; }
+  .applyf-note { font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); text-align: center; letter-spacing: 0.04em; }
+  .applyf-success { position: relative; display: none; flex-direction: column; align-items: center; text-align: center; padding: 24px 0; }
+  .applyf-success .ico { width: 64px; height: 64px; border-radius: 50%; background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.3); color: var(--teal); display: grid; place-items: center; margin-bottom: 20px; }
+  .applyf-success h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .applyf-success p { font-size: 14px; color: var(--fg-3); line-height: 1.55; margin: 0; max-width: 360px; }
+  /* consent checkbox + submit error */
+  .ff-check { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: var(--fg-2); line-height: 1.45; cursor: pointer; }
+  .ff-check input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--teal); flex-shrink: 0; cursor: pointer; }
+  .ff-check a { text-decoration: underline; }
+  .applyf-error { display: none; font-size: 13px; color: var(--danger); line-height: 1.45; padding: 10px 12px; border: 1px solid rgba(255,93,93,0.3); border-radius: var(--r-lg); background: rgba(255,93,93,0.08); }
+  .applyf-error.is-visible { display: block; }
+
+  /* FOOTER */
+  footer { padding: 36px 0; border-top: 1px solid var(--border-1); }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.04em; }
+  .footer-inner a { color: var(--fg-4); text-decoration: none; } .footer-inner a:hover { color: var(--teal); }
+
+  /* ============================================================
+     RESPONSIVE — breakpoints 1240 / 900 / 480 (LEA-2463)
+     ============================================================ */
+  @media (max-width: 1240px) {
+    .container, .container-narrow { padding: 0 24px; }
+    .hero-grid { gap: 40px; }
+  }
+  @media (max-width: 900px) {
+    .section { padding: 64px 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .pillars, .whofor, .facils, .quotes, .pricing { grid-template-columns: 1fr; }
+    .applyf { grid-template-columns: 1fr; gap: 36px; padding: 32px 24px; }
+    .ff-row, .ff-tiers { grid-template-columns: 1fr; }
+    .format { grid-template-columns: repeat(2, 1fr); }
+    .format-cell:nth-child(2) { border-right: 0; }
+    .format-cell:nth-child(1), .format-cell:nth-child(2) { border-bottom: 1px solid var(--border-1); }
+    .rhythm-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 480px) {
+    .container, .container-narrow { padding: 0 16px; }
+    .section { padding: 48px 0; }
+    .hero { padding: 48px 0; }
+    .nav-pill { display: none; }
+    .nav-seats { display: none; }
+    .hero .lead { font-size: 16px; }
+    .pillar, .whofor-card, .facil, .plan, .apply-card { padding: 24px; }
+    .format { grid-template-columns: 1fr; }
+    .format-cell { border-right: 0; border-bottom: 1px solid var(--border-1); }
+    .format-cell:last-child { border-bottom: 0; }
+    .final-cta { padding: 44px 22px; }
+    .final-cta .actions { flex-direction: column; width: 100%; }
+    .final-cta .actions a { width: 100%; justify-content: center; box-sizing: border-box; }
+    .applyf { padding: 24px 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+  }
+</style>
+  <link rel="stylesheet" href="/assets/css/lg-meganav.css">
+</head>
+<!-- data-copy="final-v3": финал-копи применена из copy-final-v3.md (LEA-2474/LEA-2476). Канон ADR-002: 6–8 мест, 200 000 ₽, первый поток, старт 23.06.2026. -->
+<body data-copy="final-v3">
+
+<a href="#main" class="skip-link">К основному содержимому</a>
+
+<!-- LG-SHELL HEADER (LEA-3015) -->
+  <header class="lg-header">
+      <div class="lg-header__inner">
+        <a class="lg-brand" href="https://leadup.guru/ru/" aria-label="LeadUp AI">
+          <img class="lg-brand__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24">
+        </a>
+        <nav class="lg-meganav" aria-label="Основная навигация">
+          <ul>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-products">
+              Продукты
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--mega" id="mn-products">
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g0">Нейросотрудники и команды</p>
+                <ul aria-labelledby="mn-products-g0">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/neuro-staff"><span class="lg-meganav__txt"><span class="lg-meganav__label">Нейросотрудники</span><span class="lg-meganav__desc">AI-сотрудники под ваши процессы</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/zero-human-company"><span class="lg-meganav__txt"><span class="lg-meganav__label">Zero-human компании</span><span class="lg-meganav__desc">Компании, которые работают без людей</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/hermes"><span class="lg-meganav__txt"><span class="lg-meganav__label">Hermes — AI-заместитель</span><span class="lg-meganav__desc">AI-руководитель операционки</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g1">Автоматизация</p>
+                <ul aria-labelledby="mn-products-g1">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/solutions/automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">n8n-автоматизация</span><span class="lg-meganav__desc">Сценарии под ключ на n8n</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/ai-diagnostics"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI-диагностика</span><span class="lg-meganav__desc">Бесплатный разбор процессов</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g2">AI-native продукты</p>
+                <ul aria-labelledby="mn-products-g2">
+                <li><a class="lg-meganav__link" href="https://portfolio.leadup.guru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Портфолио</span><span class="lg-meganav__desc">Что мы собрали на AI</span></span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-learn">
+              Обучение
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-learn">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/neyromasterskaya-2"><span class="lg-meganav__txt"><span class="lg-meganav__label">Нейромастерская 2.0</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/courses/intensive"><span class="lg-meganav__txt"><span class="lg-meganav__label">Интенсивы</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/course/ai-automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">Курс AI-автоматизации</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/course/vibecoding"><span class="lg-meganav__txt"><span class="lg-meganav__label">Вайбкодинг</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown data-current="true">
+            <button class="lg-meganav__trigger is-current" type="button" aria-expanded="false" aria-controls="mn-resources">
+              Ресурсы
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-resources">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://blog.leadup.guru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Блог</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/resources/ai-library"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI-библиотека</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/ru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Сообщество «Нейросборка»</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/ru/mastermind/"><span class="lg-meganav__txt"><span class="lg-meganav__label">Мастермайнд</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item">
+            <a class="lg-meganav__toplink" href="https://leadup.guru/ru/about">О нас</a>
+          </li>
+          </ul>
+        </nav>
+        <div class="lg-header__actions">
+          <a class="btn-p" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+          <details class="lg-mobile">
+            <summary aria-label="Меню"></summary>
+            <div class="lg-drawer">
+              <div class="lg-drawer__body">
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Продукты <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <div class="lg-drawer__sub-head">Нейросотрудники и команды</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/neuro-staff">Нейросотрудники</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/zero-human-company">Zero-human компании</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/hermes">Hermes — AI-заместитель</a>
+            <div class="lg-drawer__sub-head">Автоматизация</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/solutions/automation">n8n-автоматизация</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+            <div class="lg-drawer__sub-head">AI-native продукты</div>
+            <a class="lg-drawer__link" href="https://portfolio.leadup.guru/ru">Портфолио</a>
+          </details>
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Обучение <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/neyromasterskaya-2">Нейромастерская 2.0</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/courses/intensive">Интенсивы</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/course/ai-automation">Курс AI-автоматизации</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/course/vibecoding">Вайбкодинг</a>
+          </details>
+          <details class="lg-drawer__group" open>
+            <summary class="lg-drawer__group-trigger">Ресурсы <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://blog.leadup.guru/ru">Блог</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/resources/ai-library">AI-библиотека</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/ru/ru">Сообщество «Нейросборка»</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/ru/mastermind/">Мастермайнд</a>
+          </details>
+          <a class="lg-drawer__toplink" href="https://leadup.guru/ru/about">О нас</a>
+          <div class="lg-drawer__foot">
+            <a class="btn-p" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+          </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge">Первый поток · старт 23 июня 2026</div>
+      <h1>AI Мастермайнд<br>для <span class="accent">тех, кто внедряет AI</span></h1>
+      <p class="lead">Камерная группа из 6–8 практиков, которые за 8 недель внедряют один AI-кейс в свой реальный бизнес. Не лекции — hot-seat-разборы ваших задач под фасилитацией Владимира Нагина. На выходе — результат в цифрах.</p>
+      <div class="hero-facts">
+        <div class="hero-fact"><span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span>Только <strong>6–8 человек</strong> в потоке — каждому полноценный разбор, а не место в вебинаре</span></div>
+        <div class="hero-fact"><span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span><strong>8 недель</strong> · еженедельный созвон ~90 минут + работа над своим кейсом</span></div>
+        <div class="hero-fact"><span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/></svg></span><span>Открытый набор, <strong>отбор по заявке</strong> — берём тех, у кого есть реальная задача под AI</span></div>
+      </div>
+    </div>
+
+    <!-- APPLY CARD -->
+    <div class="apply-card" id="apply">
+      <div class="apply-glow"></div>
+      <div class="eyebrow">◆ Первый поток · старт 23.06.2026</div>
+      <h3>Заявка в мастермайнд</h3>
+      <p class="sub">Отбираем по задаче и контексту, чтобы группа была сильной и равной. 10 минут на заявку.</p>
+      <div class="apply-rows">
+        <div class="apply-row"><span class="k">Старт потока</span><span class="v">23 июня 2026</span></div>
+        <div class="apply-row"><span class="k">Формат</span><span class="v">Онлайн · Zoom</span></div>
+        <div class="apply-row"><span class="k">Размер группы</span><span class="v">6–8 человек</span></div>
+        <div class="apply-row"><span class="k">Длительность</span><span class="v">8 недель</span></div>
+        <div class="apply-row"><span class="k">Участие</span><span class="v teal">200 000 ₽</span></div>
+      </div>
+      <a href="#apply-form" class="btn-primary" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="hero_card">Подать заявку →</a>
+      <div class="apply-seats">
+        <span>6–8 мест · набор открыт</span>
+      </div>
+      <div class="apply-note">Заявка ни к чему не обязывает · ответим за 2 дня</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="container">
+    <div class="section-h">
+      <div class="eyebrow">◆ Как это работает</div>
+      <h2>Не курс и не консалтинг.<br>Среда, где внедряют</h2>
+      <p>Вы не слушаете лектора и не заказываете «решение под ключ». Вы приносите свою задачу под AI, а группа и фасилитатор помогают довести её до внедрённого результата за 8 недель.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.2 4.2l4.3 4.3m7 7 4.3 4.3M1 12h6m6 0h6M4.2 19.8l4.3-4.3m7-7 4.3-4.3"/></svg></div>
+        <h3>Hot-seat-разборы</h3>
+        <p>Каждый созвон — живой разбор кейсов участников. При камерных 6–8 каждому достаётся минимум 2 полных hot-seat-разбора за поток: ваша задача → разбор группой → конкретные ходы.</p>
+      </div>
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+        <h3>Свой проект, а не учебный</h3>
+        <p>Никакой программы «с нуля». Вы весь поток двигаете один реальный кейс и каждую неделю сдаёте спринт-результат — группа держит вас в фокусе и темпе.</p>
+      </div>
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <h3>Результат с цифрами</h3>
+        <p>На выходе — внедрённый AI-кейс и замер до/после (время, деньги, качество). Не «прошёл курс», а «внедрил и измерил».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="format">
+      <div class="format-cell"><div class="v">6–8</div><div class="l">практиков<br>в потоке</div></div>
+      <div class="format-cell"><div class="v">8</div><div class="l">недель<br>работы</div></div>
+      <div class="format-cell"><div class="v">~90 мин</div><div class="l">созвон<br>раз в неделю</div></div>
+      <div class="format-cell"><div class="v">1:1</div><div class="l">с Владимиром<br>на Н4</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO FOR -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-h">
+      <div class="eyebrow">◆ Для кого</div>
+      <h2>Подходит не всем — и это честно</h2>
+      <p>Сила камерного потока — в том, что каждый пришёл с реальной задачей и готов её довести. Поэтому честно говорим, кому будет ценно, а кому пока рано.</p>
+    </div>
+    <div class="whofor">
+      <div class="whofor-card yes">
+        <h3>Подходит, если <span class="tag">да</span></h3>
+        <ul class="whofor-list">
+          <li><span class="mk"></span>У вас есть конкретный процесс или задача, где AI сэкономит время/деньги, — и вы готовы довести её до внедрения за 8 недель</li>
+          <li><span class="mk"></span>Вы принимаете решения по своим процессам: собственник, руководитель, эксперт или самозанятый</li>
+          <li><span class="mk"></span>Готовы выделять 3–5 часов в неделю и работать в группе, где от вас ждут результата</li>
+          <li><span class="mk"></span>Готовы стартовать 23 июня и вложить 200 000 ₽ в результат, а не в «ещё один курс»</li>
+        </ul>
+      </div>
+      <div class="whofor-card no">
+        <h3>Пока рано, если <span class="tag">нет</span></h3>
+        <ul class="whofor-list">
+          <li><span class="mk"></span>Вы только знакомитесь с AI и ищете «курс с нуля» с готовой программой</li>
+          <li><span class="mk"></span>У вас нет реального проекта под AI — есть только интерес «посмотреть»</li>
+          <li><span class="mk"></span>Не готовы выделять время на спринт и обратную связь каждую неделю</li>
+          <li><span class="mk"></span>Ждёте, что за вас всё внедрят (это не консалтинг)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITATORS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-h">
+      <div class="eyebrow">◆ Ведущий</div>
+      <h2>Кто ведёт поток</h2>
+      <p>Не лектор — фасилитатор. Держит структуру, ведёт hot-seat и 1:1, задаёт правильные вопросы и подключает приглашённых экспертов под задачи группы.</p>
+    </div>
+    <div class="facils" style="grid-template-columns:1fr; max-width:640px;">
+      <div class="facil">
+        <div class="av" style="background:linear-gradient(135deg,#14F5D7,#00CBB0);">ВН</div>
+        <div>
+          <h4>Владимир Нагин</h4>
+          <div class="role">Основатель LeadUp AI · сообщество Нейросборка</div>
+          <p>Собрал сообщество практиков Нейросборки и провёл десятки AI-внедрений в бизнесе. В потоке ведёт лично: все созвоны, hot-seat-разборы и персональные 1:1. Под конкретные пробелы группы подключает приглашённых экспертов-практиков.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RHYTHM -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-h">
+      <div class="eyebrow">◆ Ритм потока</div>
+      <h2>8 недель по шагам</h2>
+      <p>Структура держит фокус, но повестку задаёте вы — через свою задачу. Старт — 23 июня, демо-день — на 8-й неделе. Синхронизировано с методологией программы.</p>
+    </div>
+    <div class="rhythm">
+      <div class="rhythm-row"><div class="wk">Неделя 1</div><div><h4>Калибровка и постановка</h4><p>Знакомство, правила группы и конфиденциальность. Выбираете один проект и метрику, с которыми идёте весь поток.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 2</div><div><h4>AI-аудит процесса</h4><p>Карта вашего процесса и точек, где AI реально даёт деньги или время.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 3</div><div><h4>Инструменты и промптинг</h4><p>Подбираете рабочие промпты и инструменты под свою задачу — Claude/OpenAI, n8n, Make.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 4</div><div><h4>1:1 с Владимиром + старт автоматизации</h4><p>Персональная сессия в середине потока + первый рабочий прототип.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 5</div><div><h4>Hot-seat-разборы</h4><p>Снимаем ключевые блокеры, корректируем план внедрения вживую.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 6</div><div><h4>Масштабирование</h4><p>Кейс начинает работать на реальных данных и встраивается в процесс.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 7</div><div><h4>Гость-эксперт + замер</h4><p>Приглашённый практик под общий пробел группы; собираете цифры до/после.</p></div></div>
+      <div class="rhythm-row"><div class="wk">Неделя 8</div><div><h4>Демо-день, итоги и сеть</h4><p>Презентация кейса с цифрами, личные обязательства, доступ в alumni-чат.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПЕРВЫЙ ПОТОК (вместо отзывов — фейк-социалпруф недопустим, brand policies.md §1.3) -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-h center">
+      <div class="eyebrow">◆ Первый поток</div>
+      <h2>Почему первый поток — это возможность</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg></div>
+        <h3>Максимум внимания</h3>
+        <p>В первом потоке ведущий и группа вкладываются в каждого по максимуму — вы закладываете стандарт кейсов для всех следующих потоков.</p>
+      </div>
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Камерность 6–8</h3>
+        <p>Не размытая аудитория, а стол, за которым каждого знают по имени и задаче.</p>
+      </div>
+      <div class="pillar">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Сообщество Нейросборки за спиной</h3>
+        <p>Доступ к практикам и приглашённым экспертам сообщества под ваши пробелы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-h center">
+      <div class="eyebrow">◆ Участие</div>
+      <h2>Стоимость потока</h2>
+      <p>Одна цена за весь поток: 8 недель, личная работа с Владимиром и ваш внедрённый кейс. Заявка бесплатна и ни к чему не обязывает.</p>
+    </div>
+    <div class="pricing" style="grid-template-columns:1fr; max-width:480px;">
+      <div class="plan featured">
+        <div class="pname">Участник первого потока</div>
+        <div class="price">200 000 ₽<span> / за поток</span></div>
+        <p class="pdesc">Камерный поток 6–8 человек, 8 недель, старт 23 июня 2026, фасилитация Владимира Нагина лично.</p>
+        <ul class="plan-feats">
+          <li><span class="ck"></span>8 еженедельных созвонов ~90 минут (с записью)</li>
+          <li><span class="ck"></span>Персональный 1:1 с Владимиром на Н4</li>
+          <li><span class="ck"></span>Минимум 2 полных hot-seat-разбора вашего кейса</li>
+          <li><span class="ck"></span>Гость-эксперт под пробел группы (Н7)</li>
+          <li><span class="ck"></span>Демо-день и карточка внедрённого кейса с цифрами до/после</li>
+          <li><span class="ck"></span>Закрытый Telegram-чат потока + доступ в alumni навсегда</li>
+        </ul>
+        <p class="pdesc" style="margin-top:0;">Полная оплата или 50/50 (50% до старта, 50% до Н4).</p>
+        <a href="#apply-form" class="btn-primary" data-tier="0" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="participant">Подать заявку →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<!-- LEA-2477: боевая форма заявки. Поля/ключи строго из спеки §2; сабмит POST'ом
+     в n8n (см. инлайн-скрипт внизу). Cutover (секрет __MM_INTAKE_SECRET__, env,
+     активация воркфлоу) — за Димой (LEA-2464). До cutover POST вернёт 401/404. -->
+<section class="section" style="padding-top:0;" id="apply-form">
+  <div class="container">
+    <div class="applyf">
+      <div class="applyf-left">
+        <div class="eyebrow">◆ Заявка · Первый поток</div>
+        <h2>Оставьте заявку в&nbsp;мастермайнд</h2>
+        <p>10 минут на заполнение. Отбираем по задаче и контексту, чтобы группа была сильной и равной.</p>
+        <ul class="applyf-steps">
+          <li><span class="n">1</span><span class="tx"><b>Ответим за 2 дня.</b> Прочитаем заявку и напишем на email.</span></li>
+          <li><span class="n">2</span><span class="tx"><b>Звонок-знакомство (~30 минут).</b> Сверим задачу, формат и ожидания.</span></li>
+          <li><span class="n">3</span><span class="tx"><b>Место в потоке.</b> Присылаем договор и детали старта (23 июня 2026).</span></li>
+        </ul>
+        <div class="applyf-seats">
+          <span>6–8 мест · набор открыт</span>
+        </div>
+      </div>
+
+      <!-- Боевая форма заявки (LEA-2477). name=/select-value строго = ключи спеки §2:
+           vault/projects/mastermind/deliverables/forms/mastermind-application-form.spec.md
+           Сабмит → POST в n8n (см. инлайн-скрипт внизу страницы, §5). -->
+      <form class="applyf-form" id="mmForm" novalidate>
+        <div class="ff-row">
+          <div class="ff"><label for="mm-full_name">Имя и фамилия</label><input id="mm-full_name" name="full_name" class="ff-input" type="text" autocomplete="name" placeholder="Иван Иванов" required/></div>
+          <div class="ff"><label for="mm-email">Рабочий email</label><input id="mm-email" name="email" class="ff-input" type="email" autocomplete="email" placeholder="you@company.ru" required/></div>
+        </div>
+        <div class="ff-row">
+          <div class="ff"><label for="mm-phone">Телефон</label><input id="mm-phone" name="phone" class="ff-input" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 999 123-45-67" required/></div>
+          <div class="ff"><label for="mm-company">Компания / проект <span class="opt">необязательно</span></label><input id="mm-company" name="company" class="ff-input" type="text" autocomplete="organization" placeholder="Например: Flow Retail"/></div>
+        </div>
+        <div class="ff">
+          <label for="mm-role">Ваша роль</label>
+          <select id="mm-role" name="role" class="ff-select" required>
+            <option value="" disabled selected>Выберите роль…</option>
+            <option value="founder">Основатель / CEO / совладелец</option>
+            <option value="top_manager">Топ-менеджер / директор</option>
+            <option value="dept_head">Руководитель отдела</option>
+            <option value="expert">Эксперт / консультант / самозанятый</option>
+            <option value="specialist">Специалист</option>
+            <option value="other">Другое</option>
+          </select>
+        </div>
+        <div class="ff"><label for="mm-niche">Ниша / сфера</label><input id="mm-niche" name="niche" class="ff-input" type="text" placeholder="Например: EdTech, e-commerce, b2b-услуги" required/></div>
+        <div class="ff"><label for="mm-ai_task">Какую задачу хотите решить с помощью AI?</label><textarea id="mm-ai_task" name="ai_task" class="ff-textarea" placeholder="Коротко опишите задачу или процесс, который хотите автоматизировать / усилить." required></textarea></div>
+        <div class="ff-row">
+          <div class="ff">
+            <label for="mm-ai_experience">Опыт с AI</label>
+            <select id="mm-ai_experience" name="ai_experience" class="ff-select" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option value="beginner">Только слышал про AI</option>
+              <option value="tried_tools">Пробовал инструменты (ChatGPT и пр.)</option>
+              <option value="partial_impl">Внедрял точечно в работу</option>
+              <option value="has_automations">Есть свои автоматизации / workflow</option>
+            </select>
+          </div>
+          <div class="ff">
+            <label for="mm-budget_readiness">Готовность инвестировать</label>
+            <select id="mm-budget_readiness" name="budget_readiness" class="ff-select" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option value="lt_100k">Менее 100 000 ₽</option>
+              <option value="100k_200k">100 000 — 200 000 ₽</option>
+              <option value="200k_500k">200 000 — 500 000 ₽</option>
+              <option value="500k_plus">500 000 ₽+</option>
+              <option value="discuss">Готов обсудить</option>
+            </select>
+          </div>
+        </div>
+        <div class="ff">
+          <label for="mm-timeline">Когда готовы стартовать</label>
+          <select id="mm-timeline" name="timeline" class="ff-select" required>
+            <option value="" disabled selected>Выберите…</option>
+            <option value="june_2026">Готов стартовать 23 июня 2026</option>
+            <option value="next_stream">Рассматриваю следующий поток</option>
+            <option value="flexible">Гибко, обсудим</option>
+          </select>
+        </div>
+        <div class="ff"><label for="mm-motivation">Почему мастермайнд, а не курс или индивидуальный коучинг? <span class="opt">необязательно</span></label><textarea id="mm-motivation" name="motivation" class="ff-textarea" placeholder="Пара строк — помогает нам понять, насколько формат вам подойдёт."></textarea></div>
+        <label class="ff-check" for="mm-consent">
+          <input id="mm-consent" name="consent" type="checkbox" required/>
+          <span>Согласен на обработку персональных данных в соответствии с <a href="https://leadup.guru/privacy" rel="noopener">политикой конфиденциальности</a>.</span>
+        </label>
+        <button class="btn-primary" id="mmSubmit" type="submit" data-event="mastermind_form_submit" data-event-page="mastermind">Отправить заявку →</button>
+        <div class="applyf-error" id="mmError" role="alert">Не удалось отправить заявку. Проверьте подключение и попробуйте ещё раз — или напишите нам на <a href="mailto:hello@leadup.guru">hello@leadup.guru</a>.</div>
+        <div class="applyf-note">Заявка ни к чему не обязывает · ответим за 2 дня · без спама</div>
+      </form>
+
+      <div class="applyf-success" id="mmSuccess">
+        <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Заявка отправлена</h3>
+        <p>Спасибо! Мы прочитаем её и напишем вам на email в течение 2 дней, чтобы договориться о звонке-знакомстве.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="container-narrow">
+    <div class="section-h center">
+      <div class="eyebrow">◆ Вопросы</div>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary class="faq-q">Чем мастермайнд отличается от курса и от консалтинга?<span class="plus"></span></summary>
+        <div class="faq-a">В курсе вы потребляете контент, в консалтинге за вас делают решение. В мастермайнде вы сами внедряете свою задачу — но не в одиночку, а в группе и под фасилитацией. Программы «с нуля» здесь нет: вы приходите с реальным кейсом и за 8 недель доводите его до результата.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Почему всего 6–8 человек и почему это премиум?<span class="plus"></span></summary>
+        <div class="faq-a">Камерность — часть продукта. При 6–8 каждому хватает времени на полноценные hot-seat-разборы и личное внимание ведущего. Это не вебинар на сотни людей, поэтому и цена соответствующая.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Кто может подать заявку — только выпускники ваших программ?<span class="plus"></span></summary>
+        <div class="faq-a">Нет, набор открытый. Заявку может подать любой практик с реальной задачей под AI. Фильтр — не статус выпускника, а наличие задачи, готовность к работе и отбор по заявке.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Что я получу на выходе?<span class="plus"></span></summary>
+        <div class="faq-a">Внедрённый AI-кейс в вашем бизнесе, цифры до/после и карточку кейса, которую можно показать команде или использовать в портфолио. Плюс воспроизводимый цикл: на следующую задачу вы идёте уже без группы.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Что если пропущу созвон?<span class="plus"></span></summary>
+        <div class="faq-a">Все созвоны записываются. Но мастермайнд работает только при регулярном участии: если знаете, что пропустите больше двух недель, лучше дождаться следующего потока.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Конфиденциальность?<span class="plus"></span></summary>
+        <div class="faq-a">Первая неделя — про правила и соглашение о конфиденциальности. Всё, что обсуждается в группе, остаётся в группе: это позволяет делиться реальными цифрами и ошибками.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Можно оплатить от компании?<span class="plus"></span></summary>
+        <div class="faq-a">Да, работаем по договору с ИП и юрлицами, даём закрывающие документы. Доступна оплата 50/50.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Когда старт?<span class="plus"></span></summary>
+        <div class="faq-a">Старт первого потока — 23 июня 2026. Поток идёт 8 недель (до ~18 августа), онлайн в Zoom. Набор закрывается по заполнению 6–8 мест, поэтому с заявкой лучше не тянуть.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="final-cta">
+      <div class="badge">Первый поток · старт 23 июня · набор открыт</div>
+      <h2>Соберём&nbsp;<span class="accent">сильную группу</span> из 6–8</h2>
+      <p>8 недель, разбор вашей задачи и внедрённый кейс с цифрами на выходе. Старт 23 июня 2026. Заявка занимает 10 минут и ни к чему не обязывает.</p>
+      <div class="actions">
+        <a href="#apply-form" class="btn-primary lg" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="final_cta">Подать заявку →</a>
+        <a href="mailto:hello@leadup.guru" class="btn-ghost" data-event="mastermind_contact_click" data-event-page="mastermind">Задать вопрос</a>
+      </div>
+      <div class="micro">Старт — 23 июня 2026 · онлайн · 6–8 мест · отбор по заявке</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- LG-SHELL FOOTER (LEA-3015) -->
+<footer class="lg-footer" aria-label="Подвал сайта">
+  <div class="lg-footer__inner">
+    <div class="lg-footer__cols">
+      <section class="lg-footer__col lg-footer__col--brand">
+        <a class="lg-footer__brand" href="https://leadup.guru/ru/" aria-label="LeadUp AI">
+          <img class="lg-footer__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24"/>
+        </a>
+        <p class="lg-footer__tagline">Экосистема AI-трансформации бизнеса. Внедряем, а не продаём курсы.</p>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Продукты</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a></li>
+          <li><a href="/ru/mastermind/">Мастермайнд</a></li>
+          <li><a href="/ru/neurosborka/">Нейросборка (сообщество)</a></li>
+          <li><a href="https://ads.leadup.guru/mini-course/" rel="noopener">Мини-курс</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Учиться</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://blog.leadup.guru" rel="noopener">Блог</a></li>
+          <li><a href="https://portfolio.leadup.guru" rel="noopener">Портфолио</a></li>
+          <li><a href="https://ads.leadup.guru/tripwire/prompt-library-ceo/" rel="noopener">42 промпта</a></li>
+          <li><a href="https://leadup.guru/ru/resources/ai-library" rel="noopener">Библиотека ресурсов</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Подписаться</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://t.me/aibusinesshub" rel="noopener">Telegram-канал · @aibusinesshub</a></li>
+          <li><a href="https://www.youtube.com/@businessaihub" rel="noopener">YouTube · @businessaihub</a></li>
+          <li><a href="https://www.tiktok.com/@businessaihub" rel="noopener">TikTok · @businessaihub</a></li>
+        </ul>
+      </section>
+      <section class="lg-footer__col">
+        <h5 class="lg-footer__title">Компания</h5>
+        <ul class="lg-footer__list">
+          <li><a href="https://leadup.guru/ru/contact" rel="noopener">Связаться</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="lg-footer__legal">
+      <div class="lg-footer__legal-row">
+        <p class="lg-footer__rights">© 2026 LeadUp AI. Все права защищены.</p>
+        <ul class="lg-footer__legal-links" aria-label="Легал">
+          <li><a href="https://leadup.guru/ru/privacy" rel="noopener">Политика данных</a></li>
+          <li><a href="https://leadup.guru/ru/terms" rel="noopener">Договор-оферта</a></li>
+          <li><a href="https://leadup.guru/ru/security" rel="noopener">Security</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     ANALYTICS (инлайн, self-contained) — Plausible, домен community.leadup.guru.
+     События мастермайнда: mastermind_apply_click, mastermind_form_submit,
+     mastermind_contact_click. UTM-захват в localStorage (30 дней).
+     Альтернатива GA4: заменить loader ниже на gtag — имена событий те же.
+     ============================================================ -->
+<script>
+  (function () {
+    if (window.__plausibleInit) return;
+    window.__plausibleInit = true;
+    var s = document.createElement('script');
+    s.defer = true;
+    s.setAttribute('data-domain', 'community.leadup.guru');
+    s.src = 'https://plausible.io/js/script.outbound-links.tagged-events.js';
+    document.head.appendChild(s);
+    window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };
+  })();
+
+  (function () {
+    var KEY = 'ns_utm_v1', TTL = 30 * 24 * 60 * 60 * 1000;
+    var FIELDS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','yclid','fbclid'];
+    function readStored() {
+      try {
+        var raw = localStorage.getItem(KEY); if (!raw) return null;
+        var p = JSON.parse(raw); if (!p || !p.t) return null;
+        if (Date.now() - p.t > TTL) { localStorage.removeItem(KEY); return null; }
+        return p.v || null;
+      } catch (e) { return null; }
+    }
+    function capture() {
+      var params = new URLSearchParams(window.location.search), found = {}, any = false;
+      FIELDS.forEach(function (f) { var v = params.get(f); if (v) { found[f] = v; any = true; } });
+      if (!any) return null;
+      try { localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), v: found })); } catch (e) {}
+      return found;
+    }
+    window.NS_UTM = capture() || readStored() || null;
+  })();
+
+  (function () {
+    function track(name, props) {
+      if (typeof window.plausible === 'function') window.plausible(name, props ? { props: props } : undefined);
+    }
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-event]');
+      if (!el) return;
+      var name = el.getAttribute('data-event'), props = {};
+      var page = el.getAttribute('data-event-page'); if (page) props.page = page;
+      var plan = el.getAttribute('data-event-plan'); if (plan) props.plan = plan;
+      if (window.NS_UTM) Object.keys(window.NS_UTM).forEach(function (k) { props[k] = window.NS_UTM[k]; });
+      track(name, props);
+    });
+  })();
+
+  /* ============================================================
+     САБМИТ ФОРМЫ ЗАЯВКИ (LEA-2477 · спека §5).
+     POST application JSON → n8n webhook + событие Plausible mastermind_form_submit.
+     name=/select-value инпутов = payload-ключи §2. Секрет X-MM-Intake-Secret —
+     плейсхолдер __MM_INTAKE_SECRET__, подставляется при cutover (Дима, не в гит).
+     До cutover (workflow INACTIVE / нет секрета) сабмит вернёт не-200 → показываем
+     блок ошибки; после активации с секретом → 200 → блок успеха #mmSuccess.
+     ============================================================ */
+  (function () {
+    var form = document.getElementById('mmForm');
+    if (!form) return;
+    var success = document.getElementById('mmSuccess');
+    var errBox = document.getElementById('mmError');
+    var btn = document.getElementById('mmSubmit');
+    var ENDPOINT = 'https://n8n.flowstudio.cloud/webhook/mastermind-application';
+    var SECRET = 'd4a600ef9992791f9fe750558cb9e966e63dbf27cbafc69ff68e6939d0f61711'; // публичный анти-спам токен (литерал в Auth-ноде n8n; см. spec §3, LEA-2482)
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      if (errBox) errBox.classList.remove('is-visible');
+
+      var fd = new FormData(form);
+      var consentEl = form.querySelector('[name=consent]');
+      var payload = {
+        full_name: (fd.get('full_name') || '').trim(),
+        email: (fd.get('email') || '').trim(),
+        phone: (fd.get('phone') || '').trim(),
+        company: fd.get('company') || '',
+        role: fd.get('role') || '',
+        niche: (fd.get('niche') || '').trim(),
+        ai_task: (fd.get('ai_task') || '').trim(),
+        ai_experience: fd.get('ai_experience') || '',
+        budget_readiness: fd.get('budget_readiness') || '',
+        timeline: fd.get('timeline') || '',
+        motivation: (fd.get('motivation') || '').trim(),
+        consent: consentEl ? consentEl.checked === true : false,
+        utm: window.NS_UTM || {},
+        page_url: location.href
+      };
+
+      if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-MM-Intake-Secret': SECRET },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { if (!r.ok) throw new Error('http_' + r.status); return r.json().catch(function () { return {}; }); })
+        .then(function () {
+          if (typeof window.plausible === 'function') window.plausible('mastermind_form_submit', { props: { page: 'mastermind' } });
+          form.style.display = 'none';
+          if (success) success.style.display = 'flex';
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = 'Отправить заявку →'; }
+          if (errBox) errBox.classList.add('is-visible');
+        });
+    });
+  })();
+</script>
+
+  <script defer src="/assets/js/lg-meganav.js"></script>
+</body>
+</html>
