@@ -437,6 +437,7 @@
     *, *::before, *::after { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
   }
 </style>
+  <link rel="stylesheet" href="/assets/css/lg-meganav.css">
 </head>
 <!-- data-copy="final-v3": финал-копи применена из copy-final-v3.md (LEA-2474/LEA-2476). Канон ADR-002: 6–8 мест, 200 000 ₽, первый поток, старт 23.06.2026. -->
 <body data-copy="final-v3">
@@ -444,38 +445,117 @@
 <a href="#main" class="skip-link">К основному содержимому</a>
 
 <!-- LG-SHELL HEADER (LEA-3015) -->
-<header class="lg-header">
-  <div class="lg-header__inner">
-    <a class="lg-brand" href="https://leadup.guru/ru/" aria-label="LeadUp AI">
-      <img class="lg-brand__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24"/>
-    </a>
-    <nav class="lg-nav" aria-label="Основная навигация">
-      <a href="https://leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a>
-      <a href="/">Сообщество</a>
-      <a href="/mastermind/">Мастермайнд</a>
-      <a href="https://blog.leadup.guru" rel="noopener">Блог</a>
-      <a href="https://leadup.guru/ru/about" rel="noopener">О нас</a>
-      <a href="https://leadup.guru/ru/contact" rel="noopener">Контакты</a>
-    </nav>
-    <div class="lg-header__actions">
-      <a class="btn-p" href="#apply-form" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="nav">Подать заявку</a>
-      <details class="lg-mobile">
-        <summary aria-label="Меню"></summary>
-        <div class="lg-drawer">
-          <nav class="lg-drawer__nav" aria-label="Мобильная навигация">
-            <a href="https://leadup.guru/ru/neuro-staff" rel="noopener">Нейроперсонал</a>
-            <a href="/">Сообщество</a>
-            <a href="/mastermind/">Мастермайнд</a>
-            <a href="https://blog.leadup.guru" rel="noopener">Блог</a>
-            <a href="https://leadup.guru/ru/about" rel="noopener">О нас</a>
-            <a href="https://leadup.guru/ru/contact" rel="noopener">Контакты</a>
-          </nav>
-          <a class="btn-p" href="#apply-form" data-event="mastermind_apply_click" data-event-page="mastermind" data-event-plan="nav">Подать заявку</a>
+  <header class="lg-header">
+      <div class="lg-header__inner">
+        <a class="lg-brand" href="https://leadup.guru/ru/" aria-label="LeadUp AI">
+          <img class="lg-brand__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24">
+        </a>
+        <nav class="lg-meganav" aria-label="Основная навигация">
+          <ul>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-products">
+              Продукты
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--mega" id="mn-products">
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g0">Нейросотрудники и команды</p>
+                <ul aria-labelledby="mn-products-g0">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/neuro-staff"><span class="lg-meganav__txt"><span class="lg-meganav__label">Нейросотрудники</span><span class="lg-meganav__desc">AI-сотрудники под ваши процессы</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/zero-human-company"><span class="lg-meganav__txt"><span class="lg-meganav__label">Zero-human компании</span><span class="lg-meganav__desc">Компании, которые работают без людей</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/hermes"><span class="lg-meganav__txt"><span class="lg-meganav__label">Hermes — AI-заместитель</span><span class="lg-meganav__desc">AI-руководитель операционки</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g1">Автоматизация</p>
+                <ul aria-labelledby="mn-products-g1">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/solutions/automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">n8n-автоматизация</span><span class="lg-meganav__desc">Сценарии под ключ на n8n</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/ai-diagnostics"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI-диагностика</span><span class="lg-meganav__desc">Бесплатный разбор процессов</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g2">AI-native продукты</p>
+                <ul aria-labelledby="mn-products-g2">
+                <li><a class="lg-meganav__link" href="https://portfolio.leadup.guru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Портфолио</span><span class="lg-meganav__desc">Что мы собрали на AI</span></span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-learn">
+              Обучение
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-learn">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/neyromasterskaya-2"><span class="lg-meganav__txt"><span class="lg-meganav__label">Нейромастерская 2.0</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/courses/intensive"><span class="lg-meganav__txt"><span class="lg-meganav__label">Интенсивы</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/course/ai-automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">Курс AI-автоматизации</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/course/vibecoding"><span class="lg-meganav__txt"><span class="lg-meganav__label">Вайбкодинг</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown data-current="true">
+            <button class="lg-meganav__trigger is-current" type="button" aria-expanded="false" aria-controls="mn-resources">
+              Ресурсы
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-resources">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://blog.leadup.guru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Блог</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/ru/resources/ai-library"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI-библиотека</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/ru"><span class="lg-meganav__txt"><span class="lg-meganav__label">Сообщество «Нейросборка»</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/mastermind/"><span class="lg-meganav__txt"><span class="lg-meganav__label">Мастермайнд</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item">
+            <a class="lg-meganav__toplink" href="https://leadup.guru/ru/about">О нас</a>
+          </li>
+          </ul>
+        </nav>
+        <div class="lg-header__actions">
+          <a class="btn-p" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+          <details class="lg-mobile">
+            <summary aria-label="Меню"></summary>
+            <div class="lg-drawer">
+              <div class="lg-drawer__body">
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Продукты <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <div class="lg-drawer__sub-head">Нейросотрудники и команды</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/neuro-staff">Нейросотрудники</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/zero-human-company">Zero-human компании</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/hermes">Hermes — AI-заместитель</a>
+            <div class="lg-drawer__sub-head">Автоматизация</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/solutions/automation">n8n-автоматизация</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+            <div class="lg-drawer__sub-head">AI-native продукты</div>
+            <a class="lg-drawer__link" href="https://portfolio.leadup.guru/ru">Портфолио</a>
+          </details>
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Обучение <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/neyromasterskaya-2">Нейромастерская 2.0</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/courses/intensive">Интенсивы</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/course/ai-automation">Курс AI-автоматизации</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/course/vibecoding">Вайбкодинг</a>
+          </details>
+          <details class="lg-drawer__group" open>
+            <summary class="lg-drawer__group-trigger">Ресурсы <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://blog.leadup.guru/ru">Блог</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/ru/resources/ai-library">AI-библиотека</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/ru">Сообщество «Нейросборка»</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/mastermind/">Мастермайнд</a>
+          </details>
+          <a class="lg-drawer__toplink" href="https://leadup.guru/ru/about">О нас</a>
+          <div class="lg-drawer__foot">
+            <a class="btn-p" href="https://leadup.guru/ru/ai-diagnostics">AI-диагностика</a>
+          </div>
+              </div>
+            </div>
+          </details>
         </div>
-      </details>
-    </div>
-  </div>
-</header>
+      </div>
+    </header>
 
 <main id="main">
 
@@ -766,7 +846,7 @@
         <div class="ff"><label for="mm-motivation">Почему мастермайнд, а не курс или индивидуальный коучинг? <span class="opt">необязательно</span></label><textarea id="mm-motivation" name="motivation" class="ff-textarea" placeholder="Пара строк — помогает нам понять, насколько формат вам подойдёт."></textarea></div>
         <label class="ff-check" for="mm-consent">
           <input id="mm-consent" name="consent" type="checkbox" required/>
-          <span>Согласен на обработку персональных данных в соответствии с <a href="https://leadup.guru/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
+          <span>Согласен на обработку персональных данных в соответствии с <a href="https://leadup.guru/privacy" rel="noopener">политикой конфиденциальности</a>.</span>
         </label>
         <button class="btn-primary" id="mmSubmit" type="submit" data-event="mastermind_form_submit" data-event-page="mastermind">Отправить заявку →</button>
         <div class="applyf-error" id="mmError" role="alert">Не удалось отправить заявку. Проверьте подключение и попробуйте ещё раз — или напишите нам на <a href="mailto:hello@leadup.guru">hello@leadup.guru</a>.</div>
@@ -1015,5 +1095,6 @@
   })();
 </script>
 
+  <script defer src="/assets/js/lg-meganav.js"></script>
 </body>
 </html>
