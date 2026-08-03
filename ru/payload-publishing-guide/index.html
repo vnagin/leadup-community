@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Publishing guide для редакторов Payload | LeadUp AI</title>
+  <meta name="description" content="Короткий чек-лист для редакторов LeadUp AI: вход в Payload, создание и публикация поста, preview, smoke на проде и откат." />
+  <meta name="theme-color" content="#0A1229" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://community.leadup.guru/ru/payload-publishing-guide/" />
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/landing.css" />
+  <link rel="stylesheet" href="/assets/css/lg-shell.css" />
+  <link rel="stylesheet" href="/assets/css/lg-meganav.css" />
+
+  <style>
+    .guide { max-width: 820px; margin: 0 auto; padding: 96px var(--sp-6) 72px; }
+    .guide__eyebrow { color: var(--teal); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; font-family: var(--font-mono); }
+    .guide h1 { font-size: clamp(32px, 5vw, 52px); line-height: var(--lh-tight); margin: var(--sp-4) 0 var(--sp-5); }
+    .guide h2 { font-size: var(--text-2xl); margin: var(--sp-12) 0 var(--sp-4); }
+    .guide h3 { font-size: var(--text-lg); margin: var(--sp-7) 0 var(--sp-3); }
+    .guide p, .guide li { color: var(--fg-2); line-height: 1.7; font-size: var(--text-md); }
+    .guide ul, .guide ol { margin: var(--sp-4) 0; padding-left: var(--sp-6); display: grid; gap: var(--sp-2); }
+    .guide strong { color: var(--fg-1); }
+    .guide blockquote { border-left: 3px solid var(--teal); padding: var(--sp-3) 0 var(--sp-3) var(--sp-5); margin: var(--sp-6) 0; color: var(--fg-2); background: var(--teal-tint); border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .guide table { width: 100%; border-collapse: collapse; margin: var(--sp-6) 0; font-size: var(--text-sm); }
+    .guide th, .guide td { border: 1px solid var(--border-2); padding: var(--sp-3); text-align: left; vertical-align: top; color: var(--fg-2); }
+    .guide th { background: var(--bg-3); color: var(--fg-1); font-weight: var(--fw-semibold); }
+    .guide code { font-family: var(--font-mono); color: var(--teal); }
+    .guide hr { border: none; border-top: 1px solid var(--border-2); margin: var(--sp-12) 0; }
+    .guide__panel { background: var(--bg-3); border: 1px solid var(--border-2); border-radius: var(--r-2xl); padding: var(--sp-7); margin: var(--sp-8) 0; }
+    .guide__muted { color: var(--fg-4); font-size: var(--text-sm); }
+    .guide__link { word-break: break-all; }
+    @media (width <= 720px) {
+      .guide { padding-top: 80px; }
+      .guide table, .guide thead, .guide tbody, .guide tr, .guide th, .guide td { display: block; }
+      .guide tr { margin-bottom: var(--sp-4); }
+      .guide th { border-bottom: 0; }
+    }
+    @media print {
+      .lg-header, .lg-footer { display: none !important; }
+      .guide { padding: 24px 0; max-width: none; }
+      body { background: #fff; }
+    }
+  </style>
+
+  <script defer src="/assets/js/analytics.js"></script>
+  <script src="/assets/js/leadup-tracking.js"></script>
+</head>
+<body>
+  <header class="lg-header">
+    <div class="lg-header__inner">
+      <a class="lg-brand" href="https://leadup.guru/ru/" aria-label="LeadUp AI">
+        <img class="lg-brand__logo" src="/assets/img/logo-leadup.png" alt="LeadUp AI" width="120" height="24">
+      </a>
+      <nav class="lg-meganav" aria-label="Основная навигация">
+        <ul>
+          <li class="lg-meganav__item"><a class="lg-meganav__toplink" href="https://leadup.guru/ru/">Главная</a></li>
+          <li class="lg-meganav__item"><a class="lg-meganav__toplink" href="https://blog.leadup.guru/ru">Блог</a></li>
+          <li class="lg-meganav__item"><a class="lg-meganav__toplink" href="https://community.leadup.guru/ru/">Сообщество</a></li>
+        </ul>
+      </nav>
+      <div class="lg-header__actions">
+        <a class="btn-p" href="https://cms.leadup.guru/admin">Открыть Payload</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="guide">
+      <p class="guide__eyebrow">LeadUp AI · Internal public share</p>
+      <h1>Publishing guide для редакторов Payload</h1>
+
+      <blockquote>
+        Короткий чек-лист для редакторов LeadUp AI. Цикл: войти → создать или отредактировать пост → preview → publish → smoke на проде → откатить, если что-то пошло не так.
+      </blockquote>
+
+      <div class="guide__panel">
+        <p><strong>Scope:</strong> этот гайд относится к публикации в <code>cms.leadup.guru</code>, после которой статья попадает на <code>blog.leadup.guru</code>.</p>
+        <p><strong>Source of truth:</strong> Vault-документ <code>vault/projects/inbound-2026/deliverables/payload-publishing-guide.md</code>.</p>
+        <p class="guide__muted">Public URL зафиксирован для welcome-banner в Payload admin по [LEA-4357](/LEA/issues/LEA-4357).</p>
+      </div>
+
+      <h2>1. Вход</h2>
+      <ol>
+        <li>Открой <a class="guide__link" href="https://cms.leadup.guru/admin">https://cms.leadup.guru/admin</a>.</li>
+        <li>На входе будет basic-auth. Креды лежат у Алекса в 1Password Shared: <code>LeadUp / Payload basic-auth</code>.</li>
+        <li>После basic-auth появится экран логина Payload. Используй свой email редактора и bootstrap-пароль из <code>LeadUp / Payload editors</code>.</li>
+        <li>При первом входе смени пароль через <code>Account</code> в правом верхнем углу.</li>
+      </ol>
+      <p>Если проблема только в логине, пароле, basic-auth или 1Password, это операционный вопрос: пиши Алексу, а не Мише.</p>
+
+      <h2>2. Создание или редактирование поста</h2>
+      <p>Путь в админке: <code>Blog → Posts → Create New</code> или клик по существующему посту.</p>
+
+      <h3>Обязательные поля</h3>
+      <table>
+        <thead>
+          <tr><th>Поле</th><th>Что писать</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Title</td><td>Заголовок H1 статьи.</td></tr>
+          <tr><td>Slug</td><td>URL-сегмент без кириллицы и лишних дефисов.</td></tr>
+          <tr><td>Locale</td><td><code>ru</code> или <code>en</code>.</td></tr>
+          <tr><td>Description</td><td>Meta description + OG, до 320 символов.</td></tr>
+          <tr><td>Excerpt</td><td>Текст для карточек и RSS, до 320 символов.</td></tr>
+          <tr><td>Category</td><td>Одна из фиксированных 9 категорий блога.</td></tr>
+          <tr><td>Published At</td><td>Дата публикации статьи.</td></tr>
+          <tr><td>Content Updated At</td><td>Дата заметной правки; при создании равна published at.</td></tr>
+          <tr><td>Reading Minutes</td><td>Целое число минут чтения.</td></tr>
+          <tr><td>Author</td><td>Slug автора, например <code>vladimir-nagin</code>.</td></tr>
+          <tr><td>Body</td><td>Markdown-тело статьи. GFM-таблицы поддерживаются.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Опциональные поля</h3>
+      <ul>
+        <li><strong>Tags</strong> — плоский массив строк.</li>
+        <li><strong>Cover Image / Hero Image</strong> — URL или путь вида <code>/img/...</code>.</li>
+      </ul>
+
+      <h3>Чего не трогать руками</h3>
+      <ul>
+        <li><strong>Translation Key</strong> — по умолчанию генерируется автоматически. Для связки RU↔EN одной статьи поставь одинаковое значение в обеих карточках.</li>
+        <li><strong>Published At</strong> для будущей даты лучше менять через <code>Schedule Publish</code>, а не вручную.</li>
+        <li><code>_status</code> — управляется только кнопками <code>Publish</code> и <code>Save Draft</code>.</li>
+      </ul>
+
+      <h2>3. AEO-блоки</h2>
+      <p>Заполняй их только когда действительно нужны. Пустой блок не должен вставлять JSON-LD.</p>
+      <table>
+        <thead>
+          <tr><th>Блок</th><th>Когда использовать</th><th>Что обязательно</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>FAQ</td><td>Статья отвечает на серию вопросов.</td><td><code>q</code> и <code>a</code> для каждого пункта.</td></tr>
+          <tr><td>HowTo</td><td>Материал является инструкцией по шагам.</td><td><code>name</code>, <code>description</code>, шаги.</td></tr>
+          <tr><td>Event</td><td>Пост анонсирует вебинар или эфир.</td><td><code>name</code>, <code>startDate</code>, <code>location</code>, <code>url</code>.</td></tr>
+        </tbody>
+      </table>
+      <p>Не дублируй FAQ в markdown body, если уже заполнил его отдельным полем.</p>
+
+      <h2>4. Preview → Publish</h2>
+      <ol>
+        <li><strong>Preview</strong> открывает черновик на блоге с параметром <code>?draft=1</code>.</li>
+        <li><strong>Save Draft</strong> сохраняет черновик без публикации и без rebuild.</li>
+        <li><strong>Publish</strong> ставит <code>_status: published</code> и триггерит rebuild блога примерно за 30–60 секунд.</li>
+        <li><strong>Schedule Publish</strong> используй для будущей даты.</li>
+      </ol>
+      <p>Если это уже опубликованный пост: маленькая правка → сразу <code>Publish</code>; большая правка → сначала <code>Save Draft</code>, затем финальный <code>Publish</code>.</p>
+
+      <h2>5. Smoke на проде</h2>
+      <ol>
+        <li>Открой URL статьи вида <code>https://blog.leadup.guru/&lt;locale&gt;/&lt;slug&gt;</code>. Должен быть <strong>200 OK</strong>.</li>
+        <li>Открой <strong>View Page Source</strong> и найди <code>BlogPosting</code>. Если заполнялись AEO-блоки, там же ищи <code>FAQPage</code>, <code>HowTo</code> или <code>Event</code>.</li>
+        <li>Проверь <a class="guide__link" href="https://blog.leadup.guru/sitemap.xml">https://blog.leadup.guru/sitemap.xml</a> — нужный <code>&lt;loc&gt;</code> должен появиться.</li>
+      </ol>
+
+      <h2>6. Откат</h2>
+      <ul>
+        <li><strong>Снять с публикации:</strong> переведи пост в <code>draft</code> и сохрани. Rebuild уберёт страницу с прода.</li>
+        <li><strong>Versions:</strong> через вкладку версий можно откатиться на прежнюю опубликованную версию.</li>
+        <li><strong>Delete:</strong> используй только как последний шаг.</li>
+      </ul>
+      <p>Media-файлы редактор намеренно не удаляет: это защита от битых ссылок в опубликованных материалах.</p>
+
+      <h2>7. Куда писать при проблеме</h2>
+      <ul>
+        <li><strong>Контент / редактура / tone of voice:</strong> Аня или Марина.</li>
+        <li><strong>Картинки / OG / дизайн:</strong> Лена.</li>
+        <li><strong>Не публикуется / 404 / пустой sitemap / сломан preview:</strong> Миша. В issue приложи slug, locale, URL прода и скриншот ошибки.</li>
+        <li><strong>Логин / пароль / basic-auth / 1Password:</strong> Алекс.</li>
+      </ul>
+      <p><strong>Важно:</strong> не правь <code>public.posts</code> в базе напрямую. Для редакторов канонический путь только через админку Payload.</p>
+
+      <hr />
+
+      <p class="guide__muted">Последнее обновление public copy: 2026-08-03. Если source-of-truth в Vault поменялся, public copy нужно синхронно обновить.</p>
+    </article>
+  </main>
+</body>
+</html>
